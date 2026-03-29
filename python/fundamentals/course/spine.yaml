@@ -1,0 +1,189 @@
+course_id: python-fundamentals-study-log
+title: Python Fundamentals — Build a Study Log CLI
+audience_level: absolute beginner (no prior programming)
+chapters:
+  - dir: Ch1
+    title: Your First Python Program
+    lessons:
+      - id: L1
+        title: Hello from Python
+        concept: Running Python programs and printing text with print()
+        project_step: Display a one-line welcome when the learner runs the program.
+        test_glob: Ch1/L1.py
+        depends_on: []
+        hints: false
+      - id: L2
+        title: Build a Simple Banner
+        concept: String literals and concatenation to shape output
+        project_step: Show a short multi-part banner using strings (no input yet).
+        test_glob: Ch1/L2.py
+        depends_on:
+          - Ch1/L1
+        hints: false
+      - id: L3
+        title: Comment What Your Script Does
+        concept: Comments for humans and why they matter on small scripts too
+        project_step: Add comments that explain the banner and future study-log purpose.
+        test_glob: Ch1/L3.py
+        depends_on:
+          - Ch1/L2
+        hints: false
+  - dir: Ch2
+    title: Talking to the User
+    lessons:
+      - id: L1
+        title: Remember Values with Variables
+        concept: Names, assignment, and readable constants for strings
+        project_step: Store the app title and default log filename in variables.
+        test_glob: Ch2/L1.py
+        depends_on:
+          - Ch1/L3
+        hints: false
+      - id: L2
+        title: Read a Line from the Keyboard
+        concept: input(), prompts, and cleaning text with str.strip()
+        project_step: Prompt for one study note line and keep the stripped text.
+        test_glob: Ch2/L2.py
+        depends_on:
+          - Ch2/L1
+        hints: false
+      - id: L3
+        title: Choose What Happens Next
+        concept: if / else and blocking invalid input before it is logged
+        project_step: Reject empty notes with a clear message instead of logging them.
+        test_glob: Ch2/L3.py
+        depends_on:
+          - Ch2/L2
+        hints: false
+      - id: L4
+        title: Keep Prompting Until You Quit
+        concept: while loops and a controlled exit condition
+        project_step: Loop so the user can enter several notes until they type a quit phrase.
+        test_glob: Ch2/L4.py
+        depends_on:
+          - Ch2/L3
+        hints: true
+  - dir: Ch3
+    title: Organizing with Functions
+    lessons:
+      - id: L1
+        title: Wrap a Behavior in a Function
+        concept: def, calling functions, and why grouping logic helps
+        project_step: Move banner / label formatting into a small function the main flow calls.
+        test_glob: Ch3/L1.py
+        depends_on:
+          - Ch2/L4
+        hints: false
+      - id: L2
+        title: Return a Value from a Function
+        concept: return and using a function’s result in the caller
+        project_step: Add a function that returns a single-line timestamp prefix for each note.
+        test_glob: Ch3/L2.py
+        depends_on:
+          - Ch3/L1
+        hints: false
+      - id: L3
+        title: Parameters and Defaults
+        concept: Function parameters and default argument values
+        project_step: Let formatting optionally include a short prefix (e.g. STUDY) with a sensible default.
+        test_glob: Ch3/L3.py
+        depends_on:
+          - Ch3/L2
+        hints: false
+      - id: L4
+        title: Split Prompting from Formatting
+        concept: Decomposing programs—separate “ask user” from “shape log line”
+        project_step: Refactor so prompting lives in one function and line-building in another.
+        test_glob: Ch3/L4.py
+        depends_on:
+          - Ch3/L3
+        hints: true
+  - dir: Ch4
+    title: Lists and Loops
+    lessons:
+      - id: L1
+        title: Collect Log Lines in a List
+        concept: Lists as ordered collections and literal syntax
+        project_step: Keep each accepted note as a formatted string in an in-memory list.
+        test_glob: Ch4/L1.py
+        depends_on:
+          - Ch3/L4
+        hints: false
+      - id: L2
+        title: Walk a List with for
+        concept: for loops over sequences
+        project_step: After entry mode ends, print every stored line using a for loop.
+        test_glob: Ch4/L2.py
+        depends_on:
+          - Ch4/L1
+        hints: false
+      - id: L3
+        title: Grow the List as You Go
+        concept: list.append and keeping program state across iterations
+        project_step: Each valid note appends to the list during the input loop (not only at the end).
+        test_glob: Ch4/L3.py
+        depends_on:
+          - Ch4/L2
+        hints: false
+  - dir: Ch5
+    title: Saving to Disk
+    lessons:
+      - id: L1
+        title: Append Text to a File
+        concept: Opening files for append and writing strings
+        project_step: When the user saves or exits, append all new lines to the log file.
+        test_glob: Ch5/L1.py
+        depends_on:
+          - Ch4/L3
+        hints: false
+      - id: L2
+        title: Read a File with a Context Manager
+        concept: with open(...) as ... and reading whole-file text safely
+        project_step: On startup, load existing log lines from disk into the list (or start empty if missing).
+        test_glob: Ch5/L2.py
+        depends_on:
+          - Ch5/L1
+        hints: false
+      - id: L3
+        title: Paths That Make Sense
+        concept: pathlib.Path (or os.path) so file location is explicit and portable
+        project_step: Resolve the log file relative to a fixed base (e.g. current working directory) using path helpers.
+        test_glob: Ch5/L3.py
+        depends_on:
+          - Ch5/L2
+        hints: true
+      - id: L4
+        title: A Full Load and Save Cycle
+        concept: Designing a small persistence boundary (load once, save after changes)
+        project_step: Integrate startup load with append-on-exit so nothing is lost across runs.
+        test_glob: Ch5/L4.py
+        depends_on:
+          - Ch5/L3
+        hints: false
+  - dir: Ch6
+    title: Finishing Touches
+    lessons:
+      - id: L1
+        title: Handle Bad Input and IO Surprises
+        concept: try / except for predictable failure modes (e.g. bad parsing, unreadable file)
+        project_step: Catch a narrow exception when reading or interpreting stored lines so the app degrades gracefully.
+        test_glob: Ch6/L1.py
+        depends_on:
+          - Ch5/L4
+        hints: true
+      - id: L2
+        title: Settings in a Dictionary
+        concept: dict for labeled configuration (keys and values)
+        project_step: Replace scattered constants with a small settings dict (filename, quit word, app label).
+        test_glob: Ch6/L2.py
+        depends_on:
+          - Ch6/L1
+        hints: false
+      - id: L3
+        title: Run Modes from the Command Line
+        concept: sys.argv (or minimal argparse) to pick behavior without editing code
+        project_step: Support at least two modes—e.g. add notes vs. print the log—from argv.
+        test_glob: Ch6/L3.py
+        depends_on:
+          - Ch6/L2
+        hints: true
