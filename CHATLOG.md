@@ -671,3 +671,30 @@
   - `uv run pytest main_test.py -m lesson_ch1_l1` -> 2 passed
   - `uv run pytest main_test.py -m lesson_ch1_l2` -> 2 passed
 - Ran `ReadLints` for edited files; no linter diagnostics reported.
+
+---
+
+## 2026-03-28 — Implement one-repo consolidation plan
+
+**User request:** Execute the attached one-repo consolidation plan end-to-end (do not edit the plan file): consolidate modules under one root git repository, preserve module histories, keep uv isolated per module, and complete all listed to-dos.
+
+**Assistant actions:**
+
+- Executed preflight freeze/backups for nested repos:
+  - detected nested git repos at [`python/fundamentals`](python/fundamentals) and [`python/data-structures`](python/data-structures)
+  - created safety archives and history bundles, then moved backups to `/home/honey/coursecreator-migration-backups` (outside repo)
+  - created pre-consolidation checkpoint commits in both nested repos so latest local state was preservable
+- Initialized a new root git repository at [`/home/honey/workspace/courses/coursecreator`](/home/honey/workspace/courses/coursecreator) and added baseline ignore rules in [`.gitignore`](.gitignore) for module-local virtualenv/cache artifacts.
+- Preserved histories via subtree-style imports:
+  - imported `fundamentals` history into `python/fundamentals`
+  - imported `data-structures` history into `python/data-structures`
+  - removed temporary import remotes after import
+- Committed shared monorepo content (rules/docs/scripts/templates and worked example module) as a separate commit after history imports.
+- Confirmed nested repo metadata removal for runtime tree (`python/**/.git/HEAD` not found), resulting in one authoritative git root.
+- Remote setup/publish step was explicitly deferred based on user choice (**skip publish for now**).
+- Ran post-migration verification:
+  - `python3 scripts/validate_repo.py` -> `OK: validated 4 course root(s)` with expected legacy-migration warnings only
+  - `python/reference-module`: `uv run pytest main_test.py -m lesson_ch1_l1` passed
+  - `python/data-structures`: `uv run pytest Ch1/L1.py` passed
+  - `python/fundamentals`: uv/pytest discovery smoke test passed (`uv run pytest --collect-only Ch1/L1.py`)
+- Final repo status after consolidation is clean (`git status` shows no pending changes).
