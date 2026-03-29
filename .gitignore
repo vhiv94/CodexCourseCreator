@@ -1,0 +1,9 @@
+# Python caches and virtual environments (all modules)
+**/.venv/
+**/__pycache__/
+**/.pytest_cache/
+**/*.pyc
+
+# OS/editor noise
+.DS_Store
+Thumbs.db
