@@ -985,3 +985,35 @@
 - Ran `ReadLints` for all newly added module files; no diagnostics reported.
 
 **Note:** Attached plan file was not modified.
+
+---
+
+## 2026-03-28 — Chapter 1 test batch (backend-fundamentals-kanban)
+
+**User request:** Implement the attached Chapter 1 test batch plan for `python/backend-fundamentals-kanban` as specified; do not edit the plan file; execute all listed to-dos in order and update todo status while working.
+
+**Assistant actions:**
+
+- Added [`python/backend-fundamentals-kanban/main_test.py`](python/backend-fundamentals-kanban/main_test.py) with selector-scoped Chapter 1 lesson blocks and behavior-first contracts:
+  - `lesson_ch1_l1` (*What Is a Server*) - FastAPI app bootstrap + `/health` contract and basic error behavior.
+  - `lesson_ch1_l2` (*HTTP Request-Response Contract*) - board route method/path/body/status and representative validation failures.
+  - `lesson_ch1_l3` (*Routing and Resource Modeling*) - nested boards/columns/tasks route behavior, parent-child mismatch checks, and SQLite write-side expectation.
+  - `lesson_ch1_l4` (*API Design Basics Methods Status and Errors*) - status-code semantics and consistent error-envelope expectations.
+- Added deterministic test fixtures and helpers in `main_test.py`:
+  - temp DB path fixture using `KANBAN_DB_PATH`
+  - app resolver (`app` or `create_app()` in `main.py`)
+  - JSON content-type + error-envelope assertion helpers
+- Added FastAPI testing dependencies for this module via `uv add` and updated [`python/backend-fundamentals-kanban/pyproject.toml`](python/backend-fundamentals-kanban/pyproject.toml):
+  - dependencies: `fastapi`, `httpx`, `pytest`
+  - pytest marker registration for `lesson_ch1_l1` through `lesson_ch1_l4`
+- Ran scoped verification commands from `python/backend-fundamentals-kanban/`:
+  - `uv run pytest main_test.py -m lesson_ch1_l1`
+  - `uv run pytest main_test.py -m lesson_ch1_l2`
+  - `uv run pytest main_test.py -m lesson_ch1_l3`
+  - `uv run pytest main_test.py -m lesson_ch1_l4`
+- Verification outcome:
+  - test collection and selector scoping worked;
+  - all selected groups currently fail at the same setup contract boundary because [`python/backend-fundamentals-kanban/main.py`](python/backend-fundamentals-kanban/main.py) does not yet expose a FastAPI `app` or `create_app()` surface.
+- Ran `ReadLints` on touched files; no linter diagnostics reported.
+
+**Note:** Attached plan file was not modified.

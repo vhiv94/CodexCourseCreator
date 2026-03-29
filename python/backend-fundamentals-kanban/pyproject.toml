@@ -4,5 +4,15 @@ version = "0.1.0"
 description = "Add your description here"
 requires-python = ">=3.13"
 dependencies = [
+    "fastapi>=0.135.2",
+    "httpx>=0.28.1",
     "pytest>=9.0.2",
+]
+
+[tool.pytest.ini_options]
+markers = [
+    "lesson_ch1_l1: Chapter 1 lesson 1 tests",
+    "lesson_ch1_l2: Chapter 1 lesson 2 tests",
+    "lesson_ch1_l3: Chapter 1 lesson 3 tests",
+    "lesson_ch1_l4: Chapter 1 lesson 4 tests",
 ]
