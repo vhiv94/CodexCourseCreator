@@ -7,3 +7,6 @@
 # OS/editor noise
 .DS_Store
 Thumbs.db
+
+# Local migration safety artifacts
+.migration-backups/

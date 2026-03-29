@@ -1,0 +1,50 @@
+# Example spine — copy to spine.yaml and edit. Validate with:
+#   npx --yes ajv-cli validate -s course/spine.schema.json -d course/spine.yaml
+# (after renaming or pointing -d at this file)
+
+course_id: example-tdd-course
+title: Example TDD Course
+audience_level: intermediate
+
+chapters:
+  - dir: Ch1
+    title: Foundations
+    lessons:
+      - id: L1
+        title: "Environment and first green test"
+        concept: Running the lesson-local test command
+        project_step: Repository boots with a placeholder module
+        reads: []
+        tasks_summary:
+          - Wire a minimal export the tests exercise
+        test_glob: main_test.py
+        lesson_selector: lesson_ch1_l1
+        depends_on: []
+        hints: false
+
+      - id: L2
+        title: "Core behavior from examples"
+        concept: Behavior-first tests without prescribing helpers
+        project_step: First user-visible behavior of the capstone
+        reads: []
+        tasks_summary:
+          - Implement to satisfy public tests only
+        test_glob: main_test.py
+        lesson_selector: lesson_ch1_l2
+        depends_on:
+          - Ch1/L1
+
+  - dir: Ch2
+    title: Extending the project
+    lessons:
+      - id: L1
+        title: "Next milestone"
+        concept: Isolating the next concept in tests
+        project_step: Second chapter first increment
+        reads: []
+        tasks_summary: []
+        test_glob: main_test.py
+        lesson_selector: lesson_ch2_l1
+        depends_on:
+          - Ch1/L2
+        hints: true

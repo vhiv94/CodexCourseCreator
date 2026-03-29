@@ -1,0 +1,35 @@
+---
+description: Shared canonical Chk/Ln target-resolution contract for Maestro, Riley, and Marsh.
+globs: []
+alwaysApply: false
+---
+
+# Shared Chk/Ln target-resolution contract
+
+Use this contract whenever work must resolve one or more lesson targets from progress + spine.
+
+## Inputs
+
+- `course/progress.yaml` or `course/progress.json` next to the same course spine.
+- `course/spine.yaml` or `course/spine.json`.
+- Optional explicit lesson list in the request (batch override).
+
+## Canonical resolution order
+
+Resolve lesson target(s) in this order:
+
+1. **Explicit batch override**: if the request/paste block explicitly lists one or more `Chk/Ln` targets, use that list in the given order.
+2. **`next_target`**: if `course/progress.*` sets `next_target` to a valid `Chk/Ln`, use it.
+3. **After `last_completed`**: otherwise select the next lesson in global spine order after `last_completed`.
+4. **Course start**: if `last_completed` is `null`, select the first lesson in global spine order.
+
+## Global spine order
+
+- Order chapters by `chapters[]` array position in the spine.
+- Order lessons by `lessons[]` array position inside each chapter.
+- "Next lesson" means the next item in this flattened sequence.
+- After resolving each `Chk/Ln`, read that lesson row's `test_glob` and `lesson_selector` (when present) to route test/lesson generation and runner commands.
+
+## Completion edge case
+
+If `last_completed` is the final lesson in the flattened spine sequence and no explicit override is provided, there is no next `Chk/Ln`; treat this as course completion routing.

@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "course-progress",
+  "title": "Course progress",
+  "description": "Learner state for Maestro handoffs; lives at course/progress.yaml or course/progress.json.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["last_completed"],
+  "properties": {
+    "last_completed": {
+      "description": "Most recently completed lesson, or null before any lesson is finished.",
+      "oneOf": [
+        { "type": "null" },
+        {
+          "type": "string",
+          "pattern": "^Ch[1-9][0-9]*/L[1-9][0-9]*$",
+          "description": "Chapter folder (Ch#) and lesson id (L#), e.g. Ch1/L1."
+        }
+      ]
+    },
+    "next_target": {
+      "description": "Optional explicit next lesson; Maestro may derive this from the spine when omitted.",
+      "oneOf": [
+        { "type": "null" },
+        {
+          "type": "string",
+          "pattern": "^Ch[1-9][0-9]*/L[1-9][0-9]*$"
+        }
+      ]
+    },
+    "notes": {
+      "type": "string",
+      "description": "Optional freeform: blockers, skip hints, stack notes, pacing."
+    }
+  }
+}

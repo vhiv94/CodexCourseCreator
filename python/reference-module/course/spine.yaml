@@ -1,0 +1,24 @@
+course_id: python-reference-module
+title: Python Reference Module - Selector-Scoped Flow
+audience_level: beginner
+chapters:
+  - dir: Ch1
+    title: Greeting and Notes
+    lessons:
+      - id: L1
+        title: Format a Greeting
+        concept: Small pure functions and deterministic string output
+        project_step: Build format_greeting(name) for the learner entrypoint.
+        test_glob: main_test.py
+        lesson_selector: lesson_ch1_l1
+        depends_on: []
+        hints: false
+      - id: L2
+        title: Append a Clean Note
+        concept: Input cleanup and defensive checks
+        project_step: Build append_note(notes, raw_note) with strip and empty-note validation.
+        test_glob: main_test.py
+        lesson_selector: lesson_ch1_l2
+        depends_on:
+          - Ch1/L1
+        hints: false

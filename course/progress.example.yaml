@@ -1,0 +1,5 @@
+# Example course/progress.yaml — copy or merge fields as needed.
+last_completed: Ch1/L1
+next_target: Ch1/L2
+notes: |
+  Prefer batched Riley for Ch1 only after L3.

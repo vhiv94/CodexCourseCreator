@@ -1,0 +1,21 @@
+# Starter spine — replace values and add chapters/lessons. See course/spine-and-contents.md
+# and course/spine.schema.json for the full contract and CONTENTS.md alignment rules.
+
+course_id: your-course-slug
+title: Your Course Title
+audience_level: beginner
+
+chapters:
+  - dir: Ch1
+    title: First chapter title
+    lessons:
+      - id: L1
+        title: "First lesson title"
+        concept: "(Replace) one concise concept for this lesson."
+        project_step: "(Replace) one project step this lesson advances."
+        reads: []
+        tasks_summary: []
+        test_glob: main_test.py
+        lesson_selector: lesson_ch1_l1
+        depends_on: []
+        hints: false

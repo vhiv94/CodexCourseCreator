@@ -1,0 +1,14 @@
+[project]
+name = "reference-module"
+version = "0.1.0"
+description = "Worked example for main.py + append-only main_test.py flow."
+requires-python = ">=3.11"
+dependencies = [
+    "pytest>=9.0.0",
+]
+
+[tool.pytest.ini_options]
+markers = [
+    "lesson_ch1_l1: selector for Ch1/L1 tests",
+    "lesson_ch1_l2: selector for Ch1/L2 tests",
+]
