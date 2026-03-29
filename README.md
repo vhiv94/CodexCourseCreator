@@ -21,7 +21,7 @@ uv add httpx
 **Tests:** run a single lesson from this directory (uv uses `pyproject.toml` / `.venv` automatically):
 
 ```bash
-uv run pytest Ch1/L1.py
+uv run pytest main_test.py -m lesson_ch1_l1
 ```
 
-Swap `Chk/Ln.py` for other lessons per the spine’s `test_glob`. More context: [`course/overview.md`](course/overview.md).
+Swap the selector for other lessons per `course/spine.yaml` (`lesson_selector`). More context: [`course/overview.md`](course/overview.md).

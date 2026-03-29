@@ -25,7 +25,7 @@ Paste everything below the line into the agent (with Atlas rule enabled).
 
 - Topic: *“Learn the basics with Python.”*
 - Audience: *Absolute beginner—no prior programming experience* (comfort using a computer and files/terminal is enough to state as the only prerequisite).
-- Pedagogy: One **cohesive capstone-style arc**—pick one small but real project (e.g. CLI helper or text-based app) that grows chapter by chapter; **one concise concept per lesson**, each lesson advances **one** project step; **`test_glob`** must resolve to **that lesson’s tests only** (plus any shared fixtures you document in `overview.md`); **`depends_on`** must form a sensible DAG. Use `hints: true` only where struggling beginners are likely; otherwise `hints: false`.
+- Pedagogy: One **cohesive capstone-style arc**—pick one small but real project (e.g. CLI helper or text-based app) that grows chapter by chapter; **one concise concept per lesson**, each lesson advances **one** project step; canonical test contract is **`test_glob: main_test.py`** plus unique **`lesson_selector: lesson_ch<chapter>_l<lesson>`** so each lesson can run with marker scope; **`depends_on`** must form a sensible DAG. Use `hints: true` only where struggling beginners are likely; otherwise `hints: false`.
 
 **Do not** ask Atlas to write per-lesson tests or lesson prose in this pass unless you explicitly expand scope later—Riley and Marsh handle those after the spine exists.
 
@@ -37,6 +37,6 @@ This course folder uses **[uv](https://docs.astral.sh/uv/)** for Python and **py
 
 - **Install dependencies:** from `python/fundamentals/`, run **`uv sync`** (not `pip install -r requirements.txt` unless the project intentionally uses that pattern—which this one does not).
 - **Add a library** when the curriculum needs it: **`uv add package-name`** (equivalent role to `pip install package-name` in older material).
-- **Verify a lesson:** **`uv run pytest Chk/Ln.py`**
+- **Verify a lesson:** **`uv run pytest main_test.py -m <lesson_selector>`**
 
 Do not document bare **`pytest …`** or raw **`pip install …`** for this course—use **`uv run pytest`** and **`uv add`**. See `course/overview.md` and `README.md` in this folder.

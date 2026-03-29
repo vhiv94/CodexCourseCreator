@@ -41,25 +41,25 @@ For **this** course repo, learners and authors also need **[uv](https://docs.ast
 
 ## Test stack (pytest)
 
-This course uses **pytest** with **one lesson → one test module** under the course root `python/fundamentals/`. Dependencies (including pytest) are managed with **[uv](https://github.com/astral-sh/uv)** via this folder’s `pyproject.toml` and lockfile.
+This course uses **pytest** with **one lesson → one marker selector** inside module-root `main_test.py` under `python/fundamentals/`. Dependencies (including pytest) are managed with **[uv](https://github.com/astral-sh/uv)** via this folder’s `pyproject.toml` and lockfile.
 
 - **Install / update the environment:** from `python/fundamentals/`, run **`uv sync`** (creates or updates **`.venv`** from the lockfile). To **add** a new dependency, use **`uv add some-package`**—not **`pip install`**. **`uv remove some-package`** drops it from the project.
-- **Layout (planned for Riley):** test functions live in `Chk/Ln.py` (e.g. `Ch1/L1.py`). Each file should collect **only** the tests for that lesson.
+- **Layout (canonical):** test functions live in module-root `main_test.py`; each lesson uses a unique marker from spine `lesson_selector` (e.g. `lesson_ch1_l1`) so one command scopes to one lesson.
 - **How to run one lesson:** from `python/fundamentals/`, use uv so the project venv and pytest stay in sync:
 
   ```bash
-  uv run pytest Ch1/L1.py
+  uv run pytest main_test.py -m lesson_ch1_l1
   ```
 
-  Same pattern for any `Chk/Ln.py` in the spine’s `test_glob`. **Document and use `uv run pytest`** in lessons, README, and CI so runners do not depend on manually activating a venv.
+  Same pattern for any lesson selector in the spine. **Document and use `uv run pytest main_test.py -m <lesson_selector>`** in lessons, README, and CI so runners do not depend on manually activating a venv.
 
-- **Learner implementation:** will live under `src/` (or another layout Marsh documents). Use **root** `pyproject.toml` or `pytest.ini` with `pythonpath = ["src"]` (or equivalent) so tests import the learner package without manual `PYTHONPATH` hacks. If you add **shared fixtures** (for temporary log directories, fake stdin, etc.), place them in a documented support area (for example `tests/support/` under this course) and import from the lesson test module—keep each lesson’s `test_glob` pointing at **that lesson’s file only**.
+- **Learner implementation:** will live under `src/` (or another layout Marsh documents). Use **root** `pyproject.toml` or `pytest.ini` with `pythonpath = ["src"]` (or equivalent) so tests import the learner package without manual `PYTHONPATH` hacks. If you add **shared fixtures** (for temporary log directories, fake stdin, etc.), place them in a documented support area (for example `tests/support/` under this course) and import from `main_test.py`—keep each lesson’s `test_glob`/`lesson_selector` pair scoped to that lesson.
 
 See the repo-wide appendix [course/guides/test-authoring/pytest.md](../../course/guides/test-authoring/pytest.md) for `conftest` scope, pitfalls, and Riley’s checklist.
 
 ## Shared fixtures (expectation)
 
-Riley may introduce **temporary directories or files** for safe file I/O tests and **stdin/stdout helpers** for “user types this” scenarios. If so, those helpers live outside individual `Chk/Ln.py` files but are documented here: **`tests/support/`** under `python/fundamentals/` (create when implementing tests). Spine `test_glob` values remain the single **lesson** module path.
+Riley may introduce **temporary directories or files** for safe file I/O tests and **stdin/stdout helpers** for “user types this” scenarios. If so, those helpers live outside `main_test.py` but are documented here: **`tests/support/`** under `python/fundamentals/` (create when implementing tests). Spine `test_glob` remains `main_test.py` while `lesson_selector` stays lesson-scoped.
 
 ## What this document is not
 
