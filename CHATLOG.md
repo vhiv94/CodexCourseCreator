@@ -959,3 +959,29 @@
     - expected failure because redesigned test contracts now target fresh API surfaces not yet implemented in `main.py`.
     - marker warnings were resolved after updating `pyproject.toml`.
   - Ran `ReadLints` on edited core files -> no linter diagnostics.
+
+---
+
+## 2026-03-28 — Backend fundamentals course plan implementation
+
+**User request:** Implement the attached backend fundamentals course plan exactly (without editing the plan file), execute all listed to-dos in order, and update todo statuses while working.
+
+**Assistant actions:**
+
+- Created new module root [`python/backend-fundamentals-kanban/`](python/backend-fundamentals-kanban/) and bootstrapped uv project setup:
+  - Ran `uv init --no-readme`
+  - Added pytest via `uv add pytest`
+  - Synced environment via `uv sync`
+  - Initialized [`python/backend-fundamentals-kanban/course/progress.yaml`](python/backend-fundamentals-kanban/course/progress.yaml) with `last_completed: null`
+- Added Atlas artifacts for a large, backend-first self-hosted Kanban API course:
+  - [`python/backend-fundamentals-kanban/course/spine.yaml`](python/backend-fundamentals-kanban/course/spine.yaml) with 7 chapters and 28 lessons
+  - canonical selectors for all lessons (`test_glob: main_test.py`, `lesson_selector: lesson_ch<chapter>_l<lesson>`)
+  - coherent linear `depends_on` DAG from `Ch1/L1` through `Ch7/L4`
+- Added [`python/backend-fundamentals-kanban/CONTENTS.md`](python/backend-fundamentals-kanban/CONTENTS.md) mirroring chapter and lesson titles/order from spine exactly.
+- Added [`python/backend-fundamentals-kanban/course/overview.md`](python/backend-fundamentals-kanban/course/overview.md) covering motivation, behavioral end-state, chapter arc, and uv workflow (`uv sync`, `uv add`, selector-scoped `uv run pytest`).
+- Added [`python/backend-fundamentals-kanban/course/glossary.md`](python/backend-fundamentals-kanban/course/glossary.md) for key server/DNS/database/container/ops terms.
+- Added module-level [`python/backend-fundamentals-kanban/README.md`](python/backend-fundamentals-kanban/README.md) with uv usage and artifact map.
+- Ran repository validation: `python3 scripts/validate_repo.py` -> `OK: validated 5 course root(s)`; expected warning that `main_test.py` is not generated yet.
+- Ran `ReadLints` for all newly added module files; no diagnostics reported.
+
+**Note:** Attached plan file was not modified.
