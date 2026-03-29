@@ -988,6 +988,37 @@
 
 ---
 
+## 2026-03-29 — Tailored Ch1 lesson batch (backend-fundamentals-kanban)
+
+**User request:** Execute the approved Ch1 tailored lesson plan for [`python/backend-fundamentals-kanban`](python/backend-fundamentals-kanban): run a backend knowledge quiz, ask extensive tailoring questions, auto-search the web for official documentation links, write very verbose Ch1 lessons under Marsh constraints, and complete all plan to-dos without editing the plan file.
+
+**Assistant actions:**
+
+- Ran a diagnostic backend quiz (server process model, HTTP contract semantics, status/method handling, nested routing, error-envelope purpose, SQLite write signal); user answered all items correctly.
+- Ran a deep tailoring interview to calibrate lesson style and challenge level:
+  - requested depth in server lifecycle, contract design, resource modeling, error/status strategy, and persistence boundary thinking
+  - preferred mixed Socratic + structured style, slow pacing, high challenge, warm-rigorous tone
+  - preferred behavior-first acceptance checklists, heavy test-literacy emphasis, high HTTP formality, and 3-5 curated links per lesson
+- Auto-searched web documentation sources and curated links primarily from FastAPI, MDN, RFC 9110, and SQLite documentation for lesson enrichment.
+- Authored the full Ch1 lesson batch for backend-fundamentals-kanban:
+  - [`python/backend-fundamentals-kanban/Ch1/L1.md`](python/backend-fundamentals-kanban/Ch1/L1.md) — *What Is a Server*
+  - [`python/backend-fundamentals-kanban/Ch1/L2.md`](python/backend-fundamentals-kanban/Ch1/L2.md) — *HTTP Request-Response Contract*
+  - [`python/backend-fundamentals-kanban/Ch1/L3.md`](python/backend-fundamentals-kanban/Ch1/L3.md) — *Routing and Resource Modeling*
+  - [`python/backend-fundamentals-kanban/Ch1/L4.md`](python/backend-fundamentals-kanban/Ch1/L4.md) — *API Design Basics Methods Status and Errors*
+- Applied Marsh/template contract requirements in each lesson:
+  - exact title-only heading matching `CONTENTS.md`
+  - unified concept-first narrative (no `## Concept` subheader)
+  - one `## Assigned task(s)` section with integrated acceptance checklist
+  - explicit evidence line (`main_test.py` + lesson selector)
+  - concise `## Further reading (optional)` with hyperlinks
+  - no `Ln-hint.md` creation for Ch1 (all Ch1 `hints: false`)
+- Performed QA checks on Ch1 outputs:
+  - verified evidence lines and section structure across all four files
+  - confirmed no Ch1 `-hint.md` files were created
+  - confirmed structure/content remains aligned with `main_test.py` selectors `lesson_ch1_l1`..`lesson_ch1_l4`
+
+---
+
 ## 2026-03-28 — Chapter 1 test batch (backend-fundamentals-kanban)
 
 **User request:** Implement the attached Chapter 1 test batch plan for `python/backend-fundamentals-kanban` as specified; do not edit the plan file; execute all listed to-dos in order and update todo status while working.
