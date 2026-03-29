@@ -1,165 +1,183 @@
 course_id: python-data-structures
-title: Python Data Structures — Build an In-Memory Search Index
-audience_level: intermediate (Python basics assumed)
+title: Python Data Structures — Inventory Operations Control Tower
+audience_level: intermediate (comfortable with lists, sets, dictionaries, tuples, and map/filter/reduce)
 chapters:
   - dir: Ch1
-    title: Sequences and the Corpus Model
+    title: Inventory Event Modeling and Functional Pipelines
     lessons:
       - id: L1
-        title: Represent Documents as a Sequenced Corpus
-        concept: Lists as ordered collections; fixed logical order of documents in memory
-        project_step: Store documents in a corpus list with stable ids and retrievable text for later indexing.
-        test_glob: Ch1/L1.py
+        title: Model Inventory Events with Typed Records
+        concept: Tuple and dict invariants for canonical inventory event data
+        project_step: Define one normalized event shape that all downstream services consume.
+        test_glob: main_test.py
+        lesson_selector: lesson_ch1_l1
         depends_on: []
         hints: false
       - id: L2
-        title: Walk the Corpus with Control
-        concept: for loops, enumerate, and intentional iteration order
-        project_step: Traverse the corpus to compute a summary (counts, lengths) without assuming dict iteration order.
-        test_glob: Ch1/L2.py
+        title: Normalize Event Streams with map/filter/reduce
+        concept: Functional transformation pipelines over event collections
+        project_step: Build a pure pipeline that cleans, filters, and folds raw events into validated operations.
+        test_glob: main_test.py
+        lesson_selector: lesson_ch1_l2
         depends_on:
           - Ch1/L1
         hints: false
       - id: L3
-        title: Slice Text into Previews
-        concept: String slicing, bounds safety, and excerpt boundaries
-        project_step: Given a corpus position, produce bounded preview snippets from document text.
-        test_glob: Ch1/L3.py
+        title: Index Current Stock by SKU and Location
+        concept: Nested dictionary indexing and update invariants
+        project_step: Produce an in-memory stock index keyed by sku and warehouse location.
+        test_glob: main_test.py
+        lesson_selector: lesson_ch1_l3
         depends_on:
           - Ch1/L2
         hints: false
-      - id: L4
-        title: Baseline Linear Scan Search
-        concept: O(n) full scan as the comparison point before indexing
-        project_step: Find candidate documents by scanning every body for a literal substring (case rules per tests).
-        test_glob: Ch1/L4.py
+  - dir: Ch2
+    title: OOP Service Primitives with Stack and Queue
+    lessons:
+      - id: L1
+        title: Build an Audit Stack Class
+        concept: LIFO class design with explicit push, pop, and peek contracts
+        project_step: Implement an `AuditStack` class for reversible inventory adjustments.
+        test_glob: main_test.py
+        lesson_selector: lesson_ch2_l1
         depends_on:
           - Ch1/L3
         hints: false
-  - dir: Ch2
-    title: Stacks, Queues, and Double-Ended Work
-    lessons:
-      - id: L1
-        title: Use a Stack Where Last-In Must Win
-        concept: Stack (LIFO) discipline for nested or reversible processing
-        project_step: Validate or normalize a query token sequence using stack-backed delimiter rules before search.
-        test_glob: Ch2/L1.py
-        depends_on:
-          - Ch1/L4
-        hints: false
       - id: L2
-        title: Fair Merge with a Queue
-        concept: Queue (FIFO) for ordered consumption of pending work
-        project_step: Merge multiple sorted posting streams (or doc-id streams) by dequeueing the smallest head repeatedly.
-        test_glob: Ch2/L2.py
+        title: Build a Replenishment Queue Class
+        concept: FIFO class behavior for fair restock scheduling
+        project_step: Implement a `ReplenishmentQueue` class for pending restock jobs.
+        test_glob: main_test.py
+        lesson_selector: lesson_ch2_l2
         depends_on:
           - Ch2/L1
-        hints: true
+        hints: false
       - id: L3
-        title: Reach Both Ends with a Deque
-        concept: deque for O(1) pushes/pops on both ends
-        project_step: Maintain a bounded window over tokens or characters using a deque when both ends move.
-        test_glob: Ch2/L3.py
+        title: Compose Stack and Queue in an Intake Service
+        concept: OOP composition and bounded side effects across cooperating classes
+        project_step: Create an intake coordinator that routes events to audit and restock flows.
+        test_glob: main_test.py
+        lesson_selector: lesson_ch2_l3
         depends_on:
           - Ch2/L2
-        hints: false
+        hints: true
   - dir: Ch3
-    title: Maps, Sets, and an Inverted Index
+    title: Linked Structures for Movement Ledgers
     lessons:
       - id: L1
-        title: Map Terms to Posting Lists
-        concept: dict as a key→value index for variable-sized associations
-        project_step: Build an inverted index mapping normalized terms to ordered lists of document ids.
-        test_glob: Ch3/L1.py
+        title: Design Node and LinkedList Ledger Classes
+        concept: Pointer-based sequence modeling with explicit node ownership
+        project_step: Implement `LedgerNode` and `MovementLedgerLinkedList` classes for ordered stock movements.
+        test_glob: main_test.py
+        lesson_selector: lesson_ch3_l1
         depends_on:
           - Ch2/L3
         hints: false
       - id: L2
-        title: Boolean Queries with Sets
-        concept: set union/intersection for combining posting sets
-        project_step: Answer AND queries by intersecting posting lists (or id sets) derived from the index.
-        test_glob: Ch3/L2.py
+        title: Insert and Remove Ledger Entries Safely
+        concept: Linked-list invariants during insertion and deletion
+        project_step: Add safe mutation operations that preserve head, tail, and length consistency.
+        test_glob: main_test.py
+        lesson_selector: lesson_ch3_l2
         depends_on:
           - Ch3/L1
-        hints: false
+        hints: true
       - id: L3
-        title: Keys Must Be Hashable and Stable
-        concept: Hashing contracts, immutability of index keys, and equality consistency
-        project_step: Refactor index keys (e.g. tuples or frozen tokens) so dict/set membership matches retrieval tests.
-        test_glob: Ch3/L3.py
+        title: Functional Aggregations over Linked Ledgers
+        concept: map/reduce-style traversals over custom object collections
+        project_step: Compute movement totals and deltas through pure traversal helpers.
+        test_glob: main_test.py
+        lesson_selector: lesson_ch3_l3
         depends_on:
           - Ch3/L2
-        hints: true
+        hints: false
   - dir: Ch4
-    title: Trees for Ordering and Prefix Retrieval
+    title: Allocation and Picking Workflows
     lessons:
       - id: L1
-        title: Binary Search Trees for Ordered Keys
-        concept: BST structure; left/right ordering invariant
-        project_step: Maintain a BST of unique terms (or scores) supporting membership and ordered iteration for the index UI.
-        test_glob: Ch4/L1.py
+        title: Build Allocation Maps for Open Orders
+        concept: Multi-index dictionary design for order-to-inventory matching
+        project_step: Build allocation structures mapping order lines to feasible stock sources.
+        test_glob: main_test.py
+        lesson_selector: lesson_ch4_l1
         depends_on:
           - Ch3/L3
         hints: false
       - id: L2
-        title: Insert Without Breaking the BST Rule
-        concept: Recursive or iterative insertion paths and duplicate policy
-        project_step: Insert terms into the BST following the ordering rule; duplicates handled per stated policy.
-        test_glob: Ch4/L2.py
+        title: Use Sets to Enforce Location and SKU Constraints
+        concept: Set-based eligibility checks and fast membership gates
+        project_step: Enforce restriction rules on pick zones and restricted sku combinations.
+        test_glob: main_test.py
+        lesson_selector: lesson_ch4_l2
         depends_on:
           - Ch4/L1
         hints: false
       - id: L3
-        title: Tries for Prefix and Completion
-        concept: Prefix trees, edges as characters or token slices
-        project_step: Add a trie (prefix tree) so partial queries list all corpus terms with a given prefix.
-        test_glob: Ch4/L3.py
+        title: Queue-Driven Picking Wave Planner
+        concept: Queue scheduling and fairness tradeoffs in operational dispatch
+        project_step: Generate deterministic picking waves from ready allocations.
+        test_glob: main_test.py
+        lesson_selector: lesson_ch4_l3
         depends_on:
           - Ch4/L2
         hints: true
   - dir: Ch5
-    title: Heaps and Ranked Results
+    title: Prioritization and Throughput Strategy
     lessons:
       - id: L1
-        title: A Heap for Running Top-K
-        concept: heap invariant; min-heap vs max-heap via negation or key functions
-        project_step: Given scored hits, return the top K document ids using a heap (heapq) without full sort when required.
-        test_glob: Ch5/L1.py
+        title: Rank Restock Tasks with a Heap
+        concept: Priority-queue semantics and heap invariants
+        project_step: Introduce heap-based urgent restock selection without full-list sorting.
+        test_glob: main_test.py
+        lesson_selector: lesson_ch5_l1
         depends_on:
           - Ch4/L3
         hints: true
       - id: L2
-        title: Deterministic Tie-Breaking Under Ties
-        concept: Secondary keys and stable ordering in priority structures
-        project_step: When scores collide, break ties by doc id (or stated rule) so rankings are reproducible.
-        test_glob: Ch5/L2.py
+        title: Deterministic Tie-Breaking for Equal Priority
+        concept: Stable secondary keys for reproducible scheduling
+        project_step: Apply deterministic tie-break rules for equal urgency restock tasks.
+        test_glob: main_test.py
+        lesson_selector: lesson_ch5_l2
         depends_on:
           - Ch5/L1
         hints: false
-  - dir: Ch6
-    title: Graphs for Related Documents
-    lessons:
-      - id: L1
-        title: Model Relationships as an Adjacency List
-        concept: Sparse graphs as map-of-neighbors; weighted vs unweighted edges
-        project_step: Represent a document graph (shared terms, explicit links, or test-provided edges) as dict[int, list[...]].
-        test_glob: Ch6/L1.py
+      - id: L3
+        title: Analyze Bottlenecks with Complexity Budgets
+        concept: Translating Big-O analysis into practical throughput constraints
+        project_step: Add complexity budget checks for core planning operations and reports.
+        test_glob: main_test.py
+        lesson_selector: lesson_ch5_l3
         depends_on:
           - Ch5/L2
         hints: false
+  - dir: Ch6
+    title: End-to-End Control Tower Integration
+    lessons:
+      - id: L1
+        title: Compose an InventoryControlTower Service
+        concept: Orchestrating multiple data structures behind one service boundary
+        project_step: Build an integration service that coordinates ledger, queue, stack, and allocation modules.
+        test_glob: main_test.py
+        lesson_selector: lesson_ch6_l1
+        depends_on:
+          - Ch5/L3
+        hints: true
       - id: L2
-        title: Breadth-First Neighbor Expansion
-        concept: BFS layering; queue-driven frontier
-        project_step: From a seed document, collect related ids within a hop limit without revisiting nodes.
-        test_glob: Ch6/L2.py
+        title: Build a Functional KPI Reporting Pipeline
+        concept: Pure reporting transforms over operational state snapshots
+        project_step: Generate daily KPIs through map/filter/reduce-friendly report functions.
+        test_glob: main_test.py
+        lesson_selector: lesson_ch6_l2
         depends_on:
           - Ch6/L1
-        hints: true
+        hints: false
       - id: L3
-        title: Depth-First Exploration for Structure
-        concept: DFS recursion/stack; discovery vs finished order tradeoffs
-        project_step: Implement DFS to enumerate a component or detect back-edges per test contract for the corpus graph.
-        test_glob: Ch6/L3.py
+        title: Simulate Failure Recovery with Undo and Replay
+        concept: Recovery workflows using stack replay and queue rehydration
+        project_step: Implement deterministic failure-recovery simulation for the full control tower.
+        test_glob: main_test.py
+        lesson_selector: lesson_ch6_l3
         depends_on:
           - Ch6/L2
         hints: true

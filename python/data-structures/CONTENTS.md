@@ -1,37 +1,37 @@
-# Python Data Structures — Build an In-Memory Search Index
+# Python Data Structures — Inventory Operations Control Tower
 
-### Ch1: Sequences and the Corpus Model
+### Ch1: Inventory Event Modeling and Functional Pipelines
 
-1. Represent Documents as a Sequenced Corpus
-2. Walk the Corpus with Control
-3. Slice Text into Previews
-4. Baseline Linear Scan Search
+1. Model Inventory Events with Typed Records
+2. Normalize Event Streams with map/filter/reduce
+3. Index Current Stock by SKU and Location
 
-### Ch2: Stacks, Queues, and Double-Ended Work
+### Ch2: OOP Service Primitives with Stack and Queue
 
-1. Use a Stack Where Last-In Must Win
-2. Fair Merge with a Queue
-3. Reach Both Ends with a Deque
+1. Build an Audit Stack Class
+2. Build a Replenishment Queue Class
+3. Compose Stack and Queue in an Intake Service
 
-### Ch3: Maps, Sets, and an Inverted Index
+### Ch3: Linked Structures for Movement Ledgers
 
-1. Map Terms to Posting Lists
-2. Boolean Queries with Sets
-3. Keys Must Be Hashable and Stable
+1. Design Node and LinkedList Ledger Classes
+2. Insert and Remove Ledger Entries Safely
+3. Functional Aggregations over Linked Ledgers
 
-### Ch4: Trees for Ordering and Prefix Retrieval
+### Ch4: Allocation and Picking Workflows
 
-1. Binary Search Trees for Ordered Keys
-2. Insert Without Breaking the BST Rule
-3. Tries for Prefix and Completion
+1. Build Allocation Maps for Open Orders
+2. Use Sets to Enforce Location and SKU Constraints
+3. Queue-Driven Picking Wave Planner
 
-### Ch5: Heaps and Ranked Results
+### Ch5: Prioritization and Throughput Strategy
 
-1. A Heap for Running Top-K
-2. Deterministic Tie-Breaking Under Ties
+1. Rank Restock Tasks with a Heap
+2. Deterministic Tie-Breaking for Equal Priority
+3. Analyze Bottlenecks with Complexity Budgets
 
-### Ch6: Graphs for Related Documents
+### Ch6: End-to-End Control Tower Integration
 
-1. Model Relationships as an Adjacency List
-2. Breadth-First Neighbor Expansion
-3. Depth-First Exploration for Structure
+1. Compose an InventoryControlTower Service
+2. Build a Functional KPI Reporting Pipeline
+3. Simulate Failure Recovery with Undo and Replay

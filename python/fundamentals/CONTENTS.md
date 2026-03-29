@@ -1,40 +1,57 @@
-# Python Fundamentals — Study Log CLI
+# Python Fundamentals - Build a Personal Tracker
 
-### Ch1: Your First Python Program
+### Ch1: First Contact with Python
 
-1. Hello from Python
-2. Build a Simple Banner
-3. Comment What Your Script Does
+1. Run Your First Program
+2. Name Values with Variables
+3. Work with Basic Data Types
+4. Evaluate Expressions with Operators
 
-### Ch2: Talking to the User
+### Ch2: Strings and Flow of Text
 
-1. Remember Values with Variables
-2. Read a Line from the Keyboard
-3. Choose What Happens Next
-4. Keep Prompting Until You Quit
+1. Index and Slice Strings
+2. Iterate Through Strings
+3. Normalize Input Text
+4. Use Conditionals for Decisions
 
-### Ch3: Organizing with Functions
+### Ch3: Collections for Tracker State
 
-1. Wrap a Behavior in a Function
-2. Return a Value from a Function
-3. Parameters and Defaults
-4. Split Prompting from Formatting
+1. Store Sequences in Lists
+2. Lock Records with Tuples
+3. Map Fields with Dictionaries
+4. Deduplicate Categories with Sets
 
-### Ch4: Lists and Loops
+### Ch4: Reuse Logic with Functions
 
-1. Collect Log Lines in a List
-2. Walk a List with for
-3. Grow the List as You Go
+1. Define Functions with Parameters
+2. Return Values from Functions
+3. Understand Local Scope
+4. Compose Functions into Pipelines
 
-### Ch5: Saving to Disk
+### Ch5: Program Organization and Main Flow
 
-1. Append Text to a File
-2. Read a File with a Context Manager
-3. Paths That Make Sense
-4. A Full Load and Save Cycle
+1. Organize Code with Modules and Imports
+2. Use the Main Guard Correctly
+3. Sequence Work in main
+4. Dispatch Basic Commands
 
-### Ch6: Finishing Touches
+### Ch6: Persistence and Error Handling
 
-1. Handle Bad Input and IO Surprises
-2. Settings in a Dictionary
-3. Run Modes from the Command Line
+1. Read and Write Text Files
+2. Append Records Safely
+3. Handle Exceptions Gracefully
+4. Validate Loaded Records
+
+### Ch7: Classes and Object Behavior
+
+1. Define a Basic Class
+2. Initialize Objects with __init__
+3. Compare __str__ and __repr__
+4. Add Behavior with Instance Methods
+
+### Ch8: Inheritance and Capstone Integration
+
+1. Build a Base Class and Child Classes
+2. Use Polymorphism for Summaries
+3. Integrate Functional and OOP Layers
+4. Complete the Personal Tracker Capstone

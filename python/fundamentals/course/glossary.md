@@ -1,73 +1,95 @@
-# Glossary — Python fundamentals
+# Glossary — Python Fundamentals Personal Tracker
 
-Short definitions for readers new to programming. Titles in **bold** match terms used in lessons and chatter around Python.
+## Core language ideas
 
-## Environment and tools
+**Variable** — A named reference to a value, created with assignment (`=`).
 
-**Python** — A programming language and the ecosystem around it. In this course, “Python” usually means **Python 3**.
+**Value** — Actual data (text, numbers, booleans, collections, objects).
 
-**uv** — A fast **Python project and package manager**. You **`uv sync`** to install everything listed in **`pyproject.toml`**, **`uv add some-package`** to add a dependency (the usual replacement for **`pip install some-package`** in beginner material), and **`uv run …`** to run a command in the project environment (for example tests). Install uv once per machine from the official docs.
+**Type** — A category of value (for example `str`, `int`, `float`, `bool`) that controls what operations are valid.
 
-**Interpreter** — The program that reads your `.py` source and runs it. When you type `python3 your_file.py`, you are asking the interpreter to execute that file.
+**String (`str`)** — Text data in quotes. Strings are immutable and iterable.
 
-**REPL** — “Read–eval–print loop”: an interactive Python session (typing `python3` with no file) where each line is read, evaluated, and the result printed. Useful for quick experiments; the course project is primarily **scripts** you run as files.
+**Integer (`int`)** — Whole number values like `0`, `7`, or `-13`.
 
-**Terminal / shell** — A text window where you run commands (`python3`, `uv run pytest`, `cd`, etc.). The **current working directory** matters for paths like `notes.txt`.
+**Float (`float`)** — Decimal number values like `3.14` or `0.5`.
 
-**IDE / editor** — Where you write code (VS Code, Cursor, etc.). Not the same as the terminal, though they often sit side by side.
+**Boolean (`bool`)** — `True` or `False`, typically produced by comparisons.
 
-## Programs and files
+**Operator** — Symbol or keyword that combines values (`+`, `-`, `*`, `/`, `==`, `and`, `or`, `not`).
 
-**Script** — A `.py` file meant to be **run** start-to-finish (e.g. your study log program).
+## Python conventions
 
-**Module** — Usually a `.py` file treated as a unit of useful code; in bigger projects, modules are **imported** from other code.
+**PEP 8** — Python style guidance; emphasizes readability and consistent naming.
 
-**Package** — A folder of modules (often with `__init__.py` in classic layouts). This course may place learner code under `src/` as a small package layout—see `overview.md`.
+**Pythonic** — Idiomatic Python style that is clear and readable for other Python developers.
 
-**Comment** — Text in source code ignored by Python, starting with `#` (or using triple-quoted strings only when meant as docstrings—Marsh will clarify usage in lessons).
+**snake_case** — Lowercase words joined by underscores; standard for variables and function names in Python.
 
-## Code building blocks
+**Main guard** — `if __name__ == "__main__":` block that runs code only when a file is executed directly.
 
-**Variable** — A name that refers to a value. You **assign** with `=` (e.g. `title = "Study log"`).
+## Control flow and data structures
 
-**Value / data** — What actually sits in memory: numbers, text, lists, etc.
+**Conditional** — `if/elif/else` branching based on boolean conditions.
 
-**String** — Text in quotes (`"hello"`, `'hi'`). You can **concatenate** strings with `+`.
+**Loop** — Repetition using `for` or `while`.
 
-**Function** — A named chunk of code you **call** with parentheses. It can take **arguments** and optionally **return** a result to the caller.
+**Iterable** — Any object you can loop over one value at a time (`str`, `list`, `tuple`, `set`, many others).
 
-**Parameter** — A name listed in a `def` line; it receives the **argument** the caller passes in.
+**List** — Ordered, mutable collection.
 
-**Return value** — What a function sends back with `return`; the caller can store or use it.
+**Tuple** — Ordered, immutable collection.
 
-**Scope** — Which parts of the code can see which names. “Inside the function” vs “at the top level” behaves differently—in **`Split Prompting from Formatting`** you focus on keeping that tidy.
+**Dictionary (`dict`)** — Key-value mapping for named lookup.
 
-**Conditional** — `if`, optional `elif`, and `else`: choose which lines run based on a **boolean** (true/false) condition.
+**Set** — Unordered collection of unique values.
 
-**Loop** — Repeating code: **`while`** repeats while a condition holds; **`for`** walks over each item in a sequence (e.g. a list).
+## Functions and modules
 
-**List** — An ordered collection: `[a, b, c]`. Often used with `for` and `.append(...)`.
+**Function** — Reusable block of code defined with `def`.
 
-**Dictionary (`dict`)** — A collection of **key → value** pairs, like a labeled tray of settings (`{"filename": "log.txt", ...}`).
+**Parameter** — Variable name inside a function signature.
 
-## Files and robustness
+**Argument** — Actual value passed to a function call.
 
-**Path** — A string or `Path` object describing **where** a file lives on disk (relative or absolute).
+**Return value** — Value produced by `return` and sent back to the caller.
 
-**Open / read / write / append** — File operations: read existing text, overwrite, or **appendnew lines at the end**. Appending is typical for logs.
+**Scope** — Region where a name is visible (local function scope vs module scope).
 
-**Context manager** — The `with open(...) as f:` pattern so files close reliably even when errors occur.
+**Module** — Python file that contains code and can be imported.
 
-**Exception** — A runtime error Python raises (e.g. file missing, bad conversion). **`try` / `except`** lets you **handle** predictable problems without crashing the whole program.
+**Import** — Statement that brings names from one module into another.
 
-## Testing
+## Classes and objects
 
-**pytest** — A test runner (here invoked via **`uv run pytest`** so the project environment stays correct). **Test functions** are usually named `test_*`. Running `uv run pytest Ch2/L3.py` should execute only that lesson’s tests if Riley scoped the file correctly.
+**Class** — Blueprint that defines data and behavior for objects.
 
-**Fixture** — Helper setup (temporary folder, fake input) used by tests; may live in `conftest.py` or `tests/support/` per `overview.md`.
+**Object / instance** — Concrete value created from a class.
 
-## CLI terms
+**Method** — Function defined inside a class.
 
-**Command-line argument** — Text after the program name when you run it (`python3 study_log.py list`). Often read from **`sys.argv`** or a small **argparse** layer.
+**`__init__`** — Initializer method that sets up instance state during object creation.
 
-If a term is still fuzzy, skim the matching lesson’s **`concept`** in `spine.yaml`—that line is the single idea the lesson centers on.
+**`__str__`** — User-facing string representation, used by `str(obj)` and `print(obj)`.
+
+**`__repr__`** — Developer-facing representation, aimed at debugging clarity.
+
+**Inheritance** — Child class reuses and extends behavior from a parent class.
+
+**Polymorphism** — Same method name works across different classes with class-specific behavior.
+
+## Files, errors, and tests
+
+**File I/O** — Reading from and writing to files.
+
+**Context manager** — `with ...:` pattern that manages setup/cleanup automatically.
+
+**Exception** — Runtime error object raised when something goes wrong.
+
+**try/except** — Structure for handling expected exceptions gracefully.
+
+**pytest** — Test framework used in this module.
+
+**Lesson selector** — Marker name such as `lesson_ch3_l2` used with `-m` to run one lesson's tests.
+
+**uv** — Python project manager used for dependency installation and command execution (`uv sync`, `uv add`, `uv run pytest`).

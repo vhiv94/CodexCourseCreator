@@ -1,6 +1,6 @@
 # Hints: Ln — short hint-sheet title
 
-Use this file **only** when `course/spine.*` has **`hints: true`** for this lesson. Path pattern: `{chapter-dir}/{lesson-id}.hints.md` (e.g. `Ch1/L3.hints.md`).
+Use this file **only** when `course/spine.*` has **`hints: true`** for this lesson. Path pattern: `{chapter-dir}/{lesson-id}-hint.md` (e.g. `Ch1/L3-hint.md`).
 
 These notes are **optional reading** when stuck. They may include sketches, “consider…”, and small pseudocode. They must **not** be a complete copy-paste solution that satisfies every test without thought.
 
@@ -12,14 +12,6 @@ Use the shallowest level that unblocks the learner.
 - **Level 2 - Strategy sketch:** give 3-6 high-level steps or partial pseudocode without final naming/details.
 - **Level 3 - Focused edge-case nudge:** call out one tricky case to check (empty input, tie-break, ordering).
 - **Not allowed:** full function/class implementations, exact final return expressions for every case, or end-to-end code that can be pasted to pass all tests directly.
-
-## When to open this file
-
-*(One sentence: what “stuck” looks like for this lesson—without giving the answer.)*
-
-## Orientation
-
-*(Remind the learner what invariant or interface the tests care about; point back to the test file path.)*
 
 **Tests:** *(from spine `test_glob` + `lesson_selector`, e.g. `main_test.py` + `lesson_ch1_l3`)*
 

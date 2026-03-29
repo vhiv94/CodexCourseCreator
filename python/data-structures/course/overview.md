@@ -1,32 +1,53 @@
-# Overview — Python Data Structures (in-memory search index)
+# Overview — Python Data Structures (Inventory Operations Control Tower)
 
 ## What you build
 
-You implement an **in-memory document mini search stack**: a corpus of documents, a **baseline scan**, then a real **inverted index**, **ordered and prefix-friendly structures**, **ranked top-k results**, and finally **graph-based related-document expansion**. The capstone is one system whose parts compose: linear passes motivate maps; maps motivate ordered trees and tries; scoring motivates heaps; relations motivate adjacency lists and traversals.
+You build an **inventory operations control tower** for a warehouse-style workflow. The system ingests stock movement events, normalizes them through functional pipelines, maintains current stock views, schedules replenishment work, supports undo/recovery operations, and produces KPI reports for daily operations.
+
+This capstone is intentionally realistic: the same event can affect availability, restock urgency, and downstream picking decisions. Data structures are chosen because each one solves a concrete operational problem, not because it is academically interesting on its own.
 
 ## Prerequisites
 
-**Python basics** are assumed: functions, classes, imports, built-in collections (`list`, `dict`, `set`), loops, and simple file-free I/O is not required unless a later lesson explicitly adds it. If you are still shaky on syntax and control flow, complete a fundamentals track first; otherwise Chapter 1 stays review plus API discipline.
+This module assumes you already know Python basics and are comfortable using:
+
+- built-in collections: `list`, `dict`, `set`, `tuple`
+- functional helpers: `map`, `filter`, `reduce`
+- class and function definitions, plus basic unit testing workflow
+
+You do **not** need prior experience implementing custom data structures from scratch; that is part of the module.
 
 ## Tooling (uv + pytest)
 
 From `python/data-structures/`:
 
-- Sync the environment: `uv sync`
-- Add runtime or dev libraries when lessons call for them: `uv add <package>` (prefer this over ad-hoc `pip install`)
-- Run **only** the tests for one lesson selector: `uv run pytest main_test.py -m lesson_ch3_l2`
+- Sync environment and lock dependencies: `uv sync`
+- Add packages when needed: `uv add <package>`
+- Run one lesson contract at a time: `uv run pytest main_test.py -m <lesson_selector>`
 
-Configure pytest so imports resolve from your learner package layout—typically a `src/` tree with `pythonpath` set in `pyproject.toml` or `pytest.ini`. Riley’s tests should import **only** learner-facing modules you expose under that layout.
+Example:
+
+```text
+uv run pytest main_test.py -m lesson_ch2_l1
+```
 
 ## How the chapters advance the project
 
-- **Ch1 — Sequences and the corpus model:** You represent a corpus as an ordered sequence, iterate deliberately, produce text previews with slicing, and implement naive substring search as the baseline cost story.
-- **Ch2 — Stacks, queues, deque:** You use LIFO and FIFO boundaries for real subproblems: query normalization, fair merging of sorted streams, and double-ended sliding when tests require it.
-- **Ch3 — Maps, sets, inverted index:** You build term → posting lists, combine postings with set logic for boolean-style queries, and tighten **hashable, stable** keys so dicts and sets behave predictably.
-- **Ch4 — Trees:** You add a BST for ordered vocabulary or keys, practice correct insertion under an explicit duplicate policy, then a **trie** for prefix completion over indexed terms.
-- **Ch5 — Heaps:** You rank hits with a heap-backed **top-k** flow and make **tie-breaking** deterministic so rankings are reproducible.
-- **Ch6 — Graphs:** You model document relationships as an adjacency structure, **expand neighbors breadth-first** within hop limits, then apply **DFS** where the contract needs depth-first structure (components, ordering, or cycle cues per tests).
+- **Ch1 — Inventory Event Modeling and Functional Pipelines:** Define canonical event records and build pure map/filter/reduce transforms for ingest quality.
+- **Ch2 — OOP Service Primitives with Stack and Queue:** Implement custom `AuditStack` and `ReplenishmentQueue` classes, then compose them in an intake coordinator.
+- **Ch3 — Linked Structures for Movement Ledgers:** Build linked-list classes for movement history and perform safe structural mutations and traversals.
+- **Ch4 — Allocation and Picking Workflows:** Use dict and set indexing to match inventory to open orders and generate queue-based wave plans.
+- **Ch5 — Prioritization and Throughput Strategy:** Introduce heap-backed urgency selection, deterministic tie-break rules, and complexity-budget reasoning.
+- **Ch6 — End-to-End Control Tower Integration:** Integrate all modules into a single service and add functional KPI reporting plus failure-recovery simulation.
+
+## Architectural style goals
+
+The module deliberately combines two styles:
+
+- **OOP style:** encapsulate stateful behavior in classes (`AuditStack`, `ReplenishmentQueue`, linked ledger, orchestrator service).
+- **Functional style:** keep transformation/reporting steps pure where possible (normalization, filtering, aggregation, reporting).
+
+Students should be able to explain when each style improves maintainability, correctness, and testability.
 
 ## End state (behavioral)
 
-By the end, a caller (or tests acting as a caller) can load a corpus representation, **index** it for term lookup, answer **multi-term** queries with intersection semantics where specified, obtain **ordered / prefix** suggestions, fetch **top-k ranked** matches, and **walk a document graph** for related results—each feature grounded in the data structure that earns its place in the design.
+By the end, a caller can submit inventory events, retrieve consistent stock views, schedule and prioritize replenishment, inspect movement history, recover from operational faults through undo/replay semantics, and generate KPI summaries. The complete behavior is validated lesson-by-lesson through selector-scoped tests in `main_test.py`.

@@ -1,66 +1,80 @@
-# Python Fundamentals — overview
+# Python Fundamentals - overview
 
 ## What you are building
 
-One **command-line study log**: you run a Python program, add short timestamped notes about what you studied, list what is saved, and keep everything in a **plain text file** so your log survives closing the terminal. By the end of the course, the program behaves like a tiny real utility—not a one-off demo script.
-
-## Why this shape
-
-Absolute beginners learn faster when every new idea **lands in the same program**. Strings, variables, `if`, loops, functions, lists, files, and a minimal “how to run it” interface each move the log one step closer to something you might actually use.
+You will build a command-line **Personal Tracker** from zero programming knowledge. The app starts as a small script, then grows into a modular program with functions, files, and classes that can add entries, list entries, and report summaries.
 
 ## Behavioral end-state
 
-When you finish the last lesson, a learner’s project should **approximately**:
+By the end of this module, the learner implementation should:
 
-- Run from the terminal with different **modes** (for example: add entries vs. show the log), using **command-line arguments**—not by editing the source between runs.
-- **Load** existing log lines from disk at startup when the file exists, and **append** new lines so data persists across sessions.
-- Keep **configuration** (names, filenames, quit phrase, labels) in a small, understandable structure instead of scattered magic strings.
-- **Fail gracefully** when something goes wrong reading or interpreting stored data, without crashing silently or losing the whole log.
+- Accept basic commands to add, list, and summarize tracker entries.
+- Clean and validate text and numeric input before storing data.
+- Represent tracker state using lists, tuples, dictionaries, and sets where each structure has a clear purpose.
+- Sequence program behavior through a `main()` function and a final `if __name__ == "__main__":` call.
+- Persist entries to disk and handle common runtime errors without crashing.
+- Model entries with classes, including `__init__`, `__str__`, `__repr__`, and simple inheritance.
 
-Exact filenames, flag names, and internal function names are left for Marsh’s lessons and Riley’s tests to pin down; the spine’s `project_step` fields describe the **capability**, not a single prescribed API.
+## Why this long-form redesign
+
+This redesign intentionally uses many short lessons so beginners can learn one concept at a time while advancing a single coherent project. Each lesson maps to isolated tests in `main_test.py` using one marker selector.
 
 ## Prerequisites
 
-- Comfortable using a computer: files, folders, opening a terminal, and running commands someone gives you.
-- **No** prior programming experience assumed.
+- No prior programming experience.
+- Ability to edit files and run terminal commands.
+- Python 3 and [uv](https://docs.astral.sh/uv/getting-started/installation/) installed.
 
-Environment: a working **Python 3** install you can run as `python` or `python3` from a terminal. Install instructions vary by OS; your lessons or local README can link to official docs.
+## Workflow and commands
 
-For **this** course repo, learners and authors also need **[uv](https://docs.astral.sh/uv/getting-started/installation/)** (install once per machine). From **`python/fundamentals/`**, run **`uv sync`** so `pyproject.toml` and the lockfile create/update **`.venv`** and install **pytest** and any other declared dependencies—do not instruct **`pip install -r requirements.txt`** here; treat **`uv add`** (with the package name) as the way to add a dependency, and **`uv remove`** to drop one.
+From `python/fundamentals/`:
 
-## How chapters map to the arc
+```bash
+uv sync
+uv run pytest main_test.py -m lesson_ch1_l1
+```
 
-| Chapter | Role in the study log |
-|--------|------------------------|
-| **Ch1 — Your First Python Program** | Run Python; print output; shape text with strings; comment the script so the “study log” direction is clear. |
-| **Ch2 — Talking to the User** | Remember strings in variables; read input; validate with `if`; repeat prompts with `while` until the user quits. |
-| **Ch3 — Organizing with Functions** | Replace a growing tangle of inline code with small functions: formatting, timestamps, prompting vs. building lines. |
-| **Ch4 — Lists and Loops** | Hold many log lines in memory; display them with `for`; append as the user types so state matches behavior. |
-| **Ch5 — Saving to Disk** | Append to a file; load on startup; represent paths sensibly; wire load + save so the tool is usable day to day. |
-| **Ch6 — Finishing Touches** | Narrow `try` / `except`; centralize settings in a **dict**; expose **modes** via `sys.argv` (or a thin argparse layer), completing the CLI shape. |
+To run a different lesson, swap the marker selector (for example, `lesson_ch4_l2`).
 
-## Test stack (pytest)
+If you add third-party packages later in experiments, use:
 
-This course uses **pytest** with **one lesson → one marker selector** inside module-root `main_test.py` under `python/fundamentals/`. Dependencies (including pytest) are managed with **[uv](https://github.com/astral-sh/uv)** via this folder’s `pyproject.toml` and lockfile.
+```bash
+uv add <package-name>
+```
 
-- **Install / update the environment:** from `python/fundamentals/`, run **`uv sync`** (creates or updates **`.venv`** from the lockfile). To **add** a new dependency, use **`uv add some-package`**—not **`pip install`**. **`uv remove some-package`** drops it from the project.
-- **Layout (canonical):** test functions live in module-root `main_test.py`; each lesson uses a unique marker from spine `lesson_selector` (e.g. `lesson_ch1_l1`) so one command scopes to one lesson.
-- **How to run one lesson:** from `python/fundamentals/`, use uv so the project venv and pytest stay in sync:
+## Chapter arc
 
-  ```bash
-  uv run pytest main_test.py -m lesson_ch1_l1
-  ```
+| Chapter | Learning focus |
+|--------|-----------------|
+| **Ch1 - First Contact with Python** | Running code, variables, data types, and operators. |
+| **Ch2 - Strings and Flow of Text** | Strings as iterables, normalization, and branching logic. |
+| **Ch3 - Collections for Tracker State** | Lists, tuples, dictionaries, sets, and state modeling. |
+| **Ch4 - Reuse Logic with Functions** | Function interfaces, return values, scope, and composition. |
+| **Ch5 - Program Organization and Main Flow** | Modules, imports, main guard, and sequential orchestration. |
+| **Ch6 - Persistence and Error Handling** | File I/O, append workflows, exceptions, and data validation. |
+| **Ch7 - Classes and Object Behavior** | Class structure, `__init__`, object methods, `__str__` and `__repr__`. |
+| **Ch8 - Inheritance and Capstone Integration** | Base/child classes, polymorphism, and end-to-end integration. |
 
-  Same pattern for any lesson selector in the spine. **Document and use `uv run pytest main_test.py -m <lesson_selector>`** in lessons, README, and CI so runners do not depend on manually activating a venv.
+## Pythonic conventions emphasized
 
-- **Learner implementation:** will live under `src/` (or another layout Marsh documents). Use **root** `pyproject.toml` or `pytest.ini` with `pythonpath = ["src"]` (or equivalent) so tests import the learner package without manual `PYTHONPATH` hacks. If you add **shared fixtures** (for temporary log directories, fake stdin, etc.), place them in a documented support area (for example `tests/support/` under this course) and import from `main_test.py`—keep each lesson’s `test_glob`/`lesson_selector` pair scoped to that lesson.
+- Readable names over abbreviations.
+- Small focused functions over monolithic scripts.
+- Explicit branching and validation over hidden assumptions.
+- Data structures chosen by intent (order, mutability, keyed lookup, uniqueness).
 
-See the repo-wide appendix [course/guides/test-authoring/pytest.md](../../course/guides/test-authoring/pytest.md) for `conftest` scope, pitfalls, and Riley’s checklist.
+## Expansion questions for future module growth
 
-## Shared fixtures (expectation)
+These questions are included so you can extend this module later without redesigning from scratch:
 
-Riley may introduce **temporary directories or files** for safe file I/O tests and **stdin/stdout helpers** for “user types this” scenarios. If so, those helpers live outside `main_test.py` but are documented here: **`tests/support/`** under `python/fundamentals/` (create when implementing tests). Spine `test_glob` remains `main_test.py` while `lesson_selector` stays lesson-scoped.
+1. Should user input eventually move from free text to `argparse` command flags?
+2. Do you want lightweight static typing (`typing` hints) taught earlier or later?
+3. Should persistence graduate from plain text files to JSON in this module or a follow-on module?
+4. Do you want a dedicated chapter on debugging workflows (`pdb`, logging, tracebacks)?
+5. Should testing grow from reading existing tests to writing learner-authored tests?
+6. Do you want packaging/distribution basics (entry points, `pyproject.toml` metadata)?
+7. Should inheritance remain shallow or include abstract base classes?
+8. Should this course include an optional mini-project branch for students who finish early?
 
-## What this document is not
+## Authoring note
 
-Not a line-by-line coding recipe. Marsh’s lessons carry steps and explanations; Riley’s tests express contracts. Use the spine’s `concept` and `project_step` fields as the bridge between “what to learn” and “what the program gains next.”
+Tests define behavior contracts in `main_test.py` and are scoped by lesson markers. Lesson prose is concept-first and avoids full copy-paste solutions so learners practice reasoning from evidence.

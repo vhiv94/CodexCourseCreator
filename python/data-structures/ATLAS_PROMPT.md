@@ -22,7 +22,7 @@ Paste below this line into Composer with Atlas attached.
 
 **Audience / topic (user words):** *“New Python project on data structures.”* Assume learners **already know Python basics** (functions, loops, simple I/O) unless you explicitly target absolute beginners and widen Chapter 1 accordingly — state the choice in `audience_level` and `overview.md`.
 
-**Spine rules:** Each lesson uses **`test_glob: main_test.py`** with unique **`lesson_selector`** marker naming (`lesson_ch<chapter>_l<lesson>`), **`depends_on`** is a sensible DAG, and **`hints: true`** appears only where you intend a later `Ln.hints.md`.
+**Spine rules:** Each lesson uses **`test_glob: main_test.py`** with unique **`lesson_selector`** marker naming (`lesson_ch<chapter>_l<lesson>`), **`depends_on`** is a sensible DAG, and **`hints: true`** appears only where you intend a later `Ln-hint.md`.
 
 **Forbidden (this pass):** Per Atlas rule — no full `Chk/Ln.md`, no full test modules, no complete capstone implementation.
 

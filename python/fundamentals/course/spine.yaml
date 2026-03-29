@@ -1,189 +1,315 @@
-course_id: python-fundamentals-study-log
-title: Python Fundamentals — Build a Study Log CLI
+course_id: python-fundamentals-personal-tracker
+title: Python Fundamentals - Build a Personal Tracker
 audience_level: absolute beginner (no prior programming)
 chapters:
   - dir: Ch1
-    title: Your First Python Program
+    title: First Contact with Python
     lessons:
       - id: L1
-        title: Hello from Python
-        concept: Running Python programs and printing text with print()
-        project_step: Display a one-line welcome when the learner runs the program.
-        test_glob: Ch1/L1.py
+        title: Run Your First Program
+        concept: Program execution is a top-to-bottom sequence of statements.
+        project_step: Show a welcome line for the Personal Tracker app.
+        test_glob: main_test.py
+        lesson_selector: lesson_ch1_l1
         depends_on: []
         hints: false
       - id: L2
-        title: Build a Simple Banner
-        concept: String literals and concatenation to shape output
-        project_step: Show a short multi-part banner using strings (no input yet).
-        test_glob: Ch1/L2.py
+        title: Name Values with Variables
+        concept: Variables bind names to values using assignment.
+        project_step: Store app metadata in clearly named variables.
+        test_glob: main_test.py
+        lesson_selector: lesson_ch1_l2
         depends_on:
           - Ch1/L1
         hints: false
       - id: L3
-        title: Comment What Your Script Does
-        concept: Comments for humans and why they matter on small scripts too
-        project_step: Add comments that explain the banner and future study-log purpose.
-        test_glob: Ch1/L3.py
+        title: Work with Basic Data Types
+        concept: Strings, ints, floats, and booleans model different kinds of data.
+        project_step: Build a starter profile dictionary from typed values.
+        test_glob: main_test.py
+        lesson_selector: lesson_ch1_l3
         depends_on:
           - Ch1/L2
         hints: false
-  - dir: Ch2
-    title: Talking to the User
-    lessons:
-      - id: L1
-        title: Remember Values with Variables
-        concept: Names, assignment, and readable constants for strings
-        project_step: Store the app title and default log filename in variables.
-        test_glob: Ch2/L1.py
+      - id: L4
+        title: Evaluate Expressions with Operators
+        concept: Operators combine values into new values and comparisons.
+        project_step: Compute progress percentages and goal checks.
+        test_glob: main_test.py
+        lesson_selector: lesson_ch1_l4
         depends_on:
           - Ch1/L3
         hints: false
+  - dir: Ch2
+    title: Strings and Flow of Text
+    lessons:
+      - id: L1
+        title: Index and Slice Strings
+        concept: String positions let you inspect or extract substrings.
+        project_step: Parse compact tracker tags from user text.
+        test_glob: main_test.py
+        lesson_selector: lesson_ch2_l1
+        depends_on:
+          - Ch1/L4
+        hints: false
       - id: L2
-        title: Read a Line from the Keyboard
-        concept: input(), prompts, and cleaning text with str.strip()
-        project_step: Prompt for one study note line and keep the stripped text.
-        test_glob: Ch2/L2.py
+        title: Iterate Through Strings
+        concept: Strings are iterable objects that yield one character at a time.
+        project_step: Count category prefixes by scanning characters.
+        test_glob: main_test.py
+        lesson_selector: lesson_ch2_l2
         depends_on:
           - Ch2/L1
         hints: false
       - id: L3
-        title: Choose What Happens Next
-        concept: if / else and blocking invalid input before it is logged
-        project_step: Reject empty notes with a clear message instead of logging them.
-        test_glob: Ch2/L3.py
+        title: Normalize Input Text
+        concept: String methods create predictable text formats for downstream logic.
+        project_step: Clean incoming tracker item names.
+        test_glob: main_test.py
+        lesson_selector: lesson_ch2_l3
         depends_on:
           - Ch2/L2
         hints: false
       - id: L4
-        title: Keep Prompting Until You Quit
-        concept: while loops and a controlled exit condition
-        project_step: Loop so the user can enter several notes until they type a quit phrase.
-        test_glob: Ch2/L4.py
+        title: Use Conditionals for Decisions
+        concept: if/elif/else branches select behavior from boolean conditions.
+        project_step: Reject invalid tracker entries with clear decisions.
+        test_glob: main_test.py
+        lesson_selector: lesson_ch2_l4
         depends_on:
           - Ch2/L3
-        hints: true
+        hints: false
   - dir: Ch3
-    title: Organizing with Functions
+    title: Collections for Tracker State
     lessons:
       - id: L1
-        title: Wrap a Behavior in a Function
-        concept: def, calling functions, and why grouping logic helps
-        project_step: Move banner / label formatting into a small function the main flow calls.
-        test_glob: Ch3/L1.py
+        title: Store Sequences in Lists
+        concept: Lists are ordered mutable collections for growing state.
+        project_step: Maintain a running list of tracker entries.
+        test_glob: main_test.py
+        lesson_selector: lesson_ch3_l1
         depends_on:
           - Ch2/L4
         hints: false
       - id: L2
-        title: Return a Value from a Function
-        concept: return and using a function’s result in the caller
-        project_step: Add a function that returns a single-line timestamp prefix for each note.
-        test_glob: Ch3/L2.py
+        title: Lock Records with Tuples
+        concept: Tuples are ordered immutable collections for fixed records.
+        project_step: Represent each entry as an immutable tuple.
+        test_glob: main_test.py
+        lesson_selector: lesson_ch3_l2
         depends_on:
           - Ch3/L1
         hints: false
       - id: L3
-        title: Parameters and Defaults
-        concept: Function parameters and default argument values
-        project_step: Let formatting optionally include a short prefix (e.g. STUDY) with a sensible default.
-        test_glob: Ch3/L3.py
+        title: Map Fields with Dictionaries
+        concept: Dictionaries map keys to values for named access.
+        project_step: Build a dictionary summary for one tracker entry.
+        test_glob: main_test.py
+        lesson_selector: lesson_ch3_l3
         depends_on:
           - Ch3/L2
         hints: false
       - id: L4
-        title: Split Prompting from Formatting
-        concept: Decomposing programs—separate “ask user” from “shape log line”
-        project_step: Refactor so prompting lives in one function and line-building in another.
-        test_glob: Ch3/L4.py
+        title: Deduplicate Categories with Sets
+        concept: Sets keep unique values and support membership checks.
+        project_step: Generate the set of unique tracker categories.
+        test_glob: main_test.py
+        lesson_selector: lesson_ch3_l4
         depends_on:
           - Ch3/L3
-        hints: true
+        hints: false
   - dir: Ch4
-    title: Lists and Loops
+    title: Reuse Logic with Functions
     lessons:
       - id: L1
-        title: Collect Log Lines in a List
-        concept: Lists as ordered collections and literal syntax
-        project_step: Keep each accepted note as a formatted string in an in-memory list.
-        test_glob: Ch4/L1.py
+        title: Define Functions with Parameters
+        concept: Function signatures declare inputs and interface intent.
+        project_step: Create functions for adding and formatting tracker data.
+        test_glob: main_test.py
+        lesson_selector: lesson_ch4_l1
         depends_on:
           - Ch3/L4
         hints: false
       - id: L2
-        title: Walk a List with for
-        concept: for loops over sequences
-        project_step: After entry mode ends, print every stored line using a for loop.
-        test_glob: Ch4/L2.py
+        title: Return Values from Functions
+        concept: return sends results back to callers for composition.
+        project_step: Return structured results instead of printing everywhere.
+        test_glob: main_test.py
+        lesson_selector: lesson_ch4_l2
         depends_on:
           - Ch4/L1
         hints: false
       - id: L3
-        title: Grow the List as You Go
-        concept: list.append and keeping program state across iterations
-        project_step: Each valid note appends to the list during the input loop (not only at the end).
-        test_glob: Ch4/L3.py
+        title: Understand Local Scope
+        concept: Names exist in local scope unless intentionally shared.
+        project_step: Avoid accidental state leaks between helper functions.
+        test_glob: main_test.py
+        lesson_selector: lesson_ch4_l3
         depends_on:
           - Ch4/L2
         hints: false
-  - dir: Ch5
-    title: Saving to Disk
-    lessons:
-      - id: L1
-        title: Append Text to a File
-        concept: Opening files for append and writing strings
-        project_step: When the user saves or exits, append all new lines to the log file.
-        test_glob: Ch5/L1.py
+      - id: L4
+        title: Compose Functions into Pipelines
+        concept: Small functions combine into reliable end-to-end workflows.
+        project_step: Build the add-entry pipeline from reusable helpers.
+        test_glob: main_test.py
+        lesson_selector: lesson_ch4_l4
         depends_on:
           - Ch4/L3
         hints: false
+  - dir: Ch5
+    title: Program Organization and Main Flow
+    lessons:
+      - id: L1
+        title: Organize Code with Modules and Imports
+        concept: Modules split responsibilities and imports connect them.
+        project_step: Separate tracker utilities into importable functions.
+        test_glob: main_test.py
+        lesson_selector: lesson_ch5_l1
+        depends_on:
+          - Ch4/L4
+        hints: false
       - id: L2
-        title: Read a File with a Context Manager
-        concept: with open(...) as ... and reading whole-file text safely
-        project_step: On startup, load existing log lines from disk into the list (or start empty if missing).
-        test_glob: Ch5/L2.py
+        title: Use the Main Guard Correctly
+        concept: __name__ checks separate import-time setup from script execution.
+        project_step: Add a main guard that calls main only when run directly.
+        test_glob: main_test.py
+        lesson_selector: lesson_ch5_l2
         depends_on:
           - Ch5/L1
         hints: false
       - id: L3
-        title: Paths That Make Sense
-        concept: pathlib.Path (or os.path) so file location is explicit and portable
-        project_step: Resolve the log file relative to a fixed base (e.g. current working directory) using path helpers.
-        test_glob: Ch5/L3.py
+        title: Sequence Work in main
+        concept: main coordinates function calls in explicit declaration order.
+        project_step: Implement a predictable start-read-update-render sequence.
+        test_glob: main_test.py
+        lesson_selector: lesson_ch5_l3
         depends_on:
           - Ch5/L2
         hints: true
       - id: L4
-        title: A Full Load and Save Cycle
-        concept: Designing a small persistence boundary (load once, save after changes)
-        project_step: Integrate startup load with append-on-exit so nothing is lost across runs.
-        test_glob: Ch5/L4.py
+        title: Dispatch Basic Commands
+        concept: Conditional command dispatch routes one input to one action.
+        project_step: Support add, list, and summary commands in main flow.
+        test_glob: main_test.py
+        lesson_selector: lesson_ch5_l4
         depends_on:
           - Ch5/L3
-        hints: false
+        hints: true
   - dir: Ch6
-    title: Finishing Touches
+    title: Persistence and Error Handling
     lessons:
       - id: L1
-        title: Handle Bad Input and IO Surprises
-        concept: try / except for predictable failure modes (e.g. bad parsing, unreadable file)
-        project_step: Catch a narrow exception when reading or interpreting stored lines so the app degrades gracefully.
-        test_glob: Ch6/L1.py
+        title: Read and Write Text Files
+        concept: File I/O persists tracker state outside program memory.
+        project_step: Save tracker entries to a text file and load them back.
+        test_glob: main_test.py
+        lesson_selector: lesson_ch6_l1
         depends_on:
           - Ch5/L4
-        hints: true
+        hints: false
       - id: L2
-        title: Settings in a Dictionary
-        concept: dict for labeled configuration (keys and values)
-        project_step: Replace scattered constants with a small settings dict (filename, quit word, app label).
-        test_glob: Ch6/L2.py
+        title: Append Records Safely
+        concept: Append mode grows logs without overwriting history.
+        project_step: Append one formatted tracker record per command.
+        test_glob: main_test.py
+        lesson_selector: lesson_ch6_l2
         depends_on:
           - Ch6/L1
         hints: false
       - id: L3
-        title: Run Modes from the Command Line
-        concept: sys.argv (or minimal argparse) to pick behavior without editing code
-        project_step: Support at least two modes—e.g. add notes vs. print the log—from argv.
-        test_glob: Ch6/L3.py
+        title: Handle Exceptions Gracefully
+        concept: try/except catches predictable failures and preserves control flow.
+        project_step: Return clear messages when files or conversions fail.
+        test_glob: main_test.py
+        lesson_selector: lesson_ch6_l3
         depends_on:
           - Ch6/L2
+        hints: true
+      - id: L4
+        title: Validate Loaded Records
+        concept: Defensive checks enforce invariants for persisted data.
+        project_step: Filter malformed lines before they enter tracker state.
+        test_glob: main_test.py
+        lesson_selector: lesson_ch6_l4
+        depends_on:
+          - Ch6/L3
+        hints: true
+  - dir: Ch7
+    title: Classes and Object Behavior
+    lessons:
+      - id: L1
+        title: Define a Basic Class
+        concept: Classes bundle data and behavior into reusable object blueprints.
+        project_step: Introduce a TrackerItem class for one entry.
+        test_glob: main_test.py
+        lesson_selector: lesson_ch7_l1
+        depends_on:
+          - Ch6/L4
+        hints: false
+      - id: L2
+        title: Initialize Objects with __init__
+        concept: __init__ constructs object state from input arguments.
+        project_step: Require name, amount, and category at creation time.
+        test_glob: main_test.py
+        lesson_selector: lesson_ch7_l2
+        depends_on:
+          - Ch7/L1
+        hints: false
+      - id: L3
+        title: Compare __str__ and __repr__
+        concept: __str__ is user-facing text while __repr__ is developer-facing representation.
+        project_step: Provide readable display and debug output for items.
+        test_glob: main_test.py
+        lesson_selector: lesson_ch7_l3
+        depends_on:
+          - Ch7/L2
+        hints: false
+      - id: L4
+        title: Add Behavior with Instance Methods
+        concept: Instance methods operate on object state through self.
+        project_step: Compute per-item status text from stored values.
+        test_glob: main_test.py
+        lesson_selector: lesson_ch7_l4
+        depends_on:
+          - Ch7/L3
+        hints: false
+  - dir: Ch8
+    title: Inheritance and Capstone Integration
+    lessons:
+      - id: L1
+        title: Build a Base Class and Child Classes
+        concept: Inheritance shares common behavior while subclasses specialize details.
+        project_step: Create BaseTrackerItem and specialized item subclasses.
+        test_glob: main_test.py
+        lesson_selector: lesson_ch8_l1
+        depends_on:
+          - Ch7/L4
+        hints: true
+      - id: L2
+        title: Use Polymorphism for Summaries
+        concept: Polymorphism lets one interface call different subclass behavior.
+        project_step: Render mixed item summaries through a shared method.
+        test_glob: main_test.py
+        lesson_selector: lesson_ch8_l2
+        depends_on:
+          - Ch8/L1
+        hints: true
+      - id: L3
+        title: Integrate Functional and OOP Layers
+        concept: Architectural boundaries keep functions and classes cooperating cleanly.
+        project_step: Connect parsing functions to object creation and reporting.
+        test_glob: main_test.py
+        lesson_selector: lesson_ch8_l3
+        depends_on:
+          - Ch8/L2
+        hints: true
+      - id: L4
+        title: Complete the Personal Tracker Capstone
+        concept: End-to-end tests verify the full workflow as one coherent system.
+        project_step: Deliver a working CLI tracker with add, list, and summary features.
+        test_glob: main_test.py
+        lesson_selector: lesson_ch8_l4
+        depends_on:
+          - Ch8/L3
         hints: true

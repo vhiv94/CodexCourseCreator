@@ -19,7 +19,7 @@ For each chapter `dir` (e.g. `Ch1`) and lesson `id` (e.g. `L1`):
 |------|----------------|
 | Lesson prose | `{dir}/{id}.md` — e.g. `Ch1/L1.md` |
 | This lesson’s tests | Resolved by **`test_glob`** — typically `{dir}/{id}.<ext>` (e.g. `Ch1/L1.py`, `Ch2/L3.test.ts`) |
-| Hints (optional) | `{dir}/{id}.hints.md` — **required** when spine `hints: true` |
+| Hints (optional) | `{dir}/{id}-hint.md` — **required** when spine `hints: true` |
 
 **`test_glob`** must resolve **only** that lesson’s test entrypoint (plus any paths you deliberately include, such as shared fixtures — document those in `course/overview.md`). Convention: one primary test file per lesson; globs stay narrow so `uv run pytest Ch1/L1.py` / `vitest run Ch2/L1.test.ts` style commands stay lesson-local.
 

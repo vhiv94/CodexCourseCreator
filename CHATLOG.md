@@ -698,3 +698,264 @@
   - `python/data-structures`: `uv run pytest Ch1/L1.py` passed
   - `python/fundamentals`: uv/pytest discovery smoke test passed (`uv run pytest --collect-only Ch1/L1.py`)
 - Final repo status after consolidation is clean (`git status` shows no pending changes).
+
+---
+
+## 2026-03-28 — Implement Dr. Marsh depth upgrade plan
+
+**User request:** Implement the attached "Dr. Marsh Rule Upgrade Plan" end-to-end (do not edit the plan file): deepen lesson concept quality, add explicit tools framing, tighten concept-example guardrails, update lesson template scaffolding, and revalidate the reference module lessons.
+
+**Assistant actions:**
+
+- Updated [`.cursor/rules/marsh-lesson-author.mdc`](.cursor/rules/marsh-lesson-author.mdc):
+  - Added a **4-part Concept depth contract** (definition, mechanics, boundary/tradeoff, project tie-in) with a minimum-depth expectation.
+  - Added required **Tools you will use** bullets with one-line rationale per tool.
+  - Tightened optional Concept snippet guardrail: if code could plausibly pass lesson tests by copy-paste, it is too close to a solution.
+  - Extended session checklist with depth/tool-quality gates.
+- Updated [`course/templates/lesson.md`](course/templates/lesson.md):
+  - Expanded `## Concept` guidance to mirror the 4-part depth contract.
+  - Added a required `## Tools you will use` scaffold with good-vs-bad examples.
+- Refreshed reference lessons to match the upgraded standard:
+  - [`python/reference-module/Ch1/L1.md`](python/reference-module/Ch1/L1.md)
+  - [`python/reference-module/Ch1/L2.md`](python/reference-module/Ch1/L2.md)
+  - Each now includes deeper concept explanations, tool-purpose bullets, concrete acceptance criteria, done-command, misconceptions, and optional tiny concept example without full-solution leakage.
+- Revalidated selector-scoped behavior:
+  - `uv run pytest main_test.py -m lesson_ch1_l1` -> passed
+  - `uv run pytest main_test.py -m lesson_ch1_l2` -> passed
+- Ran `ReadLints` on all edited files; no diagnostics reported.
+
+---
+
+## 2026-03-28 — Rules vs system design guidance
+
+**User request:** Whether rules are the best approach for this course creator, and then requested a maturity ladder.
+
+**Assistant answer (logged):**
+
+- Rules are necessary but not sufficient on their own.
+- Recommended architecture is layered:
+  - rules for role behavior and handoff constraints,
+  - schemas/templates for structure,
+  - validators/CI for enforceable quality gates,
+  - worked examples for calibration.
+- Proposed to provide a concise v1→v3 maturity ladder for next improvements.
+
+---
+
+## 2026-03-28 — Implement Python fundamentals fresh reset plan
+
+**User request:** Execute the attached fundamentals fresh-reset plan end-to-end (do not edit the plan file): reprompt/rebuild `python/fundamentals`, migrate to canonical `main_test.py` + selectors, replace legacy lesson test files immediately, rewrite lesson markdown, verify in batches, and clean docs.
+
+**Assistant actions:**
+
+- Performed Atlas-style fresh reset of planning artifacts:
+  - Replaced [`python/fundamentals/course/spine.yaml`](python/fundamentals/course/spine.yaml) with a new 2-chapter / 6-lesson spine using canonical test contract (`test_glob: main_test.py` + `lesson_selector` markers).
+  - Replaced [`python/fundamentals/CONTENTS.md`](python/fundamentals/CONTENTS.md) to mirror the new spine exactly.
+  - Rewrote [`python/fundamentals/course/overview.md`](python/fundamentals/course/overview.md) to match reset scope and selector-scoped runner.
+  - Reset progress to fresh start, then advanced to full reset-course completion in [`python/fundamentals/course/progress.yaml`](python/fundamentals/course/progress.yaml) (`last_completed: Ch2/L3`, `next_target: null`) during batch verification.
+- Regenerated tests under canonical append-only flow:
+  - Added [`python/fundamentals/main_test.py`](python/fundamentals/main_test.py) with six lesson blocks and markers:
+    - `lesson_ch1_l1`, `lesson_ch1_l2`, `lesson_ch1_l3`, `lesson_ch2_l1`, `lesson_ch2_l2`, `lesson_ch2_l3`
+  - Updated [`python/fundamentals/main.py`](python/fundamentals/main.py) with learner-facing functions aligned to lesson contracts.
+  - Updated [`python/fundamentals/pyproject.toml`](python/fundamentals/pyproject.toml) with pytest marker declarations.
+- Applied immediate replacement of legacy tests as requested:
+  - Deleted `python/fundamentals/Ch1/L1.py`, `Ch1/L2.py`, `Ch1/L3.py`, `Ch2/L1.py`, `Ch2/L2.py`, `Ch2/L3.py`.
+  - Deleted legacy `python/fundamentals/src/main.py` to avoid dual entrypoint ambiguity after reset.
+- Rewrote all lesson markdown in reset scope with deeper concept+tools format:
+  - [`python/fundamentals/Ch1/L1.md`](python/fundamentals/Ch1/L1.md)
+  - [`python/fundamentals/Ch1/L2.md`](python/fundamentals/Ch1/L2.md)
+  - [`python/fundamentals/Ch1/L3.md`](python/fundamentals/Ch1/L3.md)
+  - [`python/fundamentals/Ch2/L1.md`](python/fundamentals/Ch2/L1.md)
+  - [`python/fundamentals/Ch2/L2.md`](python/fundamentals/Ch2/L2.md)
+  - [`python/fundamentals/Ch2/L3.md`](python/fundamentals/Ch2/L3.md)
+- Batch verification run:
+  - Executed all selector-scoped commands for each lesson marker (all passed).
+  - Executed full fundamentals suite `uv run pytest main_test.py` (12 passed).
+  - Ran repository validator before/after migration passes (`python3 scripts/validate_repo.py`), with expected non-fundamentals warnings only (legacy migration warnings from `python/data-structures` and repo-root missing `CONTENTS.md` warning).
+- Cleanup/alignment:
+  - Updated [`python/fundamentals/course/glossary.md`](python/fundamentals/course/glossary.md) to remove legacy `Ch#/L#.py` runner reference.
+  - Updated [`python/fundamentals/README.md`](python/fundamentals/README.md) to reflect reset scope and module-root `main.py` entrypoint.
+  - Verified no residual legacy references in fundamentals for `Ch#/L#.py` or `src/main.py` via search.
+  - Checked diagnostics with `ReadLints`; no linter errors reported.
+
+---
+
+## 2026-03-28 — Lesson layout restructure execution
+
+**User request:** Implement assigned plan to-dos for lesson-layout normalization (without editing the plan file): `define-canonical-skeleton`, `restructure-fundamentals-lessons`, `restructure-reference-lessons`, `restructure-data-structures-lessons`, `cross-file-consistency-pass`, `append-chatlog`.
+
+**Assistant actions:**
+
+- Applied one canonical lesson layout to all in-scope lesson markdown files with exact section order:
+  - `# <Lesson title>` (matched each module `CONTENTS.md` title verbatim)
+  - `## Concept`
+  - `## Assignment`
+  - `## Further reading (optional)`
+- Rewrote fundamentals lessons to the canonical structure:
+  - [`python/fundamentals/Ch1/L1.md`](python/fundamentals/Ch1/L1.md)
+  - [`python/fundamentals/Ch1/L2.md`](python/fundamentals/Ch1/L2.md)
+  - [`python/fundamentals/Ch1/L3.md`](python/fundamentals/Ch1/L3.md)
+  - [`python/fundamentals/Ch2/L1.md`](python/fundamentals/Ch2/L1.md)
+  - [`python/fundamentals/Ch2/L2.md`](python/fundamentals/Ch2/L2.md)
+  - [`python/fundamentals/Ch2/L3.md`](python/fundamentals/Ch2/L3.md)
+- Rewrote reference-module lessons to the canonical structure:
+  - [`python/reference-module/Ch1/L1.md`](python/reference-module/Ch1/L1.md)
+  - [`python/reference-module/Ch1/L2.md`](python/reference-module/Ch1/L2.md)
+- Rewrote data-structures lessons in scope to the canonical structure:
+  - [`python/data-structures/Ch1/L1.md`](python/data-structures/Ch1/L1.md)
+  - [`python/data-structures/Ch1/L2.md`](python/data-structures/Ch1/L2.md)
+- Consolidated former tasks/criteria into each file’s single `## Assignment` section while preserving lesson intent and test-linked evidence.
+- Kept explicit evidence lines in all normalized files (e.g., `**Evidence (tests):** ...` plus lesson-scoped run command).
+- Ran a cross-file consistency pass over all 10 edited lessons to verify section order, title normalization, and assignment evidence presence.
+
+---
+
+## 2026-03-28 — Redesign `python/data-structures` from scratch
+
+**User request:** Implement attached redesign plan (do not edit the plan file): replace the current module with a new project idea, keep deep scope, include multiple data structures in a real-world use case, and emphasize OOP + functional styles.
+
+**Assistant actions:**
+
+- Gathered learner-preference inputs before planning (selected domain: **inventory operations**, level: **intermediate**, scope: **deep 16-20 lessons**, comfortable with Big-O, stacks/queues, and functional patterns).
+- Replaced [`python/data-structures/course/spine.yaml`](python/data-structures/course/spine.yaml) with a new 6-chapter / 18-lesson spine for **Inventory Operations Control Tower** using canonical selector-scoped test contracts:
+  - `test_glob: main_test.py`
+  - `lesson_selector: lesson_ch<chapter>_l<lesson>` for every lesson
+  - coherent `depends_on` DAG from `Ch1/L1` through `Ch6/L3`
+- Regenerated [`python/data-structures/CONTENTS.md`](python/data-structures/CONTENTS.md) so chapter and lesson titles match spine rows verbatim.
+- Rewrote [`python/data-structures/course/overview.md`](python/data-structures/course/overview.md) to describe the new operational capstone, OOP + functional architecture goals, chapter progression, and uv/pytest selector-scoped workflow.
+- Rewrote [`python/data-structures/course/glossary.md`](python/data-structures/course/glossary.md) with inventory-domain and DS/OOP/FP terminology aligned to the new module.
+- Reset [`python/data-structures/course/progress.yaml`](python/data-structures/course/progress.yaml) to fresh-start state:
+  - `last_completed: null`
+  - `next_target: Ch1/L1`
+- Ran `python3 scripts/validate_repo.py` from repo root:
+  - Result: `OK: validated 4 course root(s)`
+  - Warnings: repo-root `CONTENTS.md` absent (known) and `python/data-structures/main_test.py` not present yet (expected until Riley generates tests for the redesigned spine).
+- Checked diagnostics via `ReadLints` for all modified redesign files; no linter errors reported.
+
+---
+
+## 2026-03-28 — Batch authoring tests for redesigned data-structures module
+
+**User request:** Use [`.cursor/rules/kwon-test-architect.mdc`](.cursor/rules/kwon-test-architect.mdc) to batch all tests for `python/data-structures` in Python.
+
+**Assistant actions:**
+
+- Added new selector-scoped test suite at [`python/data-structures/main_test.py`](python/data-structures/main_test.py) covering all lessons defined in the redesigned spine (20 tests total across 18 lesson selectors, with deeper structures receiving multiple tests).
+- Implemented behavior-first contracts for redesigned surfaces, including:
+  - functional normalization/indexing flows (`normalize_inventory_event`, `normalize_event_stream`, `build_stock_index`)
+  - custom OOP structures (`AuditStack`, `ReplenishmentQueue`, `LedgerNode`, `MovementLedgerLinkedList`)
+  - mid-pipeline orchestration (`IntakeCoordinator`, allocation/constraint/wave planning)
+  - prioritization/reporting/recovery (`select_restock_top_k`, `estimate_planning_cost`, `InventoryControlTower`, `build_kpi_report`, `simulate_failure_recovery`)
+- Ensured every test is marked with the correct spine selector marker (`lesson_ch<chapter>_l<lesson>`) so `-m` runs remain lesson-scoped.
+- Updated [`python/data-structures/pyproject.toml`](python/data-structures/pyproject.toml) with `[tool.pytest.ini_options]` marker registrations for all 18 lesson selectors.
+- Ran collection check:
+  - `uv run pytest main_test.py --collect-only -q`
+  - Result: all tests collected successfully (`20 tests collected`).
+- Ran `ReadLints` on modified files; no diagnostics reported.
+
+---
+
+## 2026-03-28 — Batch authoring lessons for redesigned data-structures module
+
+**User request:** Use [`.cursor/rules/marsh-lesson-author.mdc`](.cursor/rules/marsh-lesson-author.mdc) to batch-write all lessons for redesigned `python/data-structures`, first tailoring structure preferences: no `Ch#/L#` in lesson headings, unified concept narrative (no separate Concept/tools/why-matters/objectives/misconceptions subheaders), `## Assigned task(s)` with integrated acceptance criteria, no dedicated done/run-command section.
+
+**Assistant actions:**
+
+- Updated shared authoring references to match the new lesson format:
+  - Updated [`course/templates/lesson.md`](course/templates/lesson.md) to the streamlined structure with title-only heading, unified concept narrative block, `## Assigned task(s)` containing acceptance checklist + evidence, and optional further reading.
+  - Updated [`.cursor/rules/marsh-lesson-author.mdc`](.cursor/rules/marsh-lesson-author.mdc) so required sections/forbidden outputs align with the new structure and explicitly exclude `How you'll know you're done` blocks in lesson files.
+- Authored all 18 redesigned lesson files under `python/data-structures/`:
+  - Ch1: [`Ch1/L1.md`](python/data-structures/Ch1/L1.md), [`Ch1/L2.md`](python/data-structures/Ch1/L2.md), [`Ch1/L3.md`](python/data-structures/Ch1/L3.md)
+  - Ch2: [`Ch2/L1.md`](python/data-structures/Ch2/L1.md), [`Ch2/L2.md`](python/data-structures/Ch2/L2.md), [`Ch2/L3.md`](python/data-structures/Ch2/L3.md)
+  - Ch3: [`Ch3/L1.md`](python/data-structures/Ch3/L1.md), [`Ch3/L2.md`](python/data-structures/Ch3/L2.md), [`Ch3/L3.md`](python/data-structures/Ch3/L3.md)
+  - Ch4: [`Ch4/L1.md`](python/data-structures/Ch4/L1.md), [`Ch4/L2.md`](python/data-structures/Ch4/L2.md), [`Ch4/L3.md`](python/data-structures/Ch4/L3.md)
+  - Ch5: [`Ch5/L1.md`](python/data-structures/Ch5/L1.md), [`Ch5/L2.md`](python/data-structures/Ch5/L2.md), [`Ch5/L3.md`](python/data-structures/Ch5/L3.md)
+  - Ch6: [`Ch6/L1.md`](python/data-structures/Ch6/L1.md), [`Ch6/L2.md`](python/data-structures/Ch6/L2.md), [`Ch6/L3.md`](python/data-structures/Ch6/L3.md)
+- Authored required hints files for all spine `hints: true` lessons:
+  - [`Ch2/L3-hint.md`](python/data-structures/Ch2/L3-hint.md)
+  - [`Ch3/L2-hint.md`](python/data-structures/Ch3/L2-hint.md)
+  - [`Ch4/L3-hint.md`](python/data-structures/Ch4/L3-hint.md)
+  - [`Ch5/L1-hint.md`](python/data-structures/Ch5/L1-hint.md)
+  - [`Ch6/L1-hint.md`](python/data-structures/Ch6/L1-hint.md)
+  - [`Ch6/L3-hint.md`](python/data-structures/Ch6/L3-hint.md)
+- Ran consistency checks:
+  - Verified all 18 lesson files and 6 hints files exist.
+  - Verified every lesson has `## Assigned task(s)` and explicit `Evidence (tests): main_test.py + lesson_selector`.
+  - Verified no lesson contains forbidden `How you'll know you're done` sections or embedded `uv run pytest` commands.
+
+---
+
+## 2026-03-28 — Hint file naming + structure adjustment
+
+**User request:** Change hint naming to `-hint.md` (not `.hints.md`) and remove `When to open` / `Orientation` sections from hint files; update references accordingly.
+
+**Assistant actions:**
+
+- Renamed data-structures hint files to `-hint.md` convention and removed legacy `.hints.md` files:
+  - `Ch2/L3-hint.md`, `Ch3/L2-hint.md`, `Ch4/L3-hint.md`, `Ch5/L1-hint.md`, `Ch6/L1-hint.md`, `Ch6/L3-hint.md`
+- Updated lesson references in:
+  - [`python/data-structures/Ch2/L3.md`](python/data-structures/Ch2/L3.md)
+  - [`python/data-structures/Ch3/L2.md`](python/data-structures/Ch3/L2.md)
+  - [`python/data-structures/Ch4/L3.md`](python/data-structures/Ch4/L3.md)
+  - [`python/data-structures/Ch5/L1.md`](python/data-structures/Ch5/L1.md)
+  - [`python/data-structures/Ch6/L1.md`](python/data-structures/Ch6/L1.md)
+  - [`python/data-structures/Ch6/L3.md`](python/data-structures/Ch6/L3.md)
+- Updated naming references in shared docs/rules/templates:
+  - [`course/templates/lesson.md`](course/templates/lesson.md)
+  - [`course/templates/lesson-hints.md`](course/templates/lesson-hints.md)
+  - [`.cursor/rules/marsh-lesson-author.mdc`](.cursor/rules/marsh-lesson-author.mdc)
+  - [`.cursor/rules/atlas-learning-architect.mdc`](.cursor/rules/atlas-learning-architect.mdc)
+  - [`.cursor/rules/kwon-test-architect.mdc`](.cursor/rules/kwon-test-architect.mdc)
+  - [`.cursor/rules/maestro-orchestrator.mdc`](.cursor/rules/maestro-orchestrator.mdc)
+  - [`course/spine.schema.json`](course/spine.schema.json)
+  - [`course/spine-and-contents.md`](course/spine-and-contents.md)
+  - [`README.md`](README.md)
+  - [`python/data-structures/ATLAS_PROMPT.md`](python/data-structures/ATLAS_PROMPT.md)
+- Updated recent hint-file links in [`CHATLOG.md`](CHATLOG.md) to the new `-hint.md` names.
+- Verified:
+  - No `.hints.md` files remain in `python/data-structures/`.
+  - No hint files contain `When to open` or `Orientation` sections.
+  - `ReadLints` reports no diagnostics for updated files.
+
+---
+
+## 2026-03-28 — Fundamentals redesign to Personal Tracker (in place)
+
+**User request:** Completely redesign `python/fundamentals` from scratch as a different project for absolute beginners; include variables/types, conventions + "pythonic", operators, functions, strings as iterable, lists/tuples, main sequencing, classes/inheritance, `__init__`, `__str__` vs `__repr__`; ask many planning questions; make it a long module; then implement the approved plan fully (do not edit the plan file).
+
+**Planning clarifications captured via structured questions:**
+
+- Course location: **replace existing `python/fundamentals/` in place**.
+- Capstone arc: **Personal Tracker App**.
+- Module length: **very long** (8 chapters / 32+ lessons).
+- Additional topics included: control flow, dicts/sets, file I/O, exceptions, modules/imports, testing basics.
+- Delivery scope: **full course artifacts** (architecture + tests + all lesson files).
+
+**Assistant actions:**
+
+- Rewrote Atlas artifacts for the redesigned course:
+  - Updated [`python/fundamentals/course/spine.yaml`](python/fundamentals/course/spine.yaml) to 8 chapters and 32 lessons with canonical `test_glob: main_test.py`, unique `lesson_selector` markers, lesson DAG dependencies, and hints flags.
+  - Updated [`python/fundamentals/CONTENTS.md`](python/fundamentals/CONTENTS.md) to mirror the new spine titles/order exactly.
+  - Rewrote [`python/fundamentals/course/overview.md`](python/fundamentals/course/overview.md) with beginner framing, uv workflow, chapter arc, and an expansion-question list for future growth.
+  - Rewrote [`python/fundamentals/course/glossary.md`](python/fundamentals/course/glossary.md) with fundamentals/OOP/testing terminology.
+  - Reset [`python/fundamentals/course/progress.yaml`](python/fundamentals/course/progress.yaml) to `last_completed: null`, `next_target: Ch1/L1`.
+- Rebuilt Riley test contracts:
+  - Replaced [`python/fundamentals/main_test.py`](python/fundamentals/main_test.py) with 32 lesson-scoped marker blocks (`lesson_ch1_l1` through `lesson_ch8_l4`) matching the redesigned spine.
+  - Updated [`python/fundamentals/pyproject.toml`](python/fundamentals/pyproject.toml) to register all 32 pytest markers.
+- Rewrote Marsh lesson artifacts across all chapter folders:
+  - Authored/replaced all lesson files `Ch1/L1.md` through `Ch8/L4.md` in [`python/fundamentals`](python/fundamentals).
+  - Added required hint files for spine-flagged lessons:
+    - [`python/fundamentals/Ch5/L3-hint.md`](python/fundamentals/Ch5/L3-hint.md)
+    - [`python/fundamentals/Ch5/L4-hint.md`](python/fundamentals/Ch5/L4-hint.md)
+    - [`python/fundamentals/Ch6/L3-hint.md`](python/fundamentals/Ch6/L3-hint.md)
+    - [`python/fundamentals/Ch6/L4-hint.md`](python/fundamentals/Ch6/L4-hint.md)
+    - [`python/fundamentals/Ch8/L1-hint.md`](python/fundamentals/Ch8/L1-hint.md)
+    - [`python/fundamentals/Ch8/L2-hint.md`](python/fundamentals/Ch8/L2-hint.md)
+    - [`python/fundamentals/Ch8/L3-hint.md`](python/fundamentals/Ch8/L3-hint.md)
+    - [`python/fundamentals/Ch8/L4-hint.md`](python/fundamentals/Ch8/L4-hint.md)
+- Validation run and outcomes:
+  - Ran `python3 scripts/validate_repo.py` from repo root -> succeeded (`OK: validated 4 course root(s)`; known warning about missing repo-root `CONTENTS.md`).
+  - Ran scoped sample test `uv run pytest main_test.py -m lesson_ch1_l1` in `python/fundamentals`:
+    - expected failure because redesigned test contracts now target fresh API surfaces not yet implemented in `main.py`.
+    - marker warnings were resolved after updating `pyproject.toml`.
+  - Ran `ReadLints` on edited core files -> no linter diagnostics.

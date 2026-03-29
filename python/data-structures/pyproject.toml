@@ -6,3 +6,25 @@ requires-python = ">=3.13"
 dependencies = [
     "pytest>=9.0.2",
 ]
+
+[tool.pytest.ini_options]
+markers = [
+    "lesson_ch1_l1: Model Inventory Events with Typed Records",
+    "lesson_ch1_l2: Normalize Event Streams with map/filter/reduce",
+    "lesson_ch1_l3: Index Current Stock by SKU and Location",
+    "lesson_ch2_l1: Build an Audit Stack Class",
+    "lesson_ch2_l2: Build a Replenishment Queue Class",
+    "lesson_ch2_l3: Compose Stack and Queue in an Intake Service",
+    "lesson_ch3_l1: Design Node and LinkedList Ledger Classes",
+    "lesson_ch3_l2: Insert and Remove Ledger Entries Safely",
+    "lesson_ch3_l3: Functional Aggregations over Linked Ledgers",
+    "lesson_ch4_l1: Build Allocation Maps for Open Orders",
+    "lesson_ch4_l2: Use Sets to Enforce Location and SKU Constraints",
+    "lesson_ch4_l3: Queue-Driven Picking Wave Planner",
+    "lesson_ch5_l1: Rank Restock Tasks with a Heap",
+    "lesson_ch5_l2: Deterministic Tie-Breaking for Equal Priority",
+    "lesson_ch5_l3: Analyze Bottlenecks with Complexity Budgets",
+    "lesson_ch6_l1: Compose an InventoryControlTower Service",
+    "lesson_ch6_l2: Build a Functional KPI Reporting Pipeline",
+    "lesson_ch6_l3: Simulate Failure Recovery with Undo and Replay",
+]

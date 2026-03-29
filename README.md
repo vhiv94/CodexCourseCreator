@@ -9,9 +9,9 @@ This workspace holds **conventions and Cursor rules** for building **capstone-st
 | **Maestro** | Orchestrator: reads `course/spine.*` and `course/progress.*`, emits **progress patches** and **copy-paste prompt packs** for the specialists. |
 | **Atlas** | Learning architect: `course/spine.yaml` (or `.json`), root **`CONTENTS.md`**, **`course/overview.md`**, optional glossary. |
 | **Riley** | Test author: append lesson-scoped test blocks to module-root **`main_test.py`** using per-lesson selectors. |
-| **Dr. Marsh** | Lesson author: **`Chk/Ln.md`**, optional **`Chk/Ln.hints.md`** when the spine sets `hints: true`. |
+| **Dr. Marsh** | Lesson author: **`Chk/Ln.md`**, optional **`Chk/Ln-hint.md`** when the spine sets `hints: true`. |
 
-**On-disk layout**: Linear **`Ch1/`**, **`Ch2/`**, … with **`L1.md`** and optional **`L1.hints.md`** per lesson, plus module-root **`main.py`** (learner entrypoint) and append-only **`main_test.py`** (all lesson tests). **`course/spine.*`** and **`CONTENTS.md`** must stay in sync (same chapter titles and lesson order).
+**On-disk layout**: Linear **`Ch1/`**, **`Ch2/`**, … with **`L1.md`** and optional **`L1-hint.md`** per lesson, plus module-root **`main.py`** (learner entrypoint) and append-only **`main_test.py`** (all lesson tests). **`course/spine.*`** and **`CONTENTS.md`** must stay in sync (same chapter titles and lesson order).
 
 Legacy per-lesson test files (`Ch#/L#.py`) are still migration-compatible, but new/updated course planning should use `main_test.py` + `lesson_selector`.
 

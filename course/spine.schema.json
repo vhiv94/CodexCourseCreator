@@ -117,7 +117,7 @@
         },
         "hints": {
           "type": "boolean",
-          "description": "If true, Ch#/L#.hints.md must exist beside Ch#/L#.md."
+          "description": "If true, Ch#/L#-hint.md must exist beside Ch#/L#.md."
         }
       },
       "allOf": [

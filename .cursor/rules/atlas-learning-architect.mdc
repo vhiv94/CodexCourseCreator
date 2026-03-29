@@ -47,7 +47,7 @@ For a **monorepo Python course** under **`python/<slug>/`**, each path below is 
 2. **Root `CONTENTS.md`** — Human outline; must **mirror** spine titles and order exactly:
    - Per chapter: `### Chk: <Chapter title>` using the same `dir` and title string as spine.
    - Under each heading: numbered lines `1. <Lesson title>`, `2. …` in chapter-local order (reset numbering per chapter).
-   - Do **not** need to list filenames (convention: `Chk/Ln.md`, `Chk/Ln.<ext>`, optional `Chk/Ln.hints.md`).
+   - Do **not** need to list filenames (convention: `Chk/Ln.md`, `Chk/Ln.<ext>`, optional `Chk/Ln-hint.md`).
 3. **`course/overview.md`** — Motivation, **behavioral** end-state (what the system does), prerequisites, how chapters map to the arc. **Not** a line-by-line implementation guide.
 4. **`course/glossary.md`** — Optional; use for jargon-heavy courses.
 
@@ -61,7 +61,7 @@ For a **monorepo Python course** under **`python/<slug>/`**, each path below is 
 - **Full lesson prose** (`Chk/Ln.md`) or **full test code** (`Chk/Ln.<ext>`) — those belong to Marsh and Riley unless the user explicitly merged roles for a one-off task.
 - **Recipe-style algorithm walkthroughs** in overview (keep behavioral and architectural).
 - Spine or `CONTENTS.md` **out of sync** with each other (titles/order must match **exactly**).
-- `hints: true` without intent to authorize **`Chk/Ln.hints.md`** later (Marsh).
+- `hints: true` without intent to authorize **`Chk/Ln-hint.md`** later (Marsh).
 
 ## Conflict precedence (hard)
 

@@ -49,7 +49,7 @@ Use the **fixed section order** below so paste targets stay predictable. **Secti
 
 1. **Progress patch** — Short YAML (or JSON) snippet the user can merge into `course/progress.*`, or explicit edit instructions (e.g. set `last_completed` to `Ch1/L1`). Must conform to `course/progress.schema.json` (only defined keys: `last_completed`, optional `next_target`, optional `notes`).
 2. **Riley block** — Single copy-paste instruction for **kwon-test-architect** (see template below). One lesson per block by default; for batching, one block listing **all** target `Chk/Ln` and each lesson's `test_glob` + `lesson_selector` from the spine.
-3. **Marsh block** — Single copy-paste instruction for **marsh-lesson-author**, **after** Riley for the same lesson(s). Require `Ln.hints.md` only where spine `hints: true`.
+3. **Marsh block** — Single copy-paste instruction for **marsh-lesson-author**, **after** Riley for the same lesson(s). Require `Ln-hint.md` only where spine `hints: true`.
 4. **Atlas block (optional)** — Single copy-paste instruction for **atlas-learning-architect** when the user is starting, replanning, or extending the spine. Do **not** include Riley/Marsh in the same turn as Atlas unless the user explicitly asked for a full pipeline after Atlas outputs already exist.
 
 **Voice**: crisp checklist tone; no pedagogy, no test code, no lesson prose in your outputs.
@@ -79,7 +79,7 @@ Open with a line: **Enable rule:** `kwon-test-architect` (or tell the user to at
 
 **Enable rule:** `marsh-lesson-author`. Fenced paste block:
 
-- Objective: **`Chk/Ln.md`** for the **same** target lesson(s) as Riley (after tests exist); optional **`Ln.hints.md`** iff spine **`hints: true`** for that lesson.
+- Objective: **`Chk/Ln.md`** for the **same** target lesson(s) as Riley (after tests exist); optional **`Ln-hint.md`** iff spine **`hints: true`** for that lesson.
 - **Resolve `Chk/Ln` using the canonical contract:** follow **`.cursor/rules/shared-target-resolution.mdc`** (same contract as Riley block).
 - **Context:** Attach **`@…/course/progress.yaml`** (or `.json`), **`@…/course/spine.yaml`** (or `.json`), **`@…/course/overview.md`**, and **`@…/main_test.py`** where Riley placed the selector-scoped tests.
 - Constraints: no step-by-step solution in the main lesson; optional minimal illustrative code **only** under **Concept**; align tasks and acceptance checklist with existing tests; **do not** add a separate “Cited materials” / bibliography section—`course/templates/lesson.md` shape only.

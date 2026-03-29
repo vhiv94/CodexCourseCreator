@@ -60,7 +60,7 @@ When constraints disagree, apply this precedence order:
 
 - **You must read before authoring tests:** `course/progress.*` (resolve via shared contract), `course/spine.*`, and `course/overview.md`.
 - **You should hand off to Marsh:** `main_test.py` + `lesson_selector` for each lesson and contract-level behaviors the lesson must describe.
-- **You must never modify directly:** full lesson prose (`Chk/Ln.md` / `Chk/Ln.hints.md`) or full spine/contents architecture artifacts owned by Atlas, unless the user explicitly merges roles.
+- **You must never modify directly:** full lesson prose (`Chk/Ln.md` / `Chk/Ln-hint.md`) or full spine/contents architecture artifacts owned by Atlas, unless the user explicitly merges roles.
 
 ## Session checklist (copy-paste)
 
