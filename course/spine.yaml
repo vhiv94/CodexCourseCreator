@@ -1,0 +1,165 @@
+course_id: python-data-structures
+title: Python Data Structures — Build an In-Memory Search Index
+audience_level: intermediate (Python basics assumed)
+chapters:
+  - dir: Ch1
+    title: Sequences and the Corpus Model
+    lessons:
+      - id: L1
+        title: Represent Documents as a Sequenced Corpus
+        concept: Lists as ordered collections; fixed logical order of documents in memory
+        project_step: Store documents in a corpus list with stable ids and retrievable text for later indexing.
+        test_glob: Ch1/L1.py
+        depends_on: []
+        hints: false
+      - id: L2
+        title: Walk the Corpus with Control
+        concept: for loops, enumerate, and intentional iteration order
+        project_step: Traverse the corpus to compute a summary (counts, lengths) without assuming dict iteration order.
+        test_glob: Ch1/L2.py
+        depends_on:
+          - Ch1/L1
+        hints: false
+      - id: L3
+        title: Slice Text into Previews
+        concept: String slicing, bounds safety, and excerpt boundaries
+        project_step: Given a corpus position, produce bounded preview snippets from document text.
+        test_glob: Ch1/L3.py
+        depends_on:
+          - Ch1/L2
+        hints: false
+      - id: L4
+        title: Baseline Linear Scan Search
+        concept: O(n) full scan as the comparison point before indexing
+        project_step: Find candidate documents by scanning every body for a literal substring (case rules per tests).
+        test_glob: Ch1/L4.py
+        depends_on:
+          - Ch1/L3
+        hints: false
+  - dir: Ch2
+    title: Stacks, Queues, and Double-Ended Work
+    lessons:
+      - id: L1
+        title: Use a Stack Where Last-In Must Win
+        concept: Stack (LIFO) discipline for nested or reversible processing
+        project_step: Validate or normalize a query token sequence using stack-backed delimiter rules before search.
+        test_glob: Ch2/L1.py
+        depends_on:
+          - Ch1/L4
+        hints: false
+      - id: L2
+        title: Fair Merge with a Queue
+        concept: Queue (FIFO) for ordered consumption of pending work
+        project_step: Merge multiple sorted posting streams (or doc-id streams) by dequeueing the smallest head repeatedly.
+        test_glob: Ch2/L2.py
+        depends_on:
+          - Ch2/L1
+        hints: true
+      - id: L3
+        title: Reach Both Ends with a Deque
+        concept: deque for O(1) pushes/pops on both ends
+        project_step: Maintain a bounded window over tokens or characters using a deque when both ends move.
+        test_glob: Ch2/L3.py
+        depends_on:
+          - Ch2/L2
+        hints: false
+  - dir: Ch3
+    title: Maps, Sets, and an Inverted Index
+    lessons:
+      - id: L1
+        title: Map Terms to Posting Lists
+        concept: dict as a key→value index for variable-sized associations
+        project_step: Build an inverted index mapping normalized terms to ordered lists of document ids.
+        test_glob: Ch3/L1.py
+        depends_on:
+          - Ch2/L3
+        hints: false
+      - id: L2
+        title: Boolean Queries with Sets
+        concept: set union/intersection for combining posting sets
+        project_step: Answer AND queries by intersecting posting lists (or id sets) derived from the index.
+        test_glob: Ch3/L2.py
+        depends_on:
+          - Ch3/L1
+        hints: false
+      - id: L3
+        title: Keys Must Be Hashable and Stable
+        concept: Hashing contracts, immutability of index keys, and equality consistency
+        project_step: Refactor index keys (e.g. tuples or frozen tokens) so dict/set membership matches retrieval tests.
+        test_glob: Ch3/L3.py
+        depends_on:
+          - Ch3/L2
+        hints: true
+  - dir: Ch4
+    title: Trees for Ordering and Prefix Retrieval
+    lessons:
+      - id: L1
+        title: Binary Search Trees for Ordered Keys
+        concept: BST structure; left/right ordering invariant
+        project_step: Maintain a BST of unique terms (or scores) supporting membership and ordered iteration for the index UI.
+        test_glob: Ch4/L1.py
+        depends_on:
+          - Ch3/L3
+        hints: false
+      - id: L2
+        title: Insert Without Breaking the BST Rule
+        concept: Recursive or iterative insertion paths and duplicate policy
+        project_step: Insert terms into the BST following the ordering rule; duplicates handled per stated policy.
+        test_glob: Ch4/L2.py
+        depends_on:
+          - Ch4/L1
+        hints: false
+      - id: L3
+        title: Tries for Prefix and Completion
+        concept: Prefix trees, edges as characters or token slices
+        project_step: Add a trie (prefix tree) so partial queries list all corpus terms with a given prefix.
+        test_glob: Ch4/L3.py
+        depends_on:
+          - Ch4/L2
+        hints: true
+  - dir: Ch5
+    title: Heaps and Ranked Results
+    lessons:
+      - id: L1
+        title: A Heap for Running Top-K
+        concept: heap invariant; min-heap vs max-heap via negation or key functions
+        project_step: Given scored hits, return the top K document ids using a heap (heapq) without full sort when required.
+        test_glob: Ch5/L1.py
+        depends_on:
+          - Ch4/L3
+        hints: true
+      - id: L2
+        title: Deterministic Tie-Breaking Under Ties
+        concept: Secondary keys and stable ordering in priority structures
+        project_step: When scores collide, break ties by doc id (or stated rule) so rankings are reproducible.
+        test_glob: Ch5/L2.py
+        depends_on:
+          - Ch5/L1
+        hints: false
+  - dir: Ch6
+    title: Graphs for Related Documents
+    lessons:
+      - id: L1
+        title: Model Relationships as an Adjacency List
+        concept: Sparse graphs as map-of-neighbors; weighted vs unweighted edges
+        project_step: Represent a document graph (shared terms, explicit links, or test-provided edges) as dict[int, list[...]].
+        test_glob: Ch6/L1.py
+        depends_on:
+          - Ch5/L2
+        hints: false
+      - id: L2
+        title: Breadth-First Neighbor Expansion
+        concept: BFS layering; queue-driven frontier
+        project_step: From a seed document, collect related ids within a hop limit without revisiting nodes.
+        test_glob: Ch6/L2.py
+        depends_on:
+          - Ch6/L1
+        hints: true
+      - id: L3
+        title: Depth-First Exploration for Structure
+        concept: DFS recursion/stack; discovery vs finished order tradeoffs
+        project_step: Implement DFS to enumerate a component or detect back-edges per test contract for the corpus graph.
+        test_glob: Ch6/L3.py
+        depends_on:
+          - Ch6/L2
+        hints: true
