@@ -6,7 +6,7 @@ This tiny module is a worked example of the canonical flow:
 - Riley appends tests in `main_test.py`.
 - Each lesson is scoped with a unique marker selector from `course/spine.yaml`.
 - Maestro routes progress updates and next-step handoffs.
-- Marsh writes lesson prose in `Ch#/L#.md`.
+- This example keeps its lesson prose in legacy `Ch#/L#.md` paths, but new courses should prefer `course/Ch#/L#.md`.
 
 ## Learning arc
 

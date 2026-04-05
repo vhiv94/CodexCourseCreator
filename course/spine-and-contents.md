@@ -41,17 +41,31 @@ Use `modules:` only when the course has **three or more** meaningful module grou
 - Chapter `dir` values remain `Ch1`, `Ch2`, and so on
 - Lesson refs and dependencies still use `Ch#/L#`
 
-## On-disk lesson layout (`Ch#/L#`)
+## On-disk lesson layout
+
+Logical lesson refs still use chapter + lesson ids such as `Ch1/L3`, but the prose path depends on the course shape.
+
+### Chapter-only courses
 
 For each chapter `dir` and lesson `id`:
 
 | Role | Path pattern |
 |------|--------------|
-| Lesson prose | `{dir}/{id}.md` |
-| Hint prose | `{dir}/{id}-hint.md` when `hints: true` |
+| Lesson prose | `course/{dir}/{id}.md` |
+| Hint prose | `course/{dir}/{id}-hint.md` when `hints: true` |
 | Tests | resolved by `test_glob` |
 
-Modules organize planning and the human table of contents. They do not introduce a separate on-disk `M#/` folder layer.
+### Module-aware courses
+
+For each module `id`, chapter `dir`, and lesson `id`:
+
+| Role | Path pattern |
+|------|--------------|
+| Lesson prose | `course/{module-id}/{dir}/{id}.md` |
+| Hint prose | `course/{module-id}/{dir}/{id}-hint.md` when `hints: true` |
+| Tests | resolved by `test_glob` |
+
+Modules therefore affect both planning and on-disk lesson placement, while lesson refs, dependencies, and selectors remain stable as `Ch#/L#`.
 
 ## Lesson metadata
 

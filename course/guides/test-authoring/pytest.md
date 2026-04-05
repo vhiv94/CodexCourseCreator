@@ -8,7 +8,8 @@ In this monorepo, **Python** courses live under **`python/<course-slug>/`**; run
 
 - **Lesson tests**: append tests into module-root `main_test.py` and mark each lesson block with its spine `lesson_selector` (for example `@pytest.mark.lesson_ch1_l1`).
 - **Spine contract**: set `test_glob: main_test.py` and one unique `lesson_selector` per lesson.
-- **Learner implementation**: packages under `src/` (import as `from mycourse import ...`) or flat modules per `overview.md`; tests import from the **learner-facing** package layout only.
+- **Lesson prose**: keep lesson markdown under `course/Ch#/L#.md` for chapter-only courses or `course/M#/Ch#/L#.md` for module-aware courses, with optional hints beside the lesson file.
+- **Learner implementation**: prefer packages under `src/` (import as `from mycourse import ...`) while keeping root `main.py` and `main_test.py` as the stable entrypoints when the course uses them; tests import from the **learner-facing** package layout only.
 
 ## Discovery and configuration
 
@@ -34,7 +35,7 @@ With **uv** (recommended for Python courses in this workspace), run **only** one
 uv run pytest main_test.py -m lesson_ch1_l1
 ```
 
-Use **`uv run pytest main_test.py -m <lesson_selector>`** in `overview.md`, every `Ch#/L#.md`, and footer comments in `main_test.py`. If a repo does not use uv, document one alternative there (for example `python -m pytest main_test.py -m lesson_ch1_l1` after activating its venv).
+Use **`uv run pytest main_test.py -m <lesson_selector>`** in `overview.md`, every lesson file under `course/Ch#/` or `course/M#/Ch#/`, and footer comments in `main_test.py`. If a repo does not use uv, document one alternative there (for example `python -m pytest main_test.py -m lesson_ch1_l1` after activating its venv).
 
 ## `conftest.py` scope
 

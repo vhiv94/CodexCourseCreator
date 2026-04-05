@@ -31,4 +31,9 @@ Keep short. Include only references that directly support this lesson.
 
 ---
 
-If the spine marks this lesson with **`hints: true`**, optional algorithmic nudges and sketches live only in **`Ln-hint.md`** next to this file—not in this lesson body.
+If the spine marks this lesson with **`hints: true`**, optional algorithmic nudges and sketches live only in the sibling hint file next to the lesson body:
+
+- chapter-only courses: **`course/Ch#/Ln-hint.md`**
+- module-aware courses: **`course/M#/Ch#/Ln-hint.md`**
+
+Do not put those nudges in this lesson body.

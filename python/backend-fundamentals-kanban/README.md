@@ -8,7 +8,7 @@ It now serves as the pilot course for the redesigned flow:
 - the full plan uses `modules -> chapters -> lessons`;
 - content is still generated in chapter-sized batches rather than assuming the whole course is authored at once.
 
-Right now, the planned course structure lives in `course/spine.yaml` and `CONTENTS.md`, while the currently authored batch is Chapter 1.
+Right now, the planned course structure lives in `course/spine.yaml` and `CONTENTS.md`, while the next authored sequence is the pre-Ch1 readiness checkpoint plus the Chapter 1 lesson batch under `course/M1/Ch1/`.
 
 ## Quick start
 
@@ -36,4 +36,8 @@ Do not use ad hoc `pip install` for this course workflow.
 - `course/overview.md`
 - `course/glossary.md`
 - `course/progress.yaml`
+- `course/M#/Ch#/L#.md` for this module-aware course's lesson prose, plus sibling `-hint.md` files when hints are enabled
 - `CONTENTS.md`
+- `src/` for learner/source modules when needed
+- `main.py`
+- `main_test.py`

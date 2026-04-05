@@ -1,6 +1,11 @@
 # Hints: Ln — short hint-sheet title
 
-Use this file **only** when `course/spine.*` has **`hints: true`** for this lesson. Path pattern: `{chapter-dir}/{lesson-id}-hint.md` (e.g. `Ch1/L3-hint.md`).
+Use this file **only** when `course/spine.*` has **`hints: true`** for this lesson.
+
+Path patterns:
+
+- chapter-only courses: `course/{chapter-dir}/{lesson-id}-hint.md` (for example `course/Ch1/L3-hint.md`)
+- module-aware courses: `course/{module-id}/{chapter-dir}/{lesson-id}-hint.md` (for example `course/M1/Ch1/L3-hint.md`)
 
 These notes are **optional reading** when stuck. They may include sketches, “consider…”, and small pseudocode. They must **not** be a complete copy-paste solution that satisfies every test without thought.
 

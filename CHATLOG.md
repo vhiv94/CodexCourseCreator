@@ -1098,6 +1098,128 @@
 
 ---
 
+## 2026-04-05 — Backend Kanban post-assessment Chapter 1 routing
+
+**User request:** Implement assigned to-dos from the attached post-assessment routing plan for `python/backend-fundamentals-kanban/` without editing the plan file:
+
+- `interpret-assessment`
+- `advance-progress`
+- `tune-ch1-prose`
+- `validate-and-log`
+
+**Assistant actions:**
+
+- Interpreted the completed Chapter 1 readiness checkpoint as: learner is ready to start the real Chapter 1 batch, but still needs explicit review on:
+  - HTTP request/response meaning, especially what a health-check request is actually asking for
+  - why JSON is the default machine-readable format for this API
+  - route and resource ownership, especially `/boards` versus `/boards/{board_id}/columns`
+  - common status/error categories such as `201`, `405`, `400`, and `422`
+  - SQLite's role as the persisted datastore behind successful writes
+- Updated [`python/backend-fundamentals-kanban/course/progress.yaml`](python/backend-fundamentals-kanban/course/progress.yaml):
+  - moved `current_target` from `type: assessment` to `type: chapter`
+  - kept `next_target: Ch1/L1`
+  - rewrote `recent_assessment` as a completed checkpoint summary with concrete Chapter 1 review guidance
+  - updated notes so the checkpoint now informs pacing instead of blocking routing
+- Updated [`python/backend-fundamentals-kanban/course/overview.md`](python/backend-fundamentals-kanban/course/overview.md) to state that the readiness checkpoint is complete and that the live Chapter 1 batch is confirmed as guided review-first.
+- Tuned the existing Chapter 1 lesson prose under [`python/backend-fundamentals-kanban/course/M1/Ch1/`](python/backend-fundamentals-kanban/course/M1/Ch1/) without changing lesson order or test scope:
+  - [`L1.md`](python/backend-fundamentals-kanban/course/M1/Ch1/L1.md): clarified what "listening" means, what `GET /health` is proving, and why wrong-method / unknown-route failures should be explicit JSON responses
+  - [`L2.md`](python/backend-fundamentals-kanban/course/M1/Ch1/L2.md): clarified what a request is asking for, what `GET /boards` vs `POST /boards` mean, and why JSON is the default contract
+  - [`L3.md`](python/backend-fundamentals-kanban/course/M1/Ch1/L3.md): clarified collection vs nested-resource routes and explained SQLite as durable storage rather than abstract database vocabulary
+  - [`L4.md`](python/backend-fundamentals-kanban/course/M1/Ch1/L4.md): made the common success/error status distinctions more explicit and reinforced why stable error payloads matter
+- Validation:
+  - `python3 scripts/validate_repo.py` -> `OK: validated 5 course root(s).`
+  - validation warnings remained the unchanged repo-root template warnings:
+    - missing root `CONTENTS.md`
+    - placeholder root `main_test.py` absent
+  - `ReadLints` on edited backend course files -> no diagnostics reported
+
+**Note:** The attached plan file was not modified.
+
+---
+
+## 2026-04-05 — Module-aware Ch1 layout + pre-Ch1 checkpoint for backend Kanban
+
+**User request:** Implement the assigned to-dos from the attached Kanban plan without editing the plan file itself:
+
+- `revise-module-aware-layout-contract`
+- `add-kanban-prech1-assessment`
+- `author-kanban-m1-ch1-lessons`
+- `validate-and-log-revised-layout`
+
+**Assistant actions:**
+
+- Updated the shared module-aware lesson path contract so chapter-only courses keep `course/Ch#/...` while module-aware courses now use `course/M#/Ch#/...` on disk, without changing logical lesson refs or selectors:
+  - [`course/spine-and-contents.md`](course/spine-and-contents.md)
+  - [`course/spine.schema.json`](course/spine.schema.json)
+  - [`course/templates/lesson.md`](course/templates/lesson.md)
+  - [`course/templates/lesson-hints.md`](course/templates/lesson-hints.md)
+  - [`.cursor/rules/marsh-lesson-author.mdc`](.cursor/rules/marsh-lesson-author.mdc)
+  - [`python/README.md`](python/README.md)
+  - [`course/guides/test-authoring/README.md`](course/guides/test-authoring/README.md)
+  - [`course/guides/test-authoring/pytest.md`](course/guides/test-authoring/pytest.md)
+- Added a chapter-local readiness checkpoint at [`python/backend-fundamentals-kanban/course/M1/Ch1/ASSESSMENT.md`](python/backend-fundamentals-kanban/course/M1/Ch1/ASSESSMENT.md) covering:
+  - server/process mental model
+  - HTTP request/response basics
+  - route/resource reasoning
+  - status/error expectations
+  - light SQL and deployment vocabulary checks
+- Updated backend course routing/docs so the active flow is now "pre-Ch1 checkpoint first, then Chapter 1 lessons under `course/M1/Ch1/`" while preserving the existing logical Chapter 1 refs/selectors:
+  - [`python/backend-fundamentals-kanban/course/progress.yaml`](python/backend-fundamentals-kanban/course/progress.yaml)
+  - [`python/backend-fundamentals-kanban/course/overview.md`](python/backend-fundamentals-kanban/course/overview.md)
+  - [`python/backend-fundamentals-kanban/README.md`](python/backend-fundamentals-kanban/README.md)
+- Authored the real Chapter 1 lesson batch under [`python/backend-fundamentals-kanban/course/M1/Ch1/`](python/backend-fundamentals-kanban/course/M1/Ch1/), aligned to existing `main_test.py` selectors and `CONTENTS.md` titles/order:
+  - [`L1.md`](python/backend-fundamentals-kanban/course/M1/Ch1/L1.md) — *What Is a Server*
+  - [`L2.md`](python/backend-fundamentals-kanban/course/M1/Ch1/L2.md) — *HTTP Request-Response Contract*
+  - [`L3.md`](python/backend-fundamentals-kanban/course/M1/Ch1/L3.md) — *Routing and Resource Modeling*
+  - [`L4.md`](python/backend-fundamentals-kanban/course/M1/Ch1/L4.md) — *API Design Basics Methods Status and Errors*
+- Verification:
+  - Ran `python3 scripts/validate_repo.py` from repo root -> `OK: validated 5 course root(s).`
+  - Validator warnings were limited to the unchanged repo-root template warnings (`CONTENTS.md` absent there and placeholder `main_test.py` absent there).
+  - Ran `ReadLints` on all edited files -> no diagnostics reported.
+
+**Note:** The attached plan file was not modified.
+
+---
+
+## 2026-04-05 — Adopt `course/` lesson layout
+
+**User request:** Implement the attached lesson-layout plan without editing the plan file itself:
+
+- `update-shared-lesson-path-contract`
+- `update-python-course-docs`
+- `align-backend-course-layout-docs`
+
+**Assistant actions:**
+
+- Updated shared lesson-path contracts so the documented default is now `course/Ch#/L#.md` with optional `course/Ch#/L#-hint.md` while keeping logical lesson refs (`Ch#/L#`) and selectors unchanged:
+  - [`course/spine-and-contents.md`](course/spine-and-contents.md)
+  - [`course/spine.schema.json`](course/spine.schema.json)
+  - [`course/templates/lesson.md`](course/templates/lesson.md)
+  - [`course/templates/lesson-hints.md`](course/templates/lesson-hints.md)
+  - [`.cursor/rules/marsh-lesson-author.mdc`](.cursor/rules/marsh-lesson-author.mdc)
+- Refreshed Python-level docs and test-authoring guides so future courses default to:
+  - lesson prose under `course/Ch#/`
+  - learner/source code under `src/`
+  - root `main.py` and `main_test.py` as stable entrypoints when used
+  - updated files:
+    - [`python/README.md`](python/README.md)
+    - [`course/guides/test-authoring/README.md`](course/guides/test-authoring/README.md)
+    - [`course/guides/test-authoring/pytest.md`](course/guides/test-authoring/pytest.md)
+- Aligned backend pilot docs so the next authored Chapter 1 batch is expected under `python/backend-fundamentals-kanban/course/Ch1/`:
+  - [`python/backend-fundamentals-kanban/README.md`](python/backend-fundamentals-kanban/README.md)
+  - [`python/backend-fundamentals-kanban/course/overview.md`](python/backend-fundamentals-kanban/course/overview.md)
+- Updated two reference-module docs to avoid contradicting the new default while preserving the example’s legacy on-disk layout:
+  - [`python/reference-module/README.md`](python/reference-module/README.md)
+  - [`python/reference-module/course/overview.md`](python/reference-module/course/overview.md)
+- Ran `python3 scripts/validate_repo.py` from repo root:
+  - result: `OK: validated 5 course root(s).`
+  - remaining warnings were unchanged root-template warnings only
+- Ran `ReadLints` for edited files; no diagnostics reported.
+
+**Note:** The attached plan file was not modified.
+
+---
+
 ## 2026-04-05 — Implement redesign to-dos: pilot course and consistency pass
 
 **User request:** Implement the assigned redesign to-dos from the attached plan without editing the plan file itself:
@@ -1139,5 +1261,49 @@
     - missing root `CONTENTS.md`
     - placeholder root `main_test.py` file absent
   - `ReadLints` on edited files -> no linter errors
+
+**Note:** The attached plan file was not modified.
+
+---
+
+## 2026-04-05 — Backend pilot intake reset and next-target confirmation
+
+**User request:** Implement assigned to-dos from the attached intake-reset plan for `python/backend-fundamentals-kanban/` without editing the plan file:
+
+- `rerun-intake`
+- `confirm-capstone`
+- `validate-structure`
+- `set-next-target`
+
+**Assessment answers captured:**
+
+- Python comfort: confident with everyday Python; backend-specific depth preferred.
+- HTTP/API concepts: mostly new.
+- Data modeling / SQL: mostly new.
+- Deployment vocabulary: partial familiarity; wants practical explanation.
+- Operational confidence: new area, but still wants challenge.
+- Capstone fit: keep **Kanban Lite API**.
+- Course shape: open to assessment-based choice.
+
+**Assistant actions:**
+
+- Re-ran the intake and interpreted the results as:
+  - Python can stay in review mode rather than driving a syntax-first course.
+  - HTTP/API concepts, resource modeling, relational schemas, and SQL constraints need explicit early depth.
+  - Deployment/ops should stay guided and practical, but not low-challenge.
+- Confirmed the capstone decision: [`python/backend-fundamentals-kanban/course/overview.md`](python/backend-fundamentals-kanban/course/overview.md) now states that the refreshed intake still supports **Kanban Lite API** as the right deployable backend project.
+- Confirmed the structure decision:
+  - kept the existing three-module spine unchanged because the intake still supports distinct phases for foundations, app/data design, and runtime/operations
+  - updated [`python/backend-fundamentals-kanban/course/overview.md`](python/backend-fundamentals-kanban/course/overview.md) with an intake snapshot and explicit module-aware rationale
+- Re-baselined progress in [`python/backend-fundamentals-kanban/course/progress.yaml`](python/backend-fundamentals-kanban/course/progress.yaml):
+  - refreshed `recent_assessment.summary`
+  - rewrote `review` / `deepen` lists from the new intake
+  - kept `next_target: Ch1/L1`
+  - kept `current_target` focused on generating **Chapter 1** first
+  - updated notes to say: keep capstone, keep module-aware spine, generate Ch1 first, then reassess before Ch2
+- Ran `python3 scripts/validate_repo.py` from the repo root:
+  - result: `OK: validated 5 course root(s).`
+  - remaining warnings were unchanged root-template warnings only
+- Ran `ReadLints` on the edited backend course files; no diagnostics reported.
 
 **Note:** The attached plan file was not modified.

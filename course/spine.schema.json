@@ -126,7 +126,7 @@
         "lessons": {
           "type": "array",
           "minItems": 1,
-          "description": "Lessons in this chapter; ids are stems for Ch#/L# files.",
+          "description": "Lessons in this chapter; ids are stems for lesson files under course/Ch#/L# for chapter-only courses or course/M#/Ch#/L# for module-aware courses.",
           "items": { "$ref": "#/$defs/lesson" }
         }
       }
@@ -145,7 +145,7 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "Lesson file stem inside chapter dir: L1, L2, ...",
+          "description": "Lesson file stem inside the chapter dir under course/: L1, L2, ... Chapter-only courses place it under course/Ch#/, while module-aware courses place it under course/M#/Ch#/.",
           "pattern": "^L[1-9][0-9]*$"
         },
         "title": {
@@ -199,7 +199,7 @@
         },
         "hints": {
           "type": "boolean",
-          "description": "If true, Ch#/L#-hint.md must exist beside Ch#/L#.md."
+          "description": "If true, a sibling hint file must exist beside the lesson body: course/Ch#/L#-hint.md for chapter-only courses or course/M#/Ch#/L#-hint.md for module-aware courses."
         }
       },
       "allOf": [

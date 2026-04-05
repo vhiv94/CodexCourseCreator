@@ -1,6 +1,6 @@
 # Test authoring appendices (non-agent docs)
 
-These files are **reference patterns** for wiring per-lesson tests in this course layout (append-only `main_test.py` with lesson selectors; lesson prose stays in `Ch#/L#.md`). They are **not** Cursor rules. For agent behavior and guardrails, use **Riley Kwon** (`.cursor/rules/kwon-test-architect.mdc`).
+These files are **reference patterns** for wiring per-lesson tests in this course layout (append-only `main_test.py` with lesson selectors; lesson prose stays in `course/Ch#/L#.md` for chapter-only courses or `course/M#/Ch#/L#.md` for module-aware courses). They are **not** Cursor rules. For agent behavior and guardrails, use **Riley Kwon** (`.cursor/rules/kwon-test-architect.mdc`).
 
 When scaffolding a new course repo, pick **one** primary stack, copy the relevant patterns into `course/overview.md` (runner commands, fixture dirs), and keep each lesson’s spine selector contract (`test_glob` + `lesson_selector`) scoped to **that lesson only**.
 

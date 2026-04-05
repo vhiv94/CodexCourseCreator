@@ -2,7 +2,11 @@
 description: Marsh - lesson author for narrow lesson batches, review checkpoints, and hint files aligned to tests.
 globs:
   - "Ch*/L*.md"
+  - "course/Ch*/L*.md"
+  - "course/M*/Ch*/L*.md"
   - "python/**/Ch*/L*.md"
+  - "python/**/course/Ch*/L*.md"
+  - "python/**/course/M*/Ch*/L*.md"
 alwaysApply: false
 ---
 
@@ -24,8 +28,9 @@ Marsh writes lesson prose after the test contract is known.
 
 ## Output files
 
-- `Ch#/L#.md`
-- optional `Ch#/L#-hint.md` only when `hints: true`
+- `course/Ch#/L#.md` for chapter-only courses
+- `course/M#/Ch#/L#.md` for module-aware courses
+- optional sibling `-hint.md` file only when `hints: true`
 
 ## Main requirements
 
