@@ -1,22 +1,42 @@
 # Overview
 
-This course teaches backend fundamentals by building and self-hosting a single coherent project: **Kanban Lite API**. You will learn what a server is, how DNS routes users to your service, how relational storage works with SQLite, and how to package and run the system in Docker containers on a VPS.
+This pilot course applies the redesigned Course Creator flow to a real project: **Kanban Lite API**, a small backend that grows from a local FastAPI service into a self-hosted, operationally sane system. The learner prompt is effectively "I know some Python and want backend fundamentals that lead to a real deployed project," so the course keeps one coherent capstone while narrowing scope to backend foundations rather than trying to cover all of web development at once.
 
-By the end, the system behavior is:
+## Intake and generation strategy
 
-- Accept HTTP requests for board, column, and task workflows.
-- Persist data in SQLite with migration history.
-- Run in containers with durable storage and reverse-proxy ingress.
-- Expose operational signals (logs, health, key metrics).
-- Support reliability workflows (rate limiting, backups, restore drills, and CI gates).
+The current pilot assumes a learner who is comfortable with basic Python syntax and shell workflows but still needs review on backend mental models such as HTTP contracts, resource ownership, persistence boundaries, and delivery vocabulary.
+
+That assessment drives three decisions:
+
+- the course uses a **module-aware** spine because the subject naturally breaks into delivery foundations, application/data layers, and runtime/operations;
+- content is still generated **one chapter at a time** so the course can reassess before the next batch;
+- early chapters stay narrow and concrete rather than jumping straight to deployment tooling.
+
+The current authored batch is **Chapter 1**. Later chapters are planned in the spine and `CONTENTS.md`, but they remain future batches rather than pretending the whole course is already fully written.
+
+## What the learner builds
+
+By the end of the full course, Kanban Lite should:
+
+- accept HTTP requests for board, column, and task workflows;
+- persist data in SQLite with migration history;
+- run in containers with durable storage and reverse-proxy ingress;
+- expose operational signals such as logs, health checks, and key metrics;
+- support reliability workflows such as rate limiting, backups, restore drills, and CI gates.
+
+## Module arc
+
+- **M1: Request and Delivery Foundations** establishes server/process thinking, HTTP contracts, and how traffic reaches a deployed backend.
+- **M2: Application and Data Layers** turns that contract into a maintainable FastAPI service with SQLite-backed data and automated validation.
+- **M3: Runtime, Reliability, and Self-Hosting** packages, operates, hardens, and ships the project as a real self-hosted service.
 
 ## Prerequisites
 
 - Beginner-level programming comfort and basic Python syntax.
 - Ability to run shell commands and edit files from a terminal.
-- Willingness to use uv for Python dependency and environment management.
+- Willingness to use `uv` for Python dependency and environment management.
 
-## Tooling and workflow (uv)
+## Tooling and workflow
 
 From `python/backend-fundamentals-kanban/`:
 
@@ -26,18 +46,8 @@ uv add <package-name>
 uv run pytest main_test.py -m <lesson_selector>
 ```
 
-Canonical lesson selector format is `lesson_ch<chapter>_l<lesson>` (for example `lesson_ch3_l2`).
+Canonical lesson selector format is `lesson_ch<chapter>_l<lesson>` such as `lesson_ch3_l2`.
 
-## Course arc by chapter
+## Why this course shape works
 
-- **Ch1: Server and HTTP Fundamentals** builds your core mental model of server processes, request-response contracts, and API consistency.
-- **Ch2: DNS and Internet Delivery** explains how traffic reaches your backend and how to troubleshoot delivery failures.
-- **Ch3: SQLite Data and Migrations** turns project requirements into schema, constraints, indexes, and migration-safe change workflows.
-- **Ch4: FastAPI Architecture and Testing** structures the application into maintainable layers and validates behavior with automated tests.
-- **Ch5: Containers and Runtime** packages the app for reproducible execution, networking, and durable data in containerized environments.
-- **Ch6: Production Backend Essentials** adds caching, background jobs, observability, and baseline security/rate limiting controls.
-- **Ch7: Self-Hosting Reliability and CI CD** operationalizes deployment, recovery, and release automation into a maintainable runbook.
-
-## Why this project shape works
-
-Kanban Lite is small enough for a beginner-intermediate learner to finish, but rich enough to demonstrate real backend tradeoffs: consistency vs speed, simplicity vs flexibility, and local productivity vs production reliability. Skills learned here transfer directly to other backend domains such as note apps, content backends, internal tools, and API-first products.
+Kanban Lite is small enough for a beginner-intermediate learner to finish, but rich enough to demonstrate real backend tradeoffs: consistency versus speed, simplicity versus flexibility, and local productivity versus production reliability. The module-aware plan keeps those concerns organized, while chapter batching preserves room for reassessment instead of locking the learner into a rigid one-shot path.

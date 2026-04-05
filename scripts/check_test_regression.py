@@ -80,6 +80,37 @@ def parse_spine_text(path: str, text: str) -> dict[str, Any] | None:
     return loaded if isinstance(loaded, dict) else None
 
 
+def iter_spine_lesson_rows(
+    spine: dict[str, Any],
+) -> list[tuple[str, dict[str, Any]]]:
+    rows: list[tuple[str, dict[str, Any]]] = []
+
+    modules = spine.get("modules")
+    if isinstance(modules, list):
+        chapter_groups = []
+        for module in modules:
+            if not isinstance(module, dict):
+                continue
+            chapters = module.get("chapters", [])
+            if isinstance(chapters, list):
+                chapter_groups.extend(chapters)
+    else:
+        chapters = spine.get("chapters", [])
+        chapter_groups = chapters if isinstance(chapters, list) else []
+
+    for chapter in chapter_groups:
+        if not isinstance(chapter, dict):
+            continue
+        chapter_dir = chapter.get("dir")
+        lessons = chapter.get("lessons", [])
+        if not isinstance(chapter_dir, str) or not isinstance(lessons, list):
+            continue
+        for lesson in lessons:
+            if isinstance(lesson, dict):
+                rows.append((chapter_dir, lesson))
+    return rows
+
+
 def collect_spine_lessons_from_ref(
     repo_root: Path, ref: str
 ) -> dict[tuple[str, str, str], dict[str, str]]:
@@ -99,31 +130,16 @@ def collect_spine_lessons_from_ref(
             continue
 
         course_root = str(Path(rel_path).parent.parent).replace("\\", "/")
-        chapters = spine.get("chapters", [])
-        if not isinstance(chapters, list):
-            continue
-
-        for chapter in chapters:
-            if not isinstance(chapter, dict):
+        for chapter_dir, lesson in iter_spine_lesson_rows(spine):
+            lesson_id = lesson.get("id")
+            test_glob = lesson.get("test_glob")
+            lesson_selector = lesson.get("lesson_selector")
+            if not isinstance(lesson_id, str):
                 continue
-            chapter_dir = chapter.get("dir")
-            lessons = chapter.get("lessons", [])
-            if not isinstance(chapter_dir, str) or not isinstance(lessons, list):
-                continue
-            for lesson in lessons:
-                if not isinstance(lesson, dict):
-                    continue
-                lesson_id = lesson.get("id")
-                test_glob = lesson.get("test_glob")
-                lesson_selector = lesson.get("lesson_selector")
-                if not isinstance(lesson_id, str):
-                    continue
-                lesson_map[(course_root, chapter_dir, lesson_id)] = {
-                    "test_glob": test_glob if isinstance(test_glob, str) else "",
-                    "lesson_selector": lesson_selector
-                    if isinstance(lesson_selector, str)
-                    else "",
-                }
+            lesson_map[(course_root, chapter_dir, lesson_id)] = {
+                "test_glob": test_glob if isinstance(test_glob, str) else "",
+                "lesson_selector": lesson_selector if isinstance(lesson_selector, str) else "",
+            }
     return lesson_map
 
 

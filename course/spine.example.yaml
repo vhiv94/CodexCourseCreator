@@ -1,50 +1,89 @@
-# Example spine — copy to spine.yaml and edit. Validate with:
-#   npx --yes ajv-cli validate -s course/spine.schema.json -d course/spine.yaml
-# (after renaming or pointing -d at this file)
+# Example spine — copy to course/spine.yaml and edit. Validate with:
+#   python3 scripts/validate_repo.py
 
-course_id: example-tdd-course
-title: Example TDD Course
-audience_level: intermediate
+course_id: example-adaptive-backend
+title: Example Adaptive Backend Course
+audience_level: beginner to intermediate
 
-chapters:
-  - dir: Ch1
+delivery:
+  generation_mode: chapter_batch
+  default_batch_size: 1
+  assessment_checkpoints: true
+
+modules:
+  - id: M1
     title: Foundations
-    lessons:
-      - id: L1
-        title: "Environment and first green test"
-        concept: Running the lesson-local test command
-        project_step: Repository boots with a placeholder module
-        reads: []
-        tasks_summary:
-          - Wire a minimal export the tests exercise
-        test_glob: main_test.py
-        lesson_selector: lesson_ch1_l1
-        depends_on: []
-        hints: false
+    summary: Narrow the learner into the core HTTP and server ideas before broader architecture work.
+    chapters:
+      - dir: Ch1
+        title: Request Response Basics
+        lessons:
+          - id: L1
+            title: "Map the HTTP cycle"
+            kind: lesson
+            concept: One request creates one response contract.
+            project_step: Sketch the first health endpoint and response shape.
+            reads: []
+            tasks_summary:
+              - Identify the minimum request and response details the learner must reason about.
+            test_glob: main_test.py
+            lesson_selector: lesson_ch1_l1
+            depends_on: []
+            hints: false
+          - id: L2
+            title: "Quick review of status code families"
+            kind: quiz
+            concept: Status families communicate broad outcome categories.
+            project_step: Confirm the learner can classify common response outcomes before moving on.
+            assessment_goal: Verify status-code family recall before chapter generation continues.
+            reads: []
+            tasks_summary:
+              - Review success, redirect, client-error, and server-error families.
+            test_glob: main_test.py
+            lesson_selector: lesson_ch1_l2
+            depends_on:
+              - Ch1/L1
+            hints: false
 
-      - id: L2
-        title: "Core behavior from examples"
-        concept: Behavior-first tests without prescribing helpers
-        project_step: First user-visible behavior of the capstone
-        reads: []
-        tasks_summary:
-          - Implement to satisfy public tests only
-        test_glob: main_test.py
-        lesson_selector: lesson_ch1_l2
-        depends_on:
-          - Ch1/L1
+  - id: M2
+    title: Resource Modeling
+    summary: Turn broad HTTP knowledge into concrete resource and routing choices.
+    chapters:
+      - dir: Ch2
+        title: Boards and Tasks
+        lessons:
+          - id: L1
+            title: "Model a board resource"
+            kind: lesson
+            concept: Resources need stable identifiers and responsibilities.
+            project_step: Define the first board resource contract.
+            reads: []
+            tasks_summary:
+              - Keep the lesson focused on one resource boundary.
+            test_glob: main_test.py
+            lesson_selector: lesson_ch2_l1
+            depends_on:
+              - Ch1/L2
+            hints: false
 
-  - dir: Ch2
-    title: Extending the project
-    lessons:
-      - id: L1
-        title: "Next milestone"
-        concept: Isolating the next concept in tests
-        project_step: Second chapter first increment
-        reads: []
-        tasks_summary: []
-        test_glob: main_test.py
-        lesson_selector: lesson_ch2_l1
-        depends_on:
-          - Ch1/L2
-        hints: true
+  - id: M3
+    title: Delivery
+    summary: Reassess the learner and generate deployment content in small batches.
+    chapters:
+      - dir: Ch3
+        title: Deployment Readiness
+        lessons:
+          - id: L1
+            title: "Checkpoint before deployment"
+            kind: assessment
+            concept: A checkpoint can change pacing without skipping the deployment unit.
+            project_step: Decide whether the next batch should deepen infra basics or continue to deployment tasks.
+            assessment_goal: Capture whether the learner needs more review before deployment work.
+            reads: []
+            tasks_summary:
+              - Record review topics before the next chapter batch.
+            test_glob: main_test.py
+            lesson_selector: lesson_ch3_l1
+            depends_on:
+              - Ch2/L1
+            hints: true

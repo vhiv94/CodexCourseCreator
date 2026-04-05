@@ -1,5 +1,7 @@
 # Backend Fundamentals - Build and Self-Host Kanban Lite
 
+## M1: Request and Delivery Foundations
+
 ### Ch1: Server and HTTP Fundamentals
 
 1. What Is a Server
@@ -14,6 +16,8 @@
 3. From Browser to VPS
 4. Debugging Common DNS Failures
 
+## M2: Application and Data Layers
+
 ### Ch3: SQLite Data and Migrations
 
 1. Relational Modeling for Boards and Tasks
@@ -27,6 +31,8 @@
 2. Validation and Error Handling
 3. Integration Testing with pytest
 4. Contract Tests for Stable APIs
+
+## M3: Runtime, Reliability, and Self-Hosting
 
 ### Ch5: Containers and Runtime
 

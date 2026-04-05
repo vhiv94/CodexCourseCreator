@@ -1048,3 +1048,96 @@
 - Ran `ReadLints` on touched files; no linter diagnostics reported.
 
 **Note:** Attached plan file was not modified.
+
+---
+
+## 2026-04-05 — Implement redesign to-dos: docs, schema, rules, validation
+
+**User request:** Implement the assigned redesign to-dos from the attached plan without editing the plan file itself:
+
+- `write-system-docs`
+- `module-aware-schema`
+- `update-role-rules`
+- `refresh-validation`
+
+**Assistant actions:**
+
+- Added new root system docs:
+  - [`AGENTS.md`](AGENTS.md)
+  - [`SCOPE.md`](SCOPE.md)
+  - [`FINAL_PRODUCT.md`](FINAL_PRODUCT.md)
+- Trimmed [`README.md`](README.md) into a short entrypoint that points at the new root docs and core contracts.
+- Redesigned the shared schema and examples for module-aware and adaptive planning:
+  - updated [`course/spine.schema.json`](course/spine.schema.json) to support either chapter-only courses or `modules -> chapters -> lessons`, optional `delivery` metadata, and lesson `kind` / `assessment_goal`
+  - updated [`course/progress.schema.json`](course/progress.schema.json) to support `current_target`, `generation_mode`, and `recent_assessment`
+  - updated starter/example files:
+    - [`course/spine.example.yaml`](course/spine.example.yaml)
+    - [`course/spine.yaml`](course/spine.yaml)
+    - [`course/progress.example.yaml`](course/progress.example.yaml)
+    - [`course/progress.yaml`](course/progress.yaml)
+  - updated [`course/spine-and-contents.md`](course/spine-and-contents.md) for module-aware `CONTENTS.md` rules
+- Rewrote the main role rules around scoping, assessment, adaptive routing, chapter batching, and narrower lesson boundaries:
+  - [`.cursor/rules/atlas-learning-architect.mdc`](.cursor/rules/atlas-learning-architect.mdc)
+  - [`.cursor/rules/maestro-orchestrator.mdc`](.cursor/rules/maestro-orchestrator.mdc)
+  - [`.cursor/rules/marsh-lesson-author.mdc`](.cursor/rules/marsh-lesson-author.mdc)
+  - [`.cursor/rules/kwon-test-architect.mdc`](.cursor/rules/kwon-test-architect.mdc)
+  - updated shared routing contract at [`.cursor/rules/shared-target-resolution.mdc`](.cursor/rules/shared-target-resolution.mdc)
+- Replaced [`scripts/validate_repo.py`](scripts/validate_repo.py) with a validator that now understands:
+  - module headings in `CONTENTS.md`
+  - chapter-only and module-aware spine flattening
+  - adaptive `current_target` references in progress files
+  - split `main_test_ch*.py` selector-scoped test files
+  - dependency ordering and structural duplicate checks
+- Updated [`scripts/check_test_regression.py`](scripts/check_test_regression.py) so historical selector/test-contract checks still work when spine lessons are nested under modules.
+- Verified the changes:
+  - `python3 scripts/validate_repo.py` -> `OK: validated 5 course root(s)` with expected warnings only for the root template course (`CONTENTS.md` and placeholder `main_test.py`)
+  - `python3 scripts/check_test_regression.py` -> `OK: no prior-lesson test regressions detected.`
+  - `ReadLints` on edited files -> no linter errors
+
+**Note:** The attached plan file was not modified.
+
+---
+
+## 2026-04-05 — Implement redesign to-dos: pilot course and consistency pass
+
+**User request:** Implement the assigned redesign to-dos from the attached plan without editing the plan file itself:
+
+- `pilot-course`
+- `consistency-pass`
+
+**Assistant actions:**
+
+- Applied the redesigned flow to the real pilot course at [`python/backend-fundamentals-kanban/`](python/backend-fundamentals-kanban/):
+  - converted [`python/backend-fundamentals-kanban/course/spine.yaml`](python/backend-fundamentals-kanban/course/spine.yaml) from a chapter-only structure into a module-aware spine with:
+    - `delivery` metadata for chapter-batched generation
+    - three meaningful modules:
+      - `M1` Request and Delivery Foundations
+      - `M2` Application and Data Layers
+      - `M3` Runtime, Reliability, and Self-Hosting
+    - chapter summaries to make the module grouping clearer
+  - preserved the existing Chapter 1 selector/test contracts and lesson ordering
+  - normalized all future `hints` flags to `false` so the spine no longer claims hint files that do not exist yet
+- Updated the pilot course routing state in [`python/backend-fundamentals-kanban/course/progress.yaml`](python/backend-fundamentals-kanban/course/progress.yaml):
+  - added `next_target`, `current_target`, `generation_mode`, `recent_assessment`, and `notes`
+  - modeled the course as: intake assessment completed -> generate Chapter 1 first -> reassess before later modules
+- Updated pilot-facing course docs so they match the redesigned flow:
+  - rewrote [`python/backend-fundamentals-kanban/CONTENTS.md`](python/backend-fundamentals-kanban/CONTENTS.md) to the module-aware `## M#` + `### Ch#` format
+  - rewrote [`python/backend-fundamentals-kanban/course/overview.md`](python/backend-fundamentals-kanban/course/overview.md) to describe:
+    - the intake/scope assumptions
+    - the module arc
+    - chapter-batched generation
+    - the fact that only Chapter 1 is currently authored
+  - updated [`python/backend-fundamentals-kanban/README.md`](python/backend-fundamentals-kanban/README.md) so it describes the course as the pilot for the redesigned flow
+- Fixed a rule-format consistency issue in [`.cursor/rules/atlas-learning-architect.mdc`](.cursor/rules/atlas-learning-architect.mdc) by restoring the missing opening frontmatter delimiter.
+- Fixed a validator consistency bug in [`scripts/validate_repo.py`](scripts/validate_repo.py):
+  - module ids were being checked once per chapter, which caused false duplicate-module errors for valid module-aware courses
+  - the duplicate-module check now iterates modules directly before validating chapters
+- Verification:
+  - `python3 scripts/check_test_regression.py` -> `OK: no prior-lesson test regressions detected.`
+  - `python3 scripts/validate_repo.py` -> `OK: validated 5 course root(s).`
+  - remaining validation warnings were unchanged root-template warnings for the repo-level example course:
+    - missing root `CONTENTS.md`
+    - placeholder root `main_test.py` file absent
+  - `ReadLints` on edited files -> no linter errors
+
+**Note:** The attached plan file was not modified.

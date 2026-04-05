@@ -1,1 +1,6 @@
 last_completed: null
+current_target:
+  type: assessment
+  ref: entry
+  notes: Start by narrowing scope and capturing a light learner assessment.
+generation_mode: adaptive

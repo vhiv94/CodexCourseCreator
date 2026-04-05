@@ -1,16 +1,25 @@
-# Starter spine — replace values and add chapters/lessons. See course/spine-and-contents.md
-# and course/spine.schema.json for the full contract and CONTENTS.md alignment rules.
+# Starter spine — replace values and add either:
+# - `chapters:` for a short course, or
+# - `modules:` for a long course with 3+ meaningful module groupings.
+# See course/spine-and-contents.md and course/spine.schema.json for the full contract.
 
 course_id: your-course-slug
 title: Your Course Title
 audience_level: beginner
 
+delivery:
+  generation_mode: chapter_batch
+  default_batch_size: 1
+  assessment_checkpoints: true
+
 chapters:
   - dir: Ch1
     title: First chapter title
+    summary: Optional narrow concept summary for this chapter.
     lessons:
       - id: L1
         title: "First lesson title"
+        kind: lesson
         concept: "(Replace) one concise concept for this lesson."
         project_step: "(Replace) one project step this lesson advances."
         reads: []

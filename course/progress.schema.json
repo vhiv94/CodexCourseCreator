@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "course-progress",
   "title": "Course progress",
-  "description": "Learner state for Maestro handoffs; lives at course/progress.yaml or course/progress.json.",
+  "description": "Learner and orchestration state for Maestro handoffs; lives at course/progress.yaml or course/progress.json.",
   "type": "object",
   "additionalProperties": false,
   "required": ["last_completed"],
@@ -11,26 +11,150 @@
       "description": "Most recently completed lesson, or null before any lesson is finished.",
       "oneOf": [
         { "type": "null" },
-        {
-          "type": "string",
-          "pattern": "^Ch[1-9][0-9]*/L[1-9][0-9]*$",
-          "description": "Chapter folder (Ch#) and lesson id (L#), e.g. Ch1/L1."
-        }
+        { "$ref": "#/$defs/lessonRef" }
       ]
     },
     "next_target": {
-      "description": "Optional explicit next lesson; Maestro may derive this from the spine when omitted.",
+      "description": "Legacy-compatible explicit next lesson. Prefer current_target for adaptive flows, but keep this for existing linear courses.",
       "oneOf": [
         { "type": "null" },
-        {
-          "type": "string",
-          "pattern": "^Ch[1-9][0-9]*/L[1-9][0-9]*$"
-        }
+        { "$ref": "#/$defs/lessonRef" }
       ]
+    },
+    "current_target": {
+      "description": "Current adaptive target for the next step of work.",
+      "oneOf": [
+        { "type": "null" },
+        { "$ref": "#/$defs/currentTarget" }
+      ]
+    },
+    "generation_mode": {
+      "$ref": "#/$defs/generationMode"
+    },
+    "recent_assessment": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Lightweight assessment context used for replanning and batching.",
+      "required": ["kind", "summary"],
+      "properties": {
+        "kind": {
+          "type": "string",
+          "enum": ["entry", "checkpoint", "chapter_end", "module_end", "manual"]
+        },
+        "summary": {
+          "type": "string",
+          "minLength": 1
+        },
+        "review": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "deepen": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "recommended_next_step": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
     },
     "notes": {
       "type": "string",
-      "description": "Optional freeform: blockers, skip hints, stack notes, pacing."
+      "description": "Optional freeform context: blockers, pacing, constraints, or routing notes."
+    }
+  },
+  "$defs": {
+    "generationMode": {
+      "type": "string",
+      "enum": ["full_spine", "module_batch", "chapter_batch", "adaptive"]
+    },
+    "moduleRef": {
+      "type": "string",
+      "pattern": "^M[1-9][0-9]*$"
+    },
+    "chapterRef": {
+      "type": "string",
+      "pattern": "^Ch[1-9][0-9]*$"
+    },
+    "lessonRef": {
+      "type": "string",
+      "pattern": "^Ch[1-9][0-9]*/L[1-9][0-9]*$"
+    },
+    "currentTarget": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "ref"],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["lesson", "chapter", "module", "assessment", "replan"]
+        },
+        "ref": {
+          "type": "string",
+          "minLength": 1
+        },
+        "notes": {
+          "type": "string"
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": { "type": { "const": "lesson" } },
+            "required": ["type"]
+          },
+          "then": {
+            "properties": { "ref": { "$ref": "#/$defs/lessonRef" } }
+          }
+        },
+        {
+          "if": {
+            "properties": { "type": { "const": "chapter" } },
+            "required": ["type"]
+          },
+          "then": {
+            "properties": { "ref": { "$ref": "#/$defs/chapterRef" } }
+          }
+        },
+        {
+          "if": {
+            "properties": { "type": { "const": "module" } },
+            "required": ["type"]
+          },
+          "then": {
+            "properties": { "ref": { "$ref": "#/$defs/moduleRef" } }
+          }
+        },
+        {
+          "if": {
+            "properties": { "type": { "const": "assessment" } },
+            "required": ["type"]
+          },
+          "then": {
+            "properties": {
+              "ref": {
+                "type": "string",
+                "pattern": "^(entry|module:M[1-9][0-9]*|chapter:Ch[1-9][0-9]*|lesson:Ch[1-9][0-9]*/L[1-9][0-9]*)$"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": { "type": { "const": "replan" } },
+            "required": ["type"]
+          },
+          "then": {
+            "properties": {
+              "ref": {
+                "type": "string",
+                "pattern": "^(course|module:M[1-9][0-9]*|chapter:Ch[1-9][0-9]*)$"
+              }
+            }
+          }
+        }
+      ]
     }
   }
 }

@@ -1,282 +1,307 @@
 course_id: backend-fundamentals-kanban
 title: Backend Fundamentals - Build and Self-Host Kanban Lite
 audience_level: beginner to early intermediate
-chapters:
-  - dir: Ch1
-    title: Server and HTTP Fundamentals
-    lessons:
-      - id: L1
-        title: What Is a Server
-        concept: A server is a long-running process that accepts requests and returns responses over a network.
-        project_step: Define the capstone boundary and the first service contract for Kanban Lite.
-        test_glob: main_test.py
-        lesson_selector: lesson_ch1_l1
-        depends_on: []
-        hints: false
-      - id: L2
-        title: HTTP Request-Response Contract
-        concept: HTTP methods, paths, headers, and status codes define the client-server interface.
-        project_step: Specify request and response shapes for board and task endpoints.
-        test_glob: main_test.py
-        lesson_selector: lesson_ch1_l2
-        depends_on:
-          - Ch1/L1
-        hints: false
-      - id: L3
-        title: Routing and Resource Modeling
-        concept: Routes map URL patterns to resource operations with clear ownership boundaries.
-        project_step: Model boards, columns, and tasks as first-class API resources.
-        test_glob: main_test.py
-        lesson_selector: lesson_ch1_l3
-        depends_on:
-          - Ch1/L2
-        hints: false
-      - id: L4
-        title: API Design Basics Methods Status and Errors
-        concept: Consistent status codes and error envelopes make APIs predictable and debuggable.
-        project_step: Finalize baseline API conventions used across the entire capstone.
-        test_glob: main_test.py
-        lesson_selector: lesson_ch1_l4
-        depends_on:
-          - Ch1/L3
-        hints: false
 
-  - dir: Ch2
-    title: DNS and Internet Delivery
-    lessons:
-      - id: L1
-        title: Domain Names and IP Addresses
-        concept: DNS translates human-friendly domains into routable IP addresses.
-        project_step: Map the capstone domain plan from local hostnames to VPS addressing.
-        test_glob: main_test.py
-        lesson_selector: lesson_ch2_l1
-        depends_on:
-          - Ch1/L4
-        hints: false
-      - id: L2
-        title: DNS Records and TTL
-        concept: Record types and TTL values control where traffic goes and how quickly changes propagate.
-        project_step: Design A and CNAME records for app and API endpoints with sane TTL choices.
-        test_glob: main_test.py
-        lesson_selector: lesson_ch2_l2
-        depends_on:
-          - Ch2/L1
-        hints: false
-      - id: L3
-        title: From Browser to VPS
-        concept: End-to-end request flow crosses DNS, network routing, reverse proxy, and app process layers.
-        project_step: Trace and document the complete delivery path to the Kanban API container.
-        test_glob: main_test.py
-        lesson_selector: lesson_ch2_l3
-        depends_on:
-          - Ch2/L2
-        hints: true
-      - id: L4
-        title: Debugging Common DNS Failures
-        concept: Systematic diagnostics isolate NXDOMAIN, stale cache, and misconfigured record issues.
-        project_step: Build a repeatable DNS troubleshooting checklist for deployment incidents.
-        test_glob: main_test.py
-        lesson_selector: lesson_ch2_l4
-        depends_on:
-          - Ch2/L3
-        hints: true
+delivery:
+  generation_mode: chapter_batch
+  default_batch_size: 1
+  assessment_checkpoints: true
 
-  - dir: Ch3
-    title: SQLite Data and Migrations
-    lessons:
-      - id: L1
-        title: Relational Modeling for Boards and Tasks
-        concept: Relational schemas encode entities, relationships, and invariants explicitly.
-        project_step: Define SQLite tables for boards, columns, tasks, and activity events.
-        test_glob: main_test.py
-        lesson_selector: lesson_ch3_l1
-        depends_on:
-          - Ch2/L4
-        hints: false
-      - id: L2
-        title: SQL CRUD and Constraints
-        concept: CRUD statements plus constraints protect data integrity under normal operations.
-        project_step: Implement create and update flows with foreign keys and uniqueness rules.
-        test_glob: main_test.py
-        lesson_selector: lesson_ch3_l2
-        depends_on:
-          - Ch3/L1
-        hints: false
-      - id: L3
-        title: Indexes and Query Planning Basics
-        concept: Indexes accelerate read paths but add write cost and maintenance tradeoffs.
-        project_step: Add indexes for task listing and search endpoints and validate with query plans.
-        test_glob: main_test.py
-        lesson_selector: lesson_ch3_l3
-        depends_on:
-          - Ch3/L2
-        hints: true
-      - id: L4
-        title: Schema Changes with Alembic Migrations
-        concept: Versioned migrations evolve schemas safely across environments.
-        project_step: Introduce migration workflow for iterative capstone feature delivery.
-        test_glob: main_test.py
-        lesson_selector: lesson_ch3_l4
-        depends_on:
-          - Ch3/L3
-        hints: false
+modules:
+  - id: M1
+    title: Request and Delivery Foundations
+    summary: Build the learner's mental model for service boundaries, HTTP contracts, and how traffic reaches a deployed backend.
+    chapters:
+      - dir: Ch1
+        title: Server and HTTP Fundamentals
+        summary: Establish the first live backend surface and the API contract conventions it will keep.
+        lessons:
+          - id: L1
+            title: What Is a Server
+            concept: A server is a long-running process that accepts requests and returns responses over a network.
+            project_step: Define the capstone boundary and the first service contract for Kanban Lite.
+            test_glob: main_test.py
+            lesson_selector: lesson_ch1_l1
+            depends_on: []
+            hints: false
+          - id: L2
+            title: HTTP Request-Response Contract
+            concept: HTTP methods, paths, headers, and status codes define the client-server interface.
+            project_step: Specify request and response shapes for board and task endpoints.
+            test_glob: main_test.py
+            lesson_selector: lesson_ch1_l2
+            depends_on:
+              - Ch1/L1
+            hints: false
+          - id: L3
+            title: Routing and Resource Modeling
+            concept: Routes map URL patterns to resource operations with clear ownership boundaries.
+            project_step: Model boards, columns, and tasks as first-class API resources.
+            test_glob: main_test.py
+            lesson_selector: lesson_ch1_l3
+            depends_on:
+              - Ch1/L2
+            hints: false
+          - id: L4
+            title: API Design Basics Methods Status and Errors
+            concept: Consistent status codes and error envelopes make APIs predictable and debuggable.
+            project_step: Finalize baseline API conventions used across the entire capstone.
+            test_glob: main_test.py
+            lesson_selector: lesson_ch1_l4
+            depends_on:
+              - Ch1/L3
+            hints: false
 
-  - dir: Ch4
-    title: FastAPI Architecture and Testing
-    lessons:
-      - id: L1
-        title: Layered Service Architecture
-        concept: Router-service-repository separation keeps boundaries testable and maintainable.
-        project_step: Organize the Kanban backend into clear layers and interfaces.
-        test_glob: main_test.py
-        lesson_selector: lesson_ch4_l1
-        depends_on:
-          - Ch3/L4
-        hints: false
-      - id: L2
-        title: Validation and Error Handling
-        concept: Input validation and structured exceptions enforce contract safety at the edge.
-        project_step: Add request validation and normalized error responses to core endpoints.
-        test_glob: main_test.py
-        lesson_selector: lesson_ch4_l2
-        depends_on:
-          - Ch4/L1
-        hints: false
-      - id: L3
-        title: Integration Testing with pytest
-        concept: Integration tests verify endpoint behavior across HTTP, app logic, and persistence.
-        project_step: Establish a reliable integration suite for board and task workflows.
-        test_glob: main_test.py
-        lesson_selector: lesson_ch4_l3
-        depends_on:
-          - Ch4/L2
-        hints: false
-      - id: L4
-        title: Contract Tests for Stable APIs
-        concept: Contract tests guard backward compatibility as APIs evolve.
-        project_step: Pin response contracts to keep client behavior stable during refactors.
-        test_glob: main_test.py
-        lesson_selector: lesson_ch4_l4
-        depends_on:
-          - Ch4/L3
-        hints: true
+      - dir: Ch2
+        title: DNS and Internet Delivery
+        summary: Connect the API mental model to the network path that carries real traffic to the service.
+        lessons:
+          - id: L1
+            title: Domain Names and IP Addresses
+            concept: DNS translates human-friendly domains into routable IP addresses.
+            project_step: Map the capstone domain plan from local hostnames to VPS addressing.
+            test_glob: main_test.py
+            lesson_selector: lesson_ch2_l1
+            depends_on:
+              - Ch1/L4
+            hints: false
+          - id: L2
+            title: DNS Records and TTL
+            concept: Record types and TTL values control where traffic goes and how quickly changes propagate.
+            project_step: Design A and CNAME records for app and API endpoints with sane TTL choices.
+            test_glob: main_test.py
+            lesson_selector: lesson_ch2_l2
+            depends_on:
+              - Ch2/L1
+            hints: false
+          - id: L3
+            title: From Browser to VPS
+            concept: End-to-end request flow crosses DNS, network routing, reverse proxy, and app process layers.
+            project_step: Trace and document the complete delivery path to the Kanban API container.
+            test_glob: main_test.py
+            lesson_selector: lesson_ch2_l3
+            depends_on:
+              - Ch2/L2
+            hints: false
+          - id: L4
+            title: Debugging Common DNS Failures
+            concept: Systematic diagnostics isolate NXDOMAIN, stale cache, and misconfigured record issues.
+            project_step: Build a repeatable DNS troubleshooting checklist for deployment incidents.
+            test_glob: main_test.py
+            lesson_selector: lesson_ch2_l4
+            depends_on:
+              - Ch2/L3
+            hints: false
 
-  - dir: Ch5
-    title: Containers and Runtime
-    lessons:
-      - id: L1
-        title: Docker Images and Dockerfiles
-        concept: Dockerfiles define reproducible runtime environments for application processes.
-        project_step: Containerize the FastAPI service with a production-lean Dockerfile.
-        test_glob: main_test.py
-        lesson_selector: lesson_ch5_l1
-        depends_on:
-          - Ch4/L4
-        hints: false
-      - id: L2
-        title: Docker Compose and Local Networking
-        concept: Compose orchestrates multi-service local environments with explicit networks.
-        project_step: Run API and supporting services together in a repeatable local stack.
-        test_glob: main_test.py
-        lesson_selector: lesson_ch5_l2
-        depends_on:
-          - Ch5/L1
-        hints: false
-      - id: L3
-        title: Volumes and SQLite Durability
-        concept: Persistent volumes decouple container lifecycle from durable application data.
-        project_step: Persist SQLite data safely across rebuilds and container restarts.
-        test_glob: main_test.py
-        lesson_selector: lesson_ch5_l3
-        depends_on:
-          - Ch5/L2
-        hints: true
-      - id: L4
-        title: Reverse Proxy and Container Deployment
-        concept: Reverse proxies handle ingress routing, TLS termination, and edge concerns.
-        project_step: Front the API with a reverse proxy suitable for VPS deployment.
-        test_glob: main_test.py
-        lesson_selector: lesson_ch5_l4
-        depends_on:
-          - Ch5/L3
-        hints: true
+  - id: M2
+    title: Application and Data Layers
+    summary: Turn the initial service contract into a durable FastAPI application with SQLite-backed state and testable boundaries.
+    chapters:
+      - dir: Ch3
+        title: SQLite Data and Migrations
+        summary: Translate Kanban Lite into relational tables, integrity constraints, and safe schema evolution.
+        lessons:
+          - id: L1
+            title: Relational Modeling for Boards and Tasks
+            concept: Relational schemas encode entities, relationships, and invariants explicitly.
+            project_step: Define SQLite tables for boards, columns, tasks, and activity events.
+            test_glob: main_test.py
+            lesson_selector: lesson_ch3_l1
+            depends_on:
+              - Ch2/L4
+            hints: false
+          - id: L2
+            title: SQL CRUD and Constraints
+            concept: CRUD statements plus constraints protect data integrity under normal operations.
+            project_step: Implement create and update flows with foreign keys and uniqueness rules.
+            test_glob: main_test.py
+            lesson_selector: lesson_ch3_l2
+            depends_on:
+              - Ch3/L1
+            hints: false
+          - id: L3
+            title: Indexes and Query Planning Basics
+            concept: Indexes accelerate read paths but add write cost and maintenance tradeoffs.
+            project_step: Add indexes for task listing and search endpoints and validate with query plans.
+            test_glob: main_test.py
+            lesson_selector: lesson_ch3_l3
+            depends_on:
+              - Ch3/L2
+            hints: false
+          - id: L4
+            title: Schema Changes with Alembic Migrations
+            concept: Versioned migrations evolve schemas safely across environments.
+            project_step: Introduce migration workflow for iterative capstone feature delivery.
+            test_glob: main_test.py
+            lesson_selector: lesson_ch3_l4
+            depends_on:
+              - Ch3/L3
+            hints: false
 
-  - dir: Ch6
-    title: Production Backend Essentials
-    lessons:
-      - id: L1
-        title: Caching Fundamentals and Invalidation
-        concept: Caches reduce read load when paired with explicit invalidation strategy.
-        project_step: Add cache-assisted reads for hot Kanban list endpoints.
-        test_glob: main_test.py
-        lesson_selector: lesson_ch6_l1
-        depends_on:
-          - Ch5/L4
-        hints: false
-      - id: L2
-        title: Background Jobs for Async Workflows
-        concept: Background jobs move non-critical or delayed work off the request path.
-        project_step: Process activity fan-out and digest jobs asynchronously.
-        test_glob: main_test.py
-        lesson_selector: lesson_ch6_l2
-        depends_on:
-          - Ch6/L1
-        hints: false
-      - id: L3
-        title: Observability Logs Metrics and Health
-        concept: Observability exposes internal system state for diagnosis and operations decisions.
-        project_step: Add structured logs, service health checks, and key performance metrics.
-        test_glob: main_test.py
-        lesson_selector: lesson_ch6_l3
-        depends_on:
-          - Ch6/L2
-        hints: true
-      - id: L4
-        title: Security and Rate Limiting Basics
-        concept: Security controls and request throttling protect backend reliability and data.
-        project_step: Implement core hardening controls suitable for a single-user self-hosted app.
-        test_glob: main_test.py
-        lesson_selector: lesson_ch6_l4
-        depends_on:
-          - Ch6/L3
-        hints: true
+      - dir: Ch4
+        title: FastAPI Architecture and Testing
+        summary: Organize the application into maintainable layers and lock behavior down with tests.
+        lessons:
+          - id: L1
+            title: Layered Service Architecture
+            concept: Router-service-repository separation keeps boundaries testable and maintainable.
+            project_step: Organize the Kanban backend into clear layers and interfaces.
+            test_glob: main_test.py
+            lesson_selector: lesson_ch4_l1
+            depends_on:
+              - Ch3/L4
+            hints: false
+          - id: L2
+            title: Validation and Error Handling
+            concept: Input validation and structured exceptions enforce contract safety at the edge.
+            project_step: Add request validation and normalized error responses to core endpoints.
+            test_glob: main_test.py
+            lesson_selector: lesson_ch4_l2
+            depends_on:
+              - Ch4/L1
+            hints: false
+          - id: L3
+            title: Integration Testing with pytest
+            concept: Integration tests verify endpoint behavior across HTTP, app logic, and persistence.
+            project_step: Establish a reliable integration suite for board and task workflows.
+            test_glob: main_test.py
+            lesson_selector: lesson_ch4_l3
+            depends_on:
+              - Ch4/L2
+            hints: false
+          - id: L4
+            title: Contract Tests for Stable APIs
+            concept: Contract tests guard backward compatibility as APIs evolve.
+            project_step: Pin response contracts to keep client behavior stable during refactors.
+            test_glob: main_test.py
+            lesson_selector: lesson_ch4_l4
+            depends_on:
+              - Ch4/L3
+            hints: false
 
-  - dir: Ch7
-    title: Self-Hosting Reliability and CI CD
-    lessons:
-      - id: L1
-        title: VPS Provisioning and Environment Management
-        concept: Stable environments require explicit runtime configuration and secrets handling.
-        project_step: Provision the deployment host and configure runtime environment boundaries.
-        test_glob: main_test.py
-        lesson_selector: lesson_ch7_l1
-        depends_on:
-          - Ch6/L4
-        hints: false
-      - id: L2
-        title: Backup Restore and Disaster Drills
-        concept: Recovery confidence comes from tested backup and restore procedures.
-        project_step: Add and test SQLite backup and restore workflows for the capstone.
-        test_glob: main_test.py
-        lesson_selector: lesson_ch7_l2
-        depends_on:
-          - Ch7/L1
-        hints: false
-      - id: L3
-        title: CI Pipeline and Release Workflow
-        concept: CI pipelines automate regression checks and reduce deployment risk.
-        project_step: Build a release workflow with lint, tests, and deployment gates.
-        test_glob: main_test.py
-        lesson_selector: lesson_ch7_l3
-        depends_on:
-          - Ch7/L2
-        hints: false
-      - id: L4
-        title: Capstone Final Integration and Operations Runbook
-        concept: A runbook captures operational knowledge for repeatable production outcomes.
-        project_step: Finalize the self-hosted Kanban backend with end-to-end operational guidance.
-        test_glob: main_test.py
-        lesson_selector: lesson_ch7_l4
-        depends_on:
-          - Ch7/L3
-        hints: true
+  - id: M3
+    title: Runtime, Reliability, and Self-Hosting
+    summary: Package, operate, harden, and ship Kanban Lite as a maintainable self-hosted service.
+    chapters:
+      - dir: Ch5
+        title: Containers and Runtime
+        summary: Package the service into reproducible runtime units with durable local state.
+        lessons:
+          - id: L1
+            title: Docker Images and Dockerfiles
+            concept: Dockerfiles define reproducible runtime environments for application processes.
+            project_step: Containerize the FastAPI service with a production-lean Dockerfile.
+            test_glob: main_test.py
+            lesson_selector: lesson_ch5_l1
+            depends_on:
+              - Ch4/L4
+            hints: false
+          - id: L2
+            title: Docker Compose and Local Networking
+            concept: Compose orchestrates multi-service local environments with explicit networks.
+            project_step: Run API and supporting services together in a repeatable local stack.
+            test_glob: main_test.py
+            lesson_selector: lesson_ch5_l2
+            depends_on:
+              - Ch5/L1
+            hints: false
+          - id: L3
+            title: Volumes and SQLite Durability
+            concept: Persistent volumes decouple container lifecycle from durable application data.
+            project_step: Persist SQLite data safely across rebuilds and container restarts.
+            test_glob: main_test.py
+            lesson_selector: lesson_ch5_l3
+            depends_on:
+              - Ch5/L2
+            hints: false
+          - id: L4
+            title: Reverse Proxy and Container Deployment
+            concept: Reverse proxies handle ingress routing, TLS termination, and edge concerns.
+            project_step: Front the API with a reverse proxy suitable for VPS deployment.
+            test_glob: main_test.py
+            lesson_selector: lesson_ch5_l4
+            depends_on:
+              - Ch5/L3
+            hints: false
+
+      - dir: Ch6
+        title: Production Backend Essentials
+        summary: Add operational features that make the service observable, resilient, and harder to misuse.
+        lessons:
+          - id: L1
+            title: Caching Fundamentals and Invalidation
+            concept: Caches reduce read load when paired with explicit invalidation strategy.
+            project_step: Add cache-assisted reads for hot Kanban list endpoints.
+            test_glob: main_test.py
+            lesson_selector: lesson_ch6_l1
+            depends_on:
+              - Ch5/L4
+            hints: false
+          - id: L2
+            title: Background Jobs for Async Workflows
+            concept: Background jobs move non-critical or delayed work off the request path.
+            project_step: Process activity fan-out and digest jobs asynchronously.
+            test_glob: main_test.py
+            lesson_selector: lesson_ch6_l2
+            depends_on:
+              - Ch6/L1
+            hints: false
+          - id: L3
+            title: Observability Logs Metrics and Health
+            concept: Observability exposes internal system state for diagnosis and operations decisions.
+            project_step: Add structured logs, service health checks, and key performance metrics.
+            test_glob: main_test.py
+            lesson_selector: lesson_ch6_l3
+            depends_on:
+              - Ch6/L2
+            hints: false
+          - id: L4
+            title: Security and Rate Limiting Basics
+            concept: Security controls and request throttling protect backend reliability and data.
+            project_step: Implement core hardening controls suitable for a single-user self-hosted app.
+            test_glob: main_test.py
+            lesson_selector: lesson_ch6_l4
+            depends_on:
+              - Ch6/L3
+            hints: false
+
+      - dir: Ch7
+        title: Self-Hosting Reliability and CI CD
+        summary: Finish the project with deployment routines, recovery drills, and release safeguards.
+        lessons:
+          - id: L1
+            title: VPS Provisioning and Environment Management
+            concept: Stable environments require explicit runtime configuration and secrets handling.
+            project_step: Provision the deployment host and configure runtime environment boundaries.
+            test_glob: main_test.py
+            lesson_selector: lesson_ch7_l1
+            depends_on:
+              - Ch6/L4
+            hints: false
+          - id: L2
+            title: Backup Restore and Disaster Drills
+            concept: Recovery confidence comes from tested backup and restore procedures.
+            project_step: Add and test SQLite backup and restore workflows for the capstone.
+            test_glob: main_test.py
+            lesson_selector: lesson_ch7_l2
+            depends_on:
+              - Ch7/L1
+            hints: false
+          - id: L3
+            title: CI Pipeline and Release Workflow
+            concept: CI pipelines automate regression checks and reduce deployment risk.
+            project_step: Build a release workflow with lint, tests, and deployment gates.
+            test_glob: main_test.py
+            lesson_selector: lesson_ch7_l3
+            depends_on:
+              - Ch7/L2
+            hints: false
+          - id: L4
+            title: Capstone Final Integration and Operations Runbook
+            concept: A runbook captures operational knowledge for repeatable production outcomes.
+            project_step: Finalize the self-hosted Kanban backend with end-to-end operational guidance.
+            test_glob: main_test.py
+            lesson_selector: lesson_ch7_l4
+            depends_on:
+              - Ch7/L3
+            hints: false

@@ -1,1 +1,21 @@
 last_completed: null
+next_target: Ch1/L1
+current_target:
+  type: chapter
+  ref: Ch1
+  notes: Start with the first chapter batch after intake assessment; the learner needs a stronger HTTP/service mental model before deeper infrastructure topics.
+generation_mode: chapter_batch
+recent_assessment:
+  kind: entry
+  summary: The learner is comfortable with basic Python syntax and terminal workflows, but still needs review on HTTP contracts, resource modeling, and deployment vocabulary.
+  review:
+    - request and response semantics
+    - status code choices
+    - DNS and traffic flow basics
+  deepen:
+    - FastAPI architecture
+    - deployment and operations reasoning
+  recommended_next_step: Generate and complete Chapter 1 first, then reassess before moving into later modules.
+notes: |
+  This pilot course now uses a full module-aware spine, but content generation remains chapter-batched.
+  Only the Chapter 1 lesson prose and tests are currently authored; later chapters remain planned for future batches.
