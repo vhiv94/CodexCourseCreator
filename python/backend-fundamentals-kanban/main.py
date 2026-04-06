@@ -2,7 +2,7 @@ from fastapi import FastAPI
 
 
 def main():
-    print("Hello from backend-fundamentals-kanban!")
+    app = FastAPI()
 
 
 if __name__ == "__main__":

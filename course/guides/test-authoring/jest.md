@@ -35,7 +35,7 @@ Same conventions as Vitest: **`tests/support/`** or **`Chk/_support/`**; spine s
 - **Projects / workspaces**: in a monorepo, ensure the command uses the **course’s** Jest config (`--config` if needed).
 - **Global setup**: `setupFilesAfterEnv` should avoid leaking state across lessons; prefer per-file setup.
 
-## Riley checklist (Jest-specific)
+## Test authoring checklist (Jest-specific)
 
 - [ ] One primary test file per lesson; spine `test_glob` matches it.
 - [ ] Documented one-liner runs **only** that file’s suite under the repo’s Jest config.

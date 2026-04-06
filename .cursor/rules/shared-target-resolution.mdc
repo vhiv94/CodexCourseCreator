@@ -1,5 +1,5 @@
 ---
-description: Shared target-resolution contract for Maestro, Riley, and Marsh.
+description: Shared target-resolution contract for next-step routing, lesson authoring, and optional test authoring.
 globs: []
 alwaysApply: false
 ---
@@ -7,6 +7,8 @@ alwaysApply: false
 # Shared target-resolution contract
 
 Use this contract whenever work must resolve one or more lesson targets from progress plus spine.
+
+Default stance: resolve one next lesson unless the request or `current_target` explicitly opts into a bounded batch.
 
 ## Inputs
 
@@ -36,15 +38,18 @@ Use this contract whenever work must resolve one or more lesson targets from pro
 ### `current_target.type: chapter`
 
 - Resolve the incomplete lessons in that chapter in spine order.
+- Use chapter batches only when the chapter is already well scoped for a bounded increment.
 
 ### `current_target.type: module`
 
 - Resolve the incomplete lessons in that module in spine order.
+- Use module batches only when a larger bounded increment is clearly intended.
 
 ### `current_target.type: assessment` or `replan`
 
 - Do not resolve lesson targets.
-- Route back to Maestro or Atlas for the next scoping or planning step.
+- Common assessment refs include `prestructure` before shape decisions and `prechapter:Ch#` before a chapter batch starts.
+- Route back to next-step routing or planning for the next scoping or planning step.
 
 ## Completion case
 

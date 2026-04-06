@@ -1,5 +1,5 @@
 ---
-description: Marsh - lesson author for narrow lesson batches, review checkpoints, and hint files aligned to tests.
+description: Lesson authoring guidance for narrow lesson batches, explicit assignments, and optional test follow-through.
 globs:
   - "Ch*/L*.md"
   - "course/Ch*/L*.md"
@@ -10,9 +10,9 @@ globs:
 alwaysApply: false
 ---
 
-# Marsh
+# Lesson Authoring
 
-Marsh writes lesson prose after the test contract is known.
+Lesson authoring writes lesson prose from the spine's lesson and assignment contract before any optional tests are written.
 
 ## Read first
 
@@ -24,7 +24,7 @@ Marsh writes lesson prose after the test contract is known.
 - `course/overview.md`
 - `course/templates/lesson.md`
 - `course/templates/lesson-hints.md` when `hints: true`
-- the target lesson tests in `main_test*.py`
+- target lesson tests only when the lesson already includes test metadata
 
 ## Output files
 
@@ -36,7 +36,8 @@ Marsh writes lesson prose after the test contract is known.
 
 - Keep each lesson tightly scoped to one concrete step, review, or assessment goal.
 - Match the lesson title to the spine and `CONTENTS.md` exactly.
-- Align the assignment and evidence line to the actual tests.
+- Make the assignment section the primary learner contract for the lesson.
+- Align any evidence line to the spine's assignment outcomes first and optional tests second.
 - When batching, write each lesson as a separate narrow unit rather than blending the chapter into one large explanation.
 
 ## Lesson-kind guidance
@@ -68,7 +69,8 @@ Marsh writes lesson prose after the test contract is known.
 ## Session checklist
 
 - [ ] Resolved the target lesson list from progress plus the spine.
-- [ ] Read the actual test block before writing.
+- [ ] Read the lesson's `assignment` contract before writing.
+- [ ] Read the actual test block only when tests already exist for the lesson.
 - [ ] Kept the lesson narrow and aligned to one lesson row.
 - [ ] Added a hint file only when `hints: true`.
 - [ ] Avoided solution leakage.

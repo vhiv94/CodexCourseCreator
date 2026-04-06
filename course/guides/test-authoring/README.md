@@ -1,8 +1,8 @@
 # Test authoring appendices (non-agent docs)
 
-These files are **reference patterns** for wiring per-lesson tests in this course layout (append-only `main_test.py` with lesson selectors; lesson prose stays in `course/Ch#/L#.md` for chapter-only courses or `course/M#/Ch#/L#.md` for module-aware courses). They are **not** Cursor rules. For agent behavior and guardrails, use **Riley Kwon** (`.cursor/rules/kwon-test-architect.mdc`).
+These files are **reference patterns** for wiring per-lesson tests in this course layout when a course chooses to ship tests (append-only `main_test.py` with lesson selectors; lesson prose stays in `course/Ch#/L#.md` for chapter-only courses or `course/M#/Ch#/L#.md` for module-aware courses). They are **not** Cursor rules. For agent behavior and guardrails, use the test authoring rule at `.cursor/rules/test-authoring.mdc`.
 
-When scaffolding a new course repo, pick **one** primary stack, copy the relevant patterns into `course/overview.md` (runner commands, fixture dirs), and keep each lesson’s spine selector contract (`test_glob` + `lesson_selector`) scoped to **that lesson only**.
+When scaffolding a new course repo, decide first whether the course needs tests at all. If it does, pick **one** primary stack, copy the relevant patterns into `course/overview.md` (runner commands, fixture dirs), and keep each lesson’s spine selector contract (`test_glob` + `lesson_selector`) scoped to **that lesson only**.
 
 **Python in this workspace:** Each course lives under **`python/<slug>/`** (see **[`python/README.md`](../../python/README.md)**). Use **[uv](https://docs.astral.sh/uv/)** — **`uv sync`**, **`uv add`** (not `pip install`), **`uv run pytest main_test.py -m <lesson_selector>`** (see [pytest.md](pytest.md)).
 

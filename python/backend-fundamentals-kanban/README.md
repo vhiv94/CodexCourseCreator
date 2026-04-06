@@ -4,11 +4,11 @@ This course teaches backend fundamentals through one coherent project: a self-ho
 
 It now serves as the pilot course for the redesigned flow:
 
-- intake assessment informs scope and pacing;
+- a short-answer pre-structure assessment informs scope and pacing;
 - the full plan uses `modules -> chapters -> lessons`;
 - content is still generated in chapter-sized batches rather than assuming the whole course is authored at once.
 
-Right now, the planned course structure lives in `course/spine.yaml` and `CONTENTS.md`, while the next authored sequence is the pre-Ch1 readiness checkpoint plus the Chapter 1 lesson batch under `course/M1/Ch1/`.
+Right now, the planned course structure lives in `course/spine.yaml` and `CONTENTS.md`, while the next authored sequence is the pre-Ch1 assessment plus the Chapter 1 lesson batch under `course/M1/Ch1/`.
 
 ## Quick start
 

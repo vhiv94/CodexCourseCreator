@@ -9,6 +9,8 @@ chapters:
         title: Model Inventory Events with Typed Records
         concept: Tuple and dict invariants for canonical inventory event data
         project_step: Define one normalized event shape that all downstream services consume.
+        assignment:
+          summary: Define one normalized event shape that all downstream services consume.
         test_glob: main_test.py
         lesson_selector: lesson_ch1_l1
         depends_on: []
@@ -17,6 +19,8 @@ chapters:
         title: Normalize Event Streams with map/filter/reduce
         concept: Functional transformation pipelines over event collections
         project_step: Build a pure pipeline that cleans, filters, and folds raw events into validated operations.
+        assignment:
+          summary: Build a pure pipeline that cleans, filters, and folds raw events into validated operations.
         test_glob: main_test.py
         lesson_selector: lesson_ch1_l2
         depends_on:
@@ -26,6 +30,8 @@ chapters:
         title: Index Current Stock by SKU and Location
         concept: Nested dictionary indexing and update invariants
         project_step: Produce an in-memory stock index keyed by sku and warehouse location.
+        assignment:
+          summary: Produce an in-memory stock index keyed by sku and warehouse location.
         test_glob: main_test.py
         lesson_selector: lesson_ch1_l3
         depends_on:
@@ -38,6 +44,8 @@ chapters:
         title: Build an Audit Stack Class
         concept: LIFO class design with explicit push, pop, and peek contracts
         project_step: Implement an `AuditStack` class for reversible inventory adjustments.
+        assignment:
+          summary: Implement an `AuditStack` class for reversible inventory adjustments.
         test_glob: main_test.py
         lesson_selector: lesson_ch2_l1
         depends_on:
@@ -47,6 +55,8 @@ chapters:
         title: Build a Replenishment Queue Class
         concept: FIFO class behavior for fair restock scheduling
         project_step: Implement a `ReplenishmentQueue` class for pending restock jobs.
+        assignment:
+          summary: Implement a `ReplenishmentQueue` class for pending restock jobs.
         test_glob: main_test.py
         lesson_selector: lesson_ch2_l2
         depends_on:
@@ -56,6 +66,8 @@ chapters:
         title: Compose Stack and Queue in an Intake Service
         concept: OOP composition and bounded side effects across cooperating classes
         project_step: Create an intake coordinator that routes events to audit and restock flows.
+        assignment:
+          summary: Create an intake coordinator that routes events to audit and restock flows.
         test_glob: main_test.py
         lesson_selector: lesson_ch2_l3
         depends_on:
@@ -68,6 +80,8 @@ chapters:
         title: Design Node and LinkedList Ledger Classes
         concept: Pointer-based sequence modeling with explicit node ownership
         project_step: Implement `LedgerNode` and `MovementLedgerLinkedList` classes for ordered stock movements.
+        assignment:
+          summary: Implement `LedgerNode` and `MovementLedgerLinkedList` classes for ordered stock movements.
         test_glob: main_test.py
         lesson_selector: lesson_ch3_l1
         depends_on:
@@ -77,6 +91,8 @@ chapters:
         title: Insert and Remove Ledger Entries Safely
         concept: Linked-list invariants during insertion and deletion
         project_step: Add safe mutation operations that preserve head, tail, and length consistency.
+        assignment:
+          summary: Add safe mutation operations that preserve head, tail, and length consistency.
         test_glob: main_test.py
         lesson_selector: lesson_ch3_l2
         depends_on:
@@ -86,6 +102,8 @@ chapters:
         title: Functional Aggregations over Linked Ledgers
         concept: map/reduce-style traversals over custom object collections
         project_step: Compute movement totals and deltas through pure traversal helpers.
+        assignment:
+          summary: Compute movement totals and deltas through pure traversal helpers.
         test_glob: main_test.py
         lesson_selector: lesson_ch3_l3
         depends_on:
@@ -98,6 +116,8 @@ chapters:
         title: Build Allocation Maps for Open Orders
         concept: Multi-index dictionary design for order-to-inventory matching
         project_step: Build allocation structures mapping order lines to feasible stock sources.
+        assignment:
+          summary: Build allocation structures mapping order lines to feasible stock sources.
         test_glob: main_test.py
         lesson_selector: lesson_ch4_l1
         depends_on:
@@ -107,6 +127,8 @@ chapters:
         title: Use Sets to Enforce Location and SKU Constraints
         concept: Set-based eligibility checks and fast membership gates
         project_step: Enforce restriction rules on pick zones and restricted sku combinations.
+        assignment:
+          summary: Enforce restriction rules on pick zones and restricted sku combinations.
         test_glob: main_test.py
         lesson_selector: lesson_ch4_l2
         depends_on:
@@ -116,6 +138,8 @@ chapters:
         title: Queue-Driven Picking Wave Planner
         concept: Queue scheduling and fairness tradeoffs in operational dispatch
         project_step: Generate deterministic picking waves from ready allocations.
+        assignment:
+          summary: Generate deterministic picking waves from ready allocations.
         test_glob: main_test.py
         lesson_selector: lesson_ch4_l3
         depends_on:
@@ -128,6 +152,8 @@ chapters:
         title: Rank Restock Tasks with a Heap
         concept: Priority-queue semantics and heap invariants
         project_step: Introduce heap-based urgent restock selection without full-list sorting.
+        assignment:
+          summary: Introduce heap-based urgent restock selection without full-list sorting.
         test_glob: main_test.py
         lesson_selector: lesson_ch5_l1
         depends_on:
@@ -137,6 +163,8 @@ chapters:
         title: Deterministic Tie-Breaking for Equal Priority
         concept: Stable secondary keys for reproducible scheduling
         project_step: Apply deterministic tie-break rules for equal urgency restock tasks.
+        assignment:
+          summary: Apply deterministic tie-break rules for equal urgency restock tasks.
         test_glob: main_test.py
         lesson_selector: lesson_ch5_l2
         depends_on:
@@ -146,6 +174,8 @@ chapters:
         title: Analyze Bottlenecks with Complexity Budgets
         concept: Translating Big-O analysis into practical throughput constraints
         project_step: Add complexity budget checks for core planning operations and reports.
+        assignment:
+          summary: Add complexity budget checks for core planning operations and reports.
         test_glob: main_test.py
         lesson_selector: lesson_ch5_l3
         depends_on:
@@ -158,6 +188,8 @@ chapters:
         title: Compose an InventoryControlTower Service
         concept: Orchestrating multiple data structures behind one service boundary
         project_step: Build an integration service that coordinates ledger, queue, stack, and allocation modules.
+        assignment:
+          summary: "Build an integration service that coordinates ledger, queue, stack, and allocation modules."
         test_glob: main_test.py
         lesson_selector: lesson_ch6_l1
         depends_on:
@@ -167,6 +199,8 @@ chapters:
         title: Build a Functional KPI Reporting Pipeline
         concept: Pure reporting transforms over operational state snapshots
         project_step: Generate daily KPIs through map/filter/reduce-friendly report functions.
+        assignment:
+          summary: Generate daily KPIs through map/filter/reduce-friendly report functions.
         test_glob: main_test.py
         lesson_selector: lesson_ch6_l2
         depends_on:
@@ -176,6 +210,8 @@ chapters:
         title: Simulate Failure Recovery with Undo and Replay
         concept: Recovery workflows using stack replay and queue rehydration
         project_step: Implement deterministic failure-recovery simulation for the full control tower.
+        assignment:
+          summary: Implement deterministic failure-recovery simulation for the full control tower.
         test_glob: main_test.py
         lesson_selector: lesson_ch6_l3
         depends_on:

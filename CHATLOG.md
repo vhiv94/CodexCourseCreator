@@ -1098,6 +1098,257 @@
 
 ---
 
+## 2026-04-05 — Rust fundamentals course planning root
+
+**User request:** Create a new Rust course in [`rust/rust-fundamentals/`](rust/rust-fundamentals/) and implement the approved planning artifacts without editing the attached plan file.
+
+**Planning context captured before implementation:**
+
+- learner has some typed-language and low-level background
+- Rust itself is still new and should be taught gently from scratch
+- a fundamentals module is required
+- ownership and borrowing should get a dedicated later module
+- the course should optimize for a broad foundation
+- the preferred project style is CLI-first, file-friendly, and close enough to backend work to support a later follow-up course
+- the chosen project direction is a CLI-first course that can grow toward a tiny service
+
+**Assistant actions:**
+
+- Reviewed the repo planning contracts in [`AGENTS.md`](AGENTS.md), [`SCOPE.md`](SCOPE.md), [`course/spine.schema.json`](course/spine.schema.json), and [`course/progress.schema.json`](course/progress.schema.json).
+- Reviewed the opening arc of the official Rust book and condensed the planning takeaways into [`rust/rust-fundamentals/RUST_BOOK_EARLY_NOTES.md`](rust/rust-fundamentals/RUST_BOOK_EARLY_NOTES.md).
+- Chose **Request Journal CLI** as the course-long project framing:
+  - records route ideas, request notes, and response summaries
+  - starts as a small terminal program
+  - grows into strings, collections, structs, enums, file persistence, modules, ownership, borrowing, traits, and generics
+  - leaves a clear handoff into a later Rust backend/services course
+- Created the new Rust course planning files:
+  - [`rust/rust-fundamentals/README.md`](rust/rust-fundamentals/README.md)
+  - [`rust/rust-fundamentals/CONTENTS.md`](rust/rust-fundamentals/CONTENTS.md)
+  - [`rust/rust-fundamentals/course/overview.md`](rust/rust-fundamentals/course/overview.md)
+  - [`rust/rust-fundamentals/course/spine.yaml`](rust/rust-fundamentals/course/spine.yaml)
+  - [`rust/rust-fundamentals/course/progress.yaml`](rust/rust-fundamentals/course/progress.yaml)
+- Planned the course as a module-aware Rust fundamentals sequence with six modules:
+  - `M1` Foundations and Tooling
+  - `M2` Text and Collections
+  - `M3` Modeling Request Data
+  - `M4` Organizing Real Programs
+  - `M5` Ownership and Borrowing
+  - `M6` Reuse and Extension
+- Kept the course `lesson_first` with pre-structure and prechapter assessment metadata enabled.
+- Set the routing state in [`rust/rust-fundamentals/course/progress.yaml`](rust/rust-fundamentals/course/progress.yaml) so the next action is a Chapter 1 prechapter assessment, with `next_target: Ch1/L1`.
+- Ran `python3 scripts/validate_repo.py`:
+  - result: `OK: validated 7 course root(s).`
+  - unchanged warning remained for the repository root missing a top-level `CONTENTS.md`
+- Ran `ReadLints` on the new Rust course files; no diagnostics were reported.
+
+**Note:** The attached plan file was not modified.
+
+---
+
+## 2026-04-05 — Implement generalized reference module to-dos
+
+**User request:** Implement the assigned to-dos from the attached plan without editing the plan file itself:
+
+- `design-reference-layout`
+- `build-reference-course`
+- `retarget-docs`
+- `retire-old-reference`
+- `validate-reference`
+
+**Assistant actions:**
+
+- Designed and created a new canonical reference course root at [`course/reference-module/`](course/reference-module/) built around a tiny chapter-only "study session summary" project arc.
+- Added the new reference artifacts:
+  - [`course/reference-module/README.md`](course/reference-module/README.md)
+  - [`course/reference-module/CONTENTS.md`](course/reference-module/CONTENTS.md)
+  - [`course/reference-module/course/spine.yaml`](course/reference-module/course/spine.yaml)
+  - [`course/reference-module/course/progress.yaml`](course/reference-module/course/progress.yaml)
+  - [`course/reference-module/course/overview.md`](course/reference-module/course/overview.md)
+  - [`course/reference-module/course/PRESTRUCTURE_ASSESSMENT.md`](course/reference-module/course/PRESTRUCTURE_ASSESSMENT.md)
+  - [`course/reference-module/course/Ch1/ASSESSMENT.md`](course/reference-module/course/Ch1/ASSESSMENT.md)
+  - lesson files [`course/reference-module/course/Ch1/L1.md`](course/reference-module/course/Ch1/L1.md), [`course/reference-module/course/Ch1/L2.md`](course/reference-module/course/Ch1/L2.md), and [`course/reference-module/course/Ch1/L3.md`](course/reference-module/course/Ch1/L3.md)
+  - learner code in [`course/reference-module/main.py`](course/reference-module/main.py)
+  - optional supporting tests in [`course/reference-module/main_test.py`](course/reference-module/main_test.py)
+  - [`course/reference-module/WORKFLOW_EXAMPLE.md`](course/reference-module/WORKFLOW_EXAMPLE.md)
+  - [`course/reference-module/pytest.ini`](course/reference-module/pytest.ini)
+- Made the new example explicitly lesson-first:
+  - every lesson row in the new spine has an explicit `assignment`
+  - only `Ch1/L3` carries optional test metadata
+  - `course/progress.yaml` is intentionally parked on `current_target.type: assessment` with `ref: prechapter:Ch1`
+  - `recent_assessment.kind: prestructure` shows that the first assessment already happened before the chapter assessment
+- Retargeted active docs so `course/reference-module/` is the primary canonical example:
+  - [`README.md`](README.md)
+  - [`python/README.md`](python/README.md)
+  - [`ROADMAP.md`](ROADMAP.md)
+- Retired the old Python reference module as a legacy archive instead of deleting it:
+  - rewrote [`python/reference-module/README.md`](python/reference-module/README.md)
+  - rewrote [`python/reference-module/course/overview.md`](python/reference-module/course/overview.md)
+  - updated [`python/reference-module/WORKFLOW_EXAMPLE.md`](python/reference-module/WORKFLOW_EXAMPLE.md) to point to the new canonical workflow example
+- Verification:
+  - `python3 scripts/validate_repo.py` -> `OK: validated 6 course root(s).`
+  - remaining validation warning was unchanged root-template behavior for the repository root missing `CONTENTS.md`
+  - `python3 main.py` inside `course/reference-module/` printed the expected study summary
+  - `ReadLints` on edited files -> no linter errors
+  - searched the new reference root to confirm the two-assessment flow is visible in:
+    - [`course/reference-module/README.md`](course/reference-module/README.md)
+    - [`course/reference-module/course/spine.yaml`](course/reference-module/course/spine.yaml)
+    - [`course/reference-module/course/progress.yaml`](course/reference-module/course/progress.yaml)
+    - [`course/reference-module/course/overview.md`](course/reference-module/course/overview.md)
+    - [`course/reference-module/WORKFLOW_EXAMPLE.md`](course/reference-module/WORKFLOW_EXAMPLE.md)
+- Optional test note:
+  - `python3 -m pytest main_test.py -m lesson_ch1_l3` could not run in this environment because system `python3` does not have `pytest` installed
+
+**Note:** The attached plan file was not modified.
+
+---
+
+## 2026-04-05 — revise generalized reference plan
+
+**User request:** Revise the plan at [`generalize-reference-module_28a71beb.plan.md`](../.cursor/plans/generalize-reference-module_28a71beb.plan.md) so it reflects the repo's recent lesson-first workflow changes.
+
+**Assistant actions:**
+
+- Updated the plan's goal and todo wording so the proposed canonical reference module now matches the current repo contract:
+  - lesson/assignment authoring comes before optional test authoring
+  - lessons should use explicit `assignment` metadata in the spine
+  - tests are optional supporting artifacts rather than mandatory first-step outputs
+  - routing examples should prefer one next lesson by default
+- Revised the proposed structure and content notes so `main_test.py` is optional, not assumed.
+- Updated the verification section so the future implementation is expected to prove:
+  - explicit lesson `assignment` metadata exists in the reference spine
+  - any included tests stay secondary to the lesson contract
+  - docs/examples reflect lesson-first sequencing
+
+**Note:** This request revised the plan file itself to keep it aligned with the repo's newer workflow.
+
+---
+
+## 2026-04-05 — lesson-first workflow rework
+
+**User request:** Rework the repository workflow so lessons and assignments drive course creation, prefer many incremental lessons, and move tests to an optional follow-up role instead of a required first step. Implement the attached plan without editing the plan file.
+
+**Planning decisions captured:**
+
+- Tests should be de-emphasized and treated as optional supporting artifacts by default.
+- Delivery should use a hybrid lesson-first model: prefer one lesson at a time, but allow bounded chapter batches when a chapter is already well scoped.
+- The change should be repo-wide and deep enough to include schema and workflow-model updates where needed.
+
+**Assistant actions:**
+
+- Updated source-of-truth workflow docs and Cursor rules to make lesson authoring the primary contract:
+  - [`AGENTS.md`](AGENTS.md)
+  - [`README.md`](README.md)
+  - [`.cursor/rules/planning.mdc`](.cursor/rules/planning.mdc)
+  - [`.cursor/rules/lesson-authoring.mdc`](.cursor/rules/lesson-authoring.mdc)
+  - [`.cursor/rules/test-authoring.mdc`](.cursor/rules/test-authoring.mdc)
+  - [`.cursor/rules/shared-target-resolution.mdc`](.cursor/rules/shared-target-resolution.mdc)
+- Reworked the spine and progress contracts:
+  - added explicit lesson `assignment` metadata to [`course/spine.schema.json`](course/spine.schema.json)
+  - made `test_glob` / `lesson_selector` optional instead of mandatory for every lesson
+  - added `lesson_first` as a supported generation mode in [`course/spine.schema.json`](course/spine.schema.json) and [`course/progress.schema.json`](course/progress.schema.json)
+  - updated starter/example files in [`course/spine.yaml`](course/spine.yaml), [`course/spine.example.yaml`](course/spine.example.yaml), [`course/progress.yaml`](course/progress.yaml), and [`course/progress.example.yaml`](course/progress.example.yaml)
+- Updated sample course spines so the repo validates under the new assignment-aware schema:
+  - [`python/fundamentals/course/spine.yaml`](python/fundamentals/course/spine.yaml)
+  - [`python/data-structures/course/spine.yaml`](python/data-structures/course/spine.yaml)
+  - [`python/reference-module/course/spine.yaml`](python/reference-module/course/spine.yaml)
+  - [`python/backend-fundamentals-kanban/course/spine.yaml`](python/backend-fundamentals-kanban/course/spine.yaml)
+- Reframed authoring templates and guidance around assignment-first lessons and optional tests:
+  - [`course/templates/lesson.md`](course/templates/lesson.md)
+  - [`course/spine-and-contents.md`](course/spine-and-contents.md)
+  - [`python/README.md`](python/README.md)
+  - [`course/guides/test-authoring/README.md`](course/guides/test-authoring/README.md)
+  - [`course/guides/test-authoring/pytest.md`](course/guides/test-authoring/pytest.md)
+  - [`python/fundamentals/PLANNING_PROMPT.md`](python/fundamentals/PLANNING_PROMPT.md)
+  - [`python/data-structures/PLANNING_PROMPT.md`](python/data-structures/PLANNING_PROMPT.md)
+  - [`python/reference-module/WORKFLOW_EXAMPLE.md`](python/reference-module/WORKFLOW_EXAMPLE.md)
+- Updated [`scripts/validate_repo.py`](scripts/validate_repo.py) wording to reflect optional test scoping and verified that the validator now accepts lesson-first spines without mandatory test metadata.
+
+**Verification:**
+
+- Ran `python3 scripts/validate_repo.py` from repo root:
+  - result: `OK: validated 5 course root(s).`
+  - warning remained: root template area still has no `CONTENTS.md`, so parity is skipped there
+- Ran `ReadLints` on the edited schema/validator files; no diagnostics were reported.
+
+**Note:** The attached plan file was not modified.
+
+---
+
+## 2026-04-05 — Short-answer prechapter + prestructure assessments
+
+**User request:** Replace the vague "not yet" style chapter-start convention with an explicit **prechapter assessment**, keep the short-answer format used in the Kanban course, and make that the default going forward both before course-structure decisions and before writing any chapter's lessons.
+
+**Assistant actions:**
+
+- Updated the shared workflow docs to make the new two-assessment convention explicit:
+  - [`AGENTS.md`](AGENTS.md)
+  - [`SCOPE.md`](SCOPE.md)
+  - [`FINAL_PRODUCT.md`](FINAL_PRODUCT.md)
+  - [`README.md`](README.md)
+- Updated active planning/routing contracts so the convention is enforceable in repo guidance:
+  - [`.cursor/rules/planning.mdc`](.cursor/rules/planning.mdc)
+  - [`.cursor/rules/shared-target-resolution.mdc`](.cursor/rules/shared-target-resolution.mdc)
+- Expanded schemas and starter examples:
+  - [`course/progress.schema.json`](course/progress.schema.json): added `prestructure` / `prechapter` assessment kinds and `prechapter:Ch#` assessment refs
+  - [`course/spine.schema.json`](course/spine.schema.json): added `delivery.assessment_format`, `delivery.prestructure_assessment`, and `delivery.prechapter_assessments`
+  - [`course/progress.yaml`](course/progress.yaml): starter now begins with `current_target.ref: prestructure`
+  - [`course/progress.example.yaml`](course/progress.example.yaml): example now uses a `prechapter:Ch1` assessment target
+  - [`course/spine.yaml`](course/spine.yaml) and [`course/spine.example.yaml`](course/spine.example.yaml): starter delivery metadata now encodes the short-answer assessment convention
+- Added a reusable short-answer assessment template at [`course/templates/assessment.md`](course/templates/assessment.md).
+- Updated planning prompt docs to carry the new convention forward:
+  - [`python/fundamentals/PLANNING_PROMPT.md`](python/fundamentals/PLANNING_PROMPT.md)
+  - [`python/data-structures/PLANNING_PROMPT.md`](python/data-structures/PLANNING_PROMPT.md)
+- Updated the backend Kanban course to match the new naming and metadata:
+  - [`python/backend-fundamentals-kanban/course/M1/Ch1/ASSESSMENT.md`](python/backend-fundamentals-kanban/course/M1/Ch1/ASSESSMENT.md) now uses **prechapter assessment** wording
+  - [`python/backend-fundamentals-kanban/course/progress.yaml`](python/backend-fundamentals-kanban/course/progress.yaml) now records the Chapter 1 assessment as `kind: prechapter`
+  - [`python/backend-fundamentals-kanban/course/spine.yaml`](python/backend-fundamentals-kanban/course/spine.yaml) now includes the shared assessment delivery metadata
+  - [`python/backend-fundamentals-kanban/course/overview.md`](python/backend-fundamentals-kanban/course/overview.md) and [`python/backend-fundamentals-kanban/README.md`](python/backend-fundamentals-kanban/README.md) now use the updated wording
+- Updated [`scripts/validate_repo.py`](scripts/validate_repo.py) so repo validation understands `prestructure` and `prechapter:Ch#` assessment targets.
+- Ran `python3 scripts/validate_repo.py`:
+  - result: `OK: validated 5 course root(s).`
+  - remaining warnings were unchanged root-template warnings only
+- Ran `ReadLints` on all edited files; no diagnostics reported.
+
+---
+
+## 2026-04-05 — Simplify active agent rules
+
+**User request:** Simplify the active rule system: remove personality/proper-name framing, remove the standalone orchestrator rule, and pull orchestration guidance back into `AGENTS.md`. Do not edit the attached plan file.
+
+**Assistant actions:**
+
+- Rewrote [`AGENTS.md`](AGENTS.md) as the single workflow source of truth using functional responsibilities: planning, next-step routing, test authoring, and lesson authoring.
+- Removed the dedicated orchestrator rule and replaced the named rule files with generic active rules:
+  - added [`.cursor/rules/planning.mdc`](.cursor/rules/planning.mdc)
+  - added [`.cursor/rules/test-authoring.mdc`](.cursor/rules/test-authoring.mdc)
+  - added [`.cursor/rules/lesson-authoring.mdc`](.cursor/rules/lesson-authoring.mdc)
+  - updated [`.cursor/rules/shared-target-resolution.mdc`](.cursor/rules/shared-target-resolution.mdc)
+  - deleted the old named rule files
+- Updated active contracts and docs to remove stale `Maestro` / `Atlas` / `Riley` / `Marsh` references where they described the live workflow:
+  - [`course/progress.schema.json`](course/progress.schema.json)
+  - [`course/progress.example.yaml`](course/progress.example.yaml)
+  - [`course/spine-and-contents.md`](course/spine-and-contents.md)
+  - [`course/guides/test-authoring/README.md`](course/guides/test-authoring/README.md)
+  - [`course/guides/test-authoring/pytest.md`](course/guides/test-authoring/pytest.md)
+  - [`course/guides/test-authoring/vitest.md`](course/guides/test-authoring/vitest.md)
+  - [`course/guides/test-authoring/jest.md`](course/guides/test-authoring/jest.md)
+  - [`python/README.md`](python/README.md)
+  - [`python/data-structures/README.md`](python/data-structures/README.md)
+  - [`python/reference-module/README.md`](python/reference-module/README.md)
+  - [`python/reference-module/course/overview.md`](python/reference-module/course/overview.md)
+  - [`ROADMAP.md`](ROADMAP.md)
+- Renamed active prompt/example docs away from persona names:
+  - added [`python/fundamentals/PLANNING_PROMPT.md`](python/fundamentals/PLANNING_PROMPT.md) and deleted `ATLAS_PROMPT.md`
+  - added [`python/data-structures/PLANNING_PROMPT.md`](python/data-structures/PLANNING_PROMPT.md) and deleted `ATLAS_PROMPT.md`
+  - added [`python/reference-module/WORKFLOW_EXAMPLE.md`](python/reference-module/WORKFLOW_EXAMPLE.md) and deleted `MAESTRO_RILEY_MARSH_FLOW.md`
+- Verified the updated live docs:
+  - `ReadLints` reported no diagnostics
+  - repo searches found no remaining old named-rule or persona references under `course/` or `python/`
+
+**Note:** The attached plan file was not modified.
+
+---
+
 ## 2026-04-05 — Backend Kanban post-assessment Chapter 1 routing
 
 **User request:** Implement assigned to-dos from the attached post-assessment routing plan for `python/backend-fundamentals-kanban/` without editing the plan file:

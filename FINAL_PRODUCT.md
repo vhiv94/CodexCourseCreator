@@ -16,10 +16,11 @@ The differentiator is personalization:
 
 1. The learner describes what they want to learn.
 2. The system asks the minimum set of questions needed to narrow or expand the topic.
-3. The system runs a light knowledge assessment.
+3. The system runs a short-answer pre-structure assessment.
 4. The system generates a personalized course plan.
-5. The learner works through the course in a viewer that resumes from the last completed step.
-6. The system can reassess and regenerate future content when needed.
+5. Before generating a chapter's lesson batch, the system can run a short-answer prechapter assessment for that chapter.
+6. The learner works through the course in a viewer that resumes from the last completed step.
+7. The system can reassess and regenerate future content when needed.
 
 ## Product surfaces
 
@@ -27,7 +28,7 @@ The differentiator is personalization:
 
 - Accepts the initial learner prompt.
 - Collects scope-defining answers.
-- Runs the initial assessment.
+- Runs the pre-structure assessment and later prechapter assessments when needed.
 - Produces a personalized course.
 
 ### Course list

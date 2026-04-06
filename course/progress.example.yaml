@@ -2,18 +2,18 @@
 last_completed: Ch1/L1
 next_target: Ch1/L2
 current_target:
-  type: chapter
-  ref: Ch1
-  notes: Generate the remaining chapter as one batch after the checkpoint.
-generation_mode: chapter_batch
+  type: assessment
+  ref: prechapter:Ch1
+  notes: Run the short-answer prechapter assessment before generating the remaining Chapter 1 batch.
+generation_mode: lesson_first
 recent_assessment:
-  kind: checkpoint
+  kind: prechapter
   summary: Comfortable with HTTP vocabulary, but still needs review on status-code choices.
   review:
     - status codes
     - request validation
   deepen:
     - resource modeling
-  recommended_next_step: Continue Chapter 1, then reassess before Chapter 2.
+  recommended_next_step: Finish the prechapter assessment, then continue Chapter 1 and reassess before Chapter 2.
 notes: |
-  Prefer batched Riley for Ch1 only after the checkpoint lesson lands.
+  Prefer generating the next narrow lesson first, then add tests only if that lesson calls for them.

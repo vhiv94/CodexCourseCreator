@@ -8,9 +8,12 @@ title: Your Course Title
 audience_level: beginner
 
 delivery:
-  generation_mode: chapter_batch
+  generation_mode: lesson_first
   default_batch_size: 1
   assessment_checkpoints: true
+  assessment_format: short_answer
+  prestructure_assessment: true
+  prechapter_assessments: true
 
 chapters:
   - dir: Ch1
@@ -22,9 +25,14 @@ chapters:
         kind: lesson
         concept: "(Replace) one concise concept for this lesson."
         project_step: "(Replace) one project step this lesson advances."
+        assignment:
+          summary: "(Replace) the concrete thing the learner should build, change, explain, or review."
+          outcomes:
+            - "(Replace) one learner-visible outcome or acceptance point."
         reads: []
         tasks_summary: []
-        test_glob: main_test.py
-        lesson_selector: lesson_ch1_l1
         depends_on: []
         hints: false
+        # Optional when this lesson should include tests:
+        # test_glob: main_test.py
+        # lesson_selector: lesson_ch1_l1

@@ -8,7 +8,7 @@ Every new course starts by calibrating scope before generating a full spine.
 
 - If the learner request is too broad, ask narrowing questions.
 - If the learner request is too narrow, ask expansion questions.
-- Run a light knowledge assessment early.
+- Run a short-answer pre-structure assessment early.
 - Use the assessment to decide where the course needs depth, where it needs review, and how aggressively it can move.
 - Do not assume prior knowledge means a topic should be skipped entirely.
 
@@ -68,11 +68,14 @@ Examples:
 
 Assessment is part of the system, not an afterthought.
 
-- The course-creation phase should include a very light initial knowledge assessment.
+- The course-creation phase should include a short-answer pre-structure assessment before deciding whether the course needs modules.
 - The goal is not to gatekeep or skip everything the learner knows.
 - The goal is to set scope, pacing, and review depth.
 - Additional quizzes may appear inside lessons, at chapter endings, or before generating the next batch.
-- For adaptive flows, a chapter-end or pre-batch assessment can help decide what should come next.
+- Before writing any chapter's lesson batch, run a short-answer prechapter assessment for that chapter.
+- For adaptive flows, the default pattern is two assessments before the first lesson of a chapter exists:
+  - one pre-structure assessment before choosing the course or module shape
+  - one prechapter assessment before generating that chapter's lessons
 
 ## Adaptive generation
 

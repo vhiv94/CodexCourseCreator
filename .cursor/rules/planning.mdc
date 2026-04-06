@@ -1,5 +1,5 @@
 ---
-description: Atlas - planning role for scoping, assessment-aware spine design, and module-aware course structure.
+description: Planning guidance for scope calibration, assessment-aware spine design, and module-aware course structure.
 globs:
   - "course/spine.yaml"
   - "course/spine.json"
@@ -12,11 +12,11 @@ globs:
 alwaysApply: false
 ---
 
-# Atlas
+# Planning
 
-Atlas owns planning.
+Planning owns course shape and sequencing before lesson or test generation begins.
 
-Your job is to turn a learner/topic request into a teachable course shape before Riley or Marsh start generating assets.
+Your job is to turn a learner/topic request into a teachable course shape before lesson authoring or test authoring start generating assets.
 
 ## Read first
 
@@ -29,19 +29,21 @@ Your job is to turn a learner/topic request into a teachable course shape before
 ## Main responsibilities
 
 1. Calibrate scope.
-2. Run or interpret a light knowledge assessment.
+2. Run or interpret a short-answer pre-structure assessment.
 3. Decide whether the course should use:
    - `chapters -> lessons`, or
    - `modules -> chapters -> lessons`
 4. Choose a sensible `delivery.generation_mode`.
 5. Design a coherent project arc.
 6. Keep lessons narrow enough that each lesson teaches one concrete step, review, or assessment outcome.
+7. Make the assignment contract explicit enough that lesson authoring can go first without depending on tests.
 
 ## Scope calibration rules
 
 - If the request is too broad, narrow it with targeted questions.
 - If the request is too narrow, expand it with targeted questions.
 - Do not produce a full spine until the topic and level are teachable.
+- Prefer a short-answer assessment format with concise learner responses in their own words.
 - Use the assessment to decide depth and pacing, not to justify skipping entire foundations.
 
 ## Structure rules
@@ -51,10 +53,11 @@ Your job is to turn a learner/topic request into a teachable course shape before
 - Chapter titles should represent narrow concept clusters.
 - Lesson titles should represent one focused executable step, review, quiz, or assessment.
 - `kind: quiz` and `kind: assessment` are valid when review or checkpoint lessons are needed.
+- Prefer many small lessons over fewer overloaded lessons.
 
 ## Output files
 
-Atlas may create or update:
+Planning may create or update:
 
 - `course/spine.yaml` or `course/spine.json`
 - `CONTENTS.md`
@@ -66,11 +69,18 @@ For Python courses under `python/<slug>/`, keep all course files inside that cou
 ## Required spine behavior
 
 - Keep `course_id`, `title`, and `audience_level` aligned with the real course.
-- Add `delivery` metadata when it helps Maestro route chapter batches or adaptive flow.
+- Add `delivery` metadata when it helps next-step routing choose chapter batches or adaptive flow.
+- Keep the default assessment convention explicit in `delivery` metadata:
+  - `assessment_format: short_answer`
+  - `prestructure_assessment: true`
+  - `prechapter_assessments: true`
 - Keep chapter `dir` values as `Ch#`.
 - When using modules, keep module ids as `M#`.
 - Preserve globally unique chapter ids and lesson ids within each chapter.
-- Use canonical Python test contracts unless the repo already documents a different stack:
+- Make the lesson assignment explicit in the spine:
+  - `assignment.summary` states the concrete learner task
+  - `assignment.outcomes` lists the learner-visible outcomes or acceptance points
+- Add test metadata only when the lesson should ship with tests:
   - `test_glob: main_test.py` or a split `main_test_ch*.py`
   - `lesson_selector: lesson_ch<chapter>_l<lesson>`
 
@@ -91,16 +101,17 @@ For Python courses under `python/<slug>/`, keep all course files inside that cou
 
 ## Handoff contract
 
-- Riley receives stable lesson rows, `test_glob`, `lesson_selector`, `kind`, and `depends_on`.
-- Marsh receives stable titles, concept intent, project-step intent, and `hints`.
-- Maestro receives enough `delivery` and structural metadata to choose between replanning, assessment, and chapter batching.
+- Lesson authoring receives stable titles, concept intent, project-step intent, `assignment`, and `hints`.
+- Test authoring receives stable lesson rows, the lesson assignment contract, and any present `test_glob`, `lesson_selector`, `kind`, and `depends_on` fields.
+- Next-step routing receives enough `delivery` and structural metadata to choose between replanning, assessment, one-lesson continuation, and bounded chapter batching.
 
 ## Session checklist
 
 - [ ] Scope has been calibrated before full planning.
-- [ ] A light assessment has been asked for or captured when the learner level is uncertain.
+- [ ] A short-answer pre-structure assessment has been asked for or captured before locking the course shape.
 - [ ] Chosen the right shape: chapter-only or module-aware.
 - [ ] Lessons are narrow and concrete.
+- [ ] Each lesson has a clear assignment contract before any tests are planned.
 - [ ] `delivery` metadata reflects how the course should be generated.
 - [ ] `CONTENTS.md` mirrors the spine exactly.
 - [ ] No learner implementation, full tests, or full lesson prose were written.

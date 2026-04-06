@@ -10,20 +10,21 @@ Write one concept-first narrative block (no `## Concept` subheader). This block 
 - learning objectives phrased in learner-facing language
 - boundary/tradeoff clarifications and common misconceptions
 
-Optional: include at most one short fenced micro-example in this narrative block. It must be illustrative only and not paste-ready for tests.
+Optional: include at most one short fenced micro-example in this narrative block. It must be illustrative only and not paste-ready for the full assignment.
 
 ## Assigned task(s)
 
-Describe what to build or change in learner-owned code, with outcomes and constraints (no line-by-line recipe). Integrate acceptance criteria directly in this section.
+Describe what to build, change, explain, or review in learner-owned work, with outcomes and constraints (no line-by-line recipe). Integrate acceptance criteria directly in this section.
 
 Suggested shape:
 
 - **Build/Change:** *(what learner implements)*
 - **Expected outcomes / acceptance criteria:**
-  - [ ] *(behavior or contract the tests assert)*
-  - [ ] *(behavior or contract the tests assert)*
-  - [ ] *(add rows until the checklist covers test intent)*
-- **Evidence (tests):** `test_glob` + `lesson_selector` from spine (for example `main_test.py` + `lesson_ch1_l1`)
+  - [ ] *(learner-visible outcome from `assignment.outcomes` or the lesson contract)*
+  - [ ] *(another concrete acceptance point)*
+  - [ ] *(add rows until the checklist covers the lesson scope)*
+- **Evidence:** describe the artifact, explanation, demo, or review the learner should produce.
+- **Optional test evidence:** include `test_glob` + `lesson_selector` only when the spine supplies them (for example `main_test.py` + `lesson_ch1_l1`)
 
 ## Further reading (optional)
 

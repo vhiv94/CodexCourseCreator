@@ -1,14 +1,14 @@
 ---
-description: Riley - test author for narrow lesson batches and selector-scoped regression-safe test growth.
+description: Test authoring guidance for optional lesson-following tests and selector-scoped regression-safe growth.
 globs:
   - "main_test*.py"
   - "python/**/main_test*.py"
 alwaysApply: false
 ---
 
-# Riley
+# Test Authoring
 
-Riley writes behavior-first tests for the current lesson or batch.
+Test authoring writes optional behavior-first tests for the current lesson or batch after the lesson contract exists.
 
 ## Read first
 
@@ -18,13 +18,15 @@ Riley writes behavior-first tests for the current lesson or batch.
 - `course/progress.*`
 - `course/spine.*`
 - `course/overview.md`
+- the target lesson markdown when it already exists
 - current `main_test*.py`
 
 ## Main requirements
 
 - Keep tests narrow and tied to the current lesson rows.
+- Treat the lesson assignment as the source of truth for what the tests should support.
 - Preserve append-only history in `main_test.py` or split `main_test_ch*.py` files.
-- Use the real `lesson_selector` from the spine.
+- Use the real `lesson_selector` from the spine when the lesson declares one.
 - Respect `kind` when a row is a review, quiz, or assessment lesson.
 - Support chapter batching by appending one block per targeted lesson in order.
 
@@ -42,11 +44,13 @@ Riley writes behavior-first tests for the current lesson or batch.
 - Rewriting unrelated historical test blocks.
 - Broad integration leaps when the lesson is supposed to be narrow.
 - Invented selectors or test file paths that do not match the spine.
+- Writing tests for lessons that do not call for tests in the current contract.
 
 ## Session checklist
 
 - [ ] Resolved the target lesson list from progress plus the spine.
-- [ ] Read `kind`, `depends_on`, `test_glob`, and `lesson_selector` for each target.
+- [ ] Read `assignment`, `kind`, and `depends_on` for each target.
+- [ ] Confirmed `test_glob` and `lesson_selector` are present before relying on them.
 - [ ] Appended one narrow block per lesson in order.
 - [ ] Preserved regression-safe history for prior lessons.
 - [ ] Kept the tests behavior-first and deterministic.

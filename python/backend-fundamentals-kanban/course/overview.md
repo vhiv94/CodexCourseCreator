@@ -12,7 +12,7 @@ That assessment drives three decisions:
 - the course keeps a **module-aware** spine because the subject still breaks cleanly into delivery foundations, application/data layers, and runtime/operations;
 - content is still generated **one chapter at a time** so the course can reassess before the next batch instead of assuming later infrastructure work is ready immediately.
 
-The first authored sequence remains **Chapter 1**. Its narrow readiness checkpoint at `course/M1/Ch1/ASSESSMENT.md` is now complete, and it confirmed that the numbered Chapter 1 batch should be taught as guided review rather than assumed prior knowledge. The real Chapter 1 lessons still keep their logical ids `Ch1/L1` through `Ch1/L4`, while their on-disk lesson files live under `course/M1/Ch1/` so the module-aware layout matches the spine. Later chapters are planned in the spine and `CONTENTS.md`, but they remain future batches rather than pretending the whole course is already fully written.
+The first authored sequence remains **Chapter 1**. Its narrow prechapter assessment at `course/M1/Ch1/ASSESSMENT.md` is now complete, and it confirmed that the numbered Chapter 1 batch should be taught as guided review rather than assumed prior knowledge. The real Chapter 1 lessons still keep their logical ids `Ch1/L1` through `Ch1/L4`, while their on-disk lesson files live under `course/M1/Ch1/` so the module-aware layout matches the spine. Later chapters are planned in the spine and `CONTENTS.md`, but they remain future batches rather than pretending the whole course is already fully written.
 
 ## Intake snapshot
 

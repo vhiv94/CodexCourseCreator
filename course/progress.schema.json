@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "course-progress",
   "title": "Course progress",
-  "description": "Learner and orchestration state for Maestro handoffs; lives at course/progress.yaml or course/progress.json.",
+  "description": "Learner and workflow routing state; lives at course/progress.yaml or course/progress.json.",
   "type": "object",
   "additionalProperties": false,
   "required": ["last_completed"],
@@ -34,12 +34,12 @@
     "recent_assessment": {
       "type": "object",
       "additionalProperties": false,
-      "description": "Lightweight assessment context used for replanning and batching.",
+      "description": "Lightweight assessment context used for pre-structure planning, prechapter routing, replanning, and batching.",
       "required": ["kind", "summary"],
       "properties": {
         "kind": {
           "type": "string",
-          "enum": ["entry", "checkpoint", "chapter_end", "module_end", "manual"]
+          "enum": ["entry", "prestructure", "prechapter", "checkpoint", "chapter_end", "module_end", "manual"]
         },
         "summary": {
           "type": "string",
@@ -67,7 +67,7 @@
   "$defs": {
     "generationMode": {
       "type": "string",
-      "enum": ["full_spine", "module_batch", "chapter_batch", "adaptive"]
+      "enum": ["lesson_first", "full_spine", "module_batch", "chapter_batch", "adaptive"]
     },
     "moduleRef": {
       "type": "string",
@@ -135,7 +135,7 @@
             "properties": {
               "ref": {
                 "type": "string",
-                "pattern": "^(entry|module:M[1-9][0-9]*|chapter:Ch[1-9][0-9]*|lesson:Ch[1-9][0-9]*/L[1-9][0-9]*)$"
+                "pattern": "^(entry|prestructure|prechapter:Ch[1-9][0-9]*|module:M[1-9][0-9]*|chapter:Ch[1-9][0-9]*|lesson:Ch[1-9][0-9]*/L[1-9][0-9]*)$"
               }
             }
           }

@@ -1,0 +1,23 @@
+last_completed: null
+next_target: Ch1/L1
+current_target:
+  type: assessment
+  ref: prechapter:Ch1
+  notes: Run the Chapter 1 short-answer assessment before authoring the first lesson file.
+generation_mode: lesson_first
+recent_assessment:
+  kind: prestructure
+  summary: The learner seems comfortable with print and basic variables, but still needs depth on small function boundaries and input cleanup.
+  review:
+    - function boundaries
+    - string cleanup
+    - filtering empty inputs
+  deepen:
+    - composing tiny helpers into one stable output
+  recommended_next_step: Finish the Chapter 1 prechapter assessment, then author Ch1/L1 as the next narrow lesson.
+notes: |
+  This reference course intentionally shows the default two-assessment flow:
+  1. a pre-structure assessment before locking the one-chapter course shape
+  2. a prechapter assessment before generating the Chapter 1 lesson batch
+
+  After the prechapter assessment, route to lesson authoring first and add tests only when the selected lesson row includes test metadata.

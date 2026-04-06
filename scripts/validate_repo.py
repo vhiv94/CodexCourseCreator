@@ -4,7 +4,7 @@
 Checks:
 1) Schema validity for each course's `course/spine.*` and `course/progress.*`.
 2) Exact parity between `course/spine.*` and `CONTENTS.md`, including module headings.
-3) Test scoping via `test_glob` and `lesson_selector` contracts.
+3) Optional test scoping via `test_glob` and `lesson_selector` contracts.
 4) Cross-reference validation for dependencies and adaptive progress targets.
 """
 
@@ -444,7 +444,13 @@ def validate_progress_targets(
     elif target_type == "module" and target_ref not in refs.module_ids:
         results.add_error(f"{course_root}: current_target module ref is unknown: {target_ref!r}")
     elif target_type == "assessment":
-        if target_ref.startswith("module:") and target_ref.split(":", 1)[1] not in refs.module_ids:
+        if target_ref == "prestructure" or target_ref == "entry":
+            pass
+        elif target_ref.startswith("prechapter:") and target_ref.split(":", 1)[1] not in refs.chapter_dirs:
+            results.add_error(
+                f"{course_root}: current_target prechapter assessment ref is unknown: {target_ref!r}"
+            )
+        elif target_ref.startswith("module:") and target_ref.split(":", 1)[1] not in refs.module_ids:
             results.add_error(
                 f"{course_root}: current_target assessment module ref is unknown: {target_ref!r}"
             )

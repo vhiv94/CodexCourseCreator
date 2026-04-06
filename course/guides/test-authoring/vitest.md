@@ -28,12 +28,12 @@ For watch mode while developing:
 npx vitest Ch1/L1.test.ts
 ```
 
-Document the **exact** command—copy-paste stable—in `course/overview.md` and in each `Chk/Ln.md` (Marsh template placeholder).
+Document the **exact** command—copy-paste stable—in `course/overview.md` and in each `Chk/Ln.md` (lesson template placeholder).
 
 ## Shared fixtures / helpers
 
 - Prefer **`tests/support/`** (repo-wide) or **`Chk/_support/`** (chapter-scoped) for builders, sample payloads, and golden files.
-- **Imports**: tests may import helpers; spine `test_glob` should still point at **the lesson’s** test file. Do not broaden `test_glob` to “all tests in chapter” unless `overview.md` defines that contract and Riley’s checklist allows it.
+- **Imports**: tests may import helpers; spine `test_glob` should still point at **the lesson’s** test file. Do not broaden `test_glob` to “all tests in chapter” unless `overview.md` defines that contract and the test authoring checklist allows it.
 - Avoid global mocks in `setupFiles` that couple lessons; scope mocks inside `Ln.test.ts` when possible.
 
 ## Spine and naming
@@ -47,7 +47,7 @@ Document the **exact** command—copy-paste stable—in `course/overview.md` and
 - **ESM/CJS edge cases**: align `package.json` `"type"` with Vitest config; document any extension rules (`.mts`, `.cts`) in `overview.md`.
 - **Flakes**: no real timers/network unless the lesson concept requires it; use Vitest fake timers when teaching time-dependent logic.
 
-## Riley checklist (Vitest-specific)
+## Test authoring checklist (Vitest-specific)
 
 - [ ] `Chk/Ln.test.ts` exists and matches lesson `id` and spine `test_glob`.
 - [ ] `npx vitest run <that path>` executes **only** that lesson’s suite (plus explicitly allowed shared modules).

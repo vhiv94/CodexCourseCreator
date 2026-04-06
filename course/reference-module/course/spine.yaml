@@ -1,0 +1,66 @@
+course_id: reference-module
+title: Reference Module - Study Session Summary
+audience_level: beginner
+
+delivery:
+  generation_mode: lesson_first
+  default_batch_size: 1
+  assessment_checkpoints: true
+  assessment_format: short_answer
+  prestructure_assessment: true
+  prechapter_assessments: true
+
+chapters:
+  - dir: Ch1
+    title: Study Session Summary
+    summary: Build one tiny text-based study recap by composing small string and list helpers.
+    lessons:
+      - id: L1
+        title: Normalize a Learner Name
+        kind: lesson
+        concept: Small pure functions make later output predictable and easier to reason about.
+        project_step: Add a helper that turns raw learner input into one clean display name.
+        assignment:
+          summary: Implement `normalize_name(raw_name)` so later lessons can rely on one cleaned learner name.
+          outcomes:
+            - Strip surrounding whitespace from the learner name before using it anywhere else.
+            - Fall back to `Learner` when the cleaned name would otherwise be empty.
+          evidence:
+            - A quick demo call or short explanation of the cleanup rule is enough before tests exist.
+        depends_on: []
+        hints: false
+      - id: L2
+        title: Keep Only Real Practice Notes
+        kind: lesson
+        concept: Cleaning and filtering list input early keeps noisy data from leaking into later steps.
+        project_step: Add a helper that strips note lines and keeps only non-empty entries.
+        assignment:
+          summary: Implement `collect_notes(raw_notes)` so the project keeps only meaningful practice notes.
+          outcomes:
+            - Strip surrounding whitespace from each raw note.
+            - Skip notes that are empty after cleanup.
+            - Preserve the original order of valid notes.
+          evidence:
+            - Show the cleaned list for a small sample input or explain the filter rule you used.
+        depends_on:
+          - Ch1/L1
+        hints: false
+      - id: L3
+        title: Render the Study Summary
+        kind: lesson
+        concept: Composing small helpers into one deterministic output is easier once each earlier step has a clear contract.
+        project_step: Combine the cleaned name and cleaned notes into one stable multi-line summary.
+        assignment:
+          summary: Implement `build_progress_summary(raw_name, raw_notes)` and wire `main()` to print one study-session summary.
+          outcomes:
+            - Use the cleaned name and cleaned notes from the earlier lesson contracts.
+            - Return a deterministic multi-line summary with a heading and bullet lines.
+            - Show `- No practice notes yet.` when no valid notes remain after cleanup.
+          evidence:
+            - The printed summary plus an optional targeted test run are both valid completion evidence.
+        test_glob: main_test.py
+        lesson_selector: lesson_ch1_l3
+        depends_on:
+          - Ch1/L1
+          - Ch1/L2
+        hints: false

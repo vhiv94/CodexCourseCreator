@@ -1,6 +1,6 @@
-# Chapter 1 Readiness Checkpoint
+# Chapter 1 Prechapter Assessment
 
-This checkpoint happens before the numbered Chapter 1 lesson batch. It is not a replacement for `Ch1/L1` through `Ch1/L4`; it is a short routing step that helps decide how much review, pacing, and explanation the learner will need inside those lessons.
+This prechapter assessment happens before the numbered Chapter 1 lesson batch. It is not a replacement for `Ch1/L1` through `Ch1/L4`; it is a short routing step that helps decide how much review, pacing, and explanation the learner will need inside those lessons.
 
 Short bullet answers are fine. Uncertainty is useful information here.
 
@@ -82,4 +82,4 @@ Short bullet answers are fine. Uncertainty is useful information here.
 
 - Strong Chapter 1 readiness means the learner can mostly explain the health-check contract, the shape of a create/list API, nested resource ownership, and the difference between common status/error categories.
 - Review-heavy Chapter 1 pacing is still appropriate if the learner mixes up methods, paths, bodies, resource boundaries, or the difference between not found versus invalid input versus wrong method.
-- The outcome of this checkpoint should tune pacing and emphasis only. It should not renumber the existing `Ch1/L1` through `Ch1/L4` lesson or test contract.
+- The outcome of this prechapter assessment should tune pacing and emphasis only. It should not renumber the existing `Ch1/L1` through `Ch1/L4` lesson or test contract.

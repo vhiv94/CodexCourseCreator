@@ -18,13 +18,16 @@ The schema now supports two valid course shapes:
 
 ## Planning metadata
 
-`delivery` is optional metadata that helps Atlas and Maestro coordinate adaptive generation.
+`delivery` is optional metadata that helps planning and next-step routing coordinate adaptive generation.
 
 Supported fields:
 
-- `generation_mode`: `full_spine`, `module_batch`, `chapter_batch`, or `adaptive`
+- `generation_mode`: `lesson_first`, `full_spine`, `module_batch`, `chapter_batch`, or `adaptive`
 - `default_batch_size`: typical number of chapters or lessons to generate at once
 - `assessment_checkpoints`: whether reassessment is expected beyond intake
+- `assessment_format`: default assessment style such as `short_answer`
+- `prestructure_assessment`: whether planning starts with a short-answer assessment before deciding chapters vs modules
+- `prechapter_assessments`: whether each chapter should begin with a short-answer assessment before lesson generation
 
 ## Course shape
 
@@ -53,7 +56,7 @@ For each chapter `dir` and lesson `id`:
 |------|--------------|
 | Lesson prose | `course/{dir}/{id}.md` |
 | Hint prose | `course/{dir}/{id}-hint.md` when `hints: true` |
-| Tests | resolved by `test_glob` |
+| Tests | optional, resolved by `test_glob` when present |
 
 ### Module-aware courses
 
@@ -63,7 +66,7 @@ For each module `id`, chapter `dir`, and lesson `id`:
 |------|--------------|
 | Lesson prose | `course/{module-id}/{dir}/{id}.md` |
 | Hint prose | `course/{module-id}/{dir}/{id}-hint.md` when `hints: true` |
-| Tests | resolved by `test_glob` |
+| Tests | optional, resolved by `test_glob` when present |
 
 Modules therefore affect both planning and on-disk lesson placement, while lesson refs, dependencies, and selectors remain stable as `Ch#/L#`.
 
@@ -72,14 +75,18 @@ Modules therefore affect both planning and on-disk lesson placement, while lesso
 Each lesson keeps the existing core fields and may now include:
 
 - `kind`: `lesson`, `review`, `quiz`, or `assessment`
+- `assignment.summary`: the concrete learner task for the lesson
+- `assignment.outcomes`: optional learner-visible acceptance points for lesson authoring
+- `assignment.evidence`: optional notes about what counts as proof of completion
 - `assessment_goal`: required when `kind` is `quiz` or `assessment`
 
-This lets the spine represent lightweight reviews and checkpoints without pretending every row is a normal build step.
+This lets the spine represent lightweight reviews, checkpoints, and explicit assignment contracts without pretending every row is a normal build step.
 
-## Test contract
+## Optional test contract
 
+- `test_glob` is optional. Lessons may be assignment-first with no test metadata.
 - Legacy per-lesson test files such as `Ch1/L1.py` remain migration-compatible.
-- Canonical Python flow uses append-only `main_test.py` or split files like `main_test_ch2.py`.
+- Canonical Python flow uses append-only `main_test.py` or split files like `main_test_ch2.py` when the course chooses to ship tests.
 - When `test_glob` points at a `main_test*.py` file, `lesson_selector` is required.
 - `lesson_selector` uses the pytest marker form `lesson_ch<chapter>_l<lesson>`.
 

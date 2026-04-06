@@ -8,28 +8,29 @@ Every **Python** course in this repository gets its **own subdirectory** under *
 |------------|--------|
 | **One folder per course** | `python/<course-slug>/` — short, lowercase, hyphenated (filesystem-safe). |
 | **uv only** | Manage the project with **[uv](https://docs.astral.sh/uv/)**: `uv init`, `uv sync`, `uv add`, `uv run pytest`, … — not ad-hoc `pip install` + hand-written `requirements.txt` unless a course explicitly documents an exception in its `overview.md`. |
-| **Course artifacts** | Same shape as the reference course: `course/spine.yaml`, `course/overview.md`, optional `course/glossary.md`, `course/progress.yaml`, root **`CONTENTS.md`** next to `course/`, lesson prose under `course/Ch#/L#.md` for chapter-only courses or `course/M#/Ch#/L#.md` for module-aware courses (with optional sibling `-hint.md` files), learner/source code under `src/` when needed, module-root `main.py`, and append-only module-root `main_test.py` with selector-scoped lesson tests. |
+| **Course artifacts** | Same planning shape as the canonical example in `course/reference-module/`: `course/spine.yaml`, `course/overview.md`, optional `course/glossary.md`, `course/progress.yaml`, root **`CONTENTS.md`** next to `course/`, lesson prose under `course/Ch#/L#.md` for chapter-only courses or `course/M#/Ch#/L#.md` for module-aware courses (with optional sibling `-hint.md` files), learner/source code under `src/` when needed, module-root `main.py`, and optional module-root `main_test.py` with selector-scoped lesson tests when the course uses them. |
 | **Schema** | `spine.yaml` validates against the **repository root** [`course/spine.schema.json`](../course/spine.schema.json) (use `@course/spine.schema.json` in prompts from repo root). |
 
-## New course: Atlas + uv
+## New course: planning + uv
 
-When **Atlas** plans a **new** Python course:
+When the planning pass defines a **new** Python course:
 
 1. **Create** `python/<course-slug>/` if it does not exist.
 2. If there is **no** `pyproject.toml` in that directory, **run `uv init`** there. Prefer **`uv init --no-readme`** so uv does not create a default `README.md` that collides with the course `README.md` you will add—or use **`uv init --bare`** if you want only a minimal `pyproject.toml` and will flesh out the tree afterward.
-3. **Add** test dependencies the overview commits to — at minimum **`uv add pytest`** for the usual Riley/pytest layout, then **`uv sync`**.
+3. **Add** test dependencies only if the course overview commits to tests — usually **`uv add pytest`** for a pytest-based flow, then **`uv sync`**.
 4. Write **spine**, **CONTENTS.md**, **overview**, optional glossary, and initialize **`course/progress.yaml`** as usual.
 
 For new Python courses, prefer this root split:
 
 - `course/` for planning files and lesson markdown
 - `src/` for learner/source modules and packages
-- root `main.py` and `main_test.py` as stable entrypoints when the course uses them
+- root `main.py` and optional `main_test.py` as stable entrypoints when the course uses them
 
 Reference implementations:
 
 - **`python/fundamentals/`** for a larger real course.
-- **`python/reference-module/`** for a compact worked example of `main.py` + append-only `main_test.py` + selector-scoped lesson flow.
+- **`course/reference-module/`** for the canonical minimal lesson-first workflow example using plain `python3`.
+- **`python/reference-module/`** as a legacy archive of the earlier `uv` + selector-scoped pytest example.
 
 ## Bootstrap command sequence (human/agent preflight)
 
@@ -47,11 +48,11 @@ cd ../../
 python3 scripts/validate_repo.py
 ```
 
-If `spine.yaml`/`CONTENTS.md` are not generated yet, run Atlas first, then rerun validation.
+If `spine.yaml`/`CONTENTS.md` are not generated yet, run planning first, then rerun validation.
 
-## Canonical lesson selector contract
+## Optional lesson selector contract
 
-For module-root `main_test.py` flow, each lesson in `course/spine.*` defines:
+For module-root `main_test.py` flow, a tested lesson in `course/spine.*` defines:
 
 - `test_glob: main_test.py`
 - `lesson_selector: lesson_ch<chapter>_l<lesson>` (example: `lesson_ch2_l3`)
@@ -62,7 +63,7 @@ Run one lesson with:
 uv run pytest main_test.py -m lesson_ch2_l3
 ```
 
-Riley appends new lesson blocks to `main_test.py` (never rewrites unrelated prior lesson blocks).
+Test authoring appends new lesson blocks to `main_test.py` (never rewrites unrelated prior lesson blocks).
 
 ## `main_test.py` growth guardrails
 
@@ -101,6 +102,6 @@ If a course still uses per-lesson test files (`Ch#/L#.py`), migrate incrementall
 
 ## Governance and batching in day-to-day flow
 
-- Stay in **Riley/Marsh flow** for normal next-lesson work on an unchanged spine.
-- Re-engage **Atlas** before lesson generation when chapter sequencing, lesson scope, or audience constraints need replanning.
-- Keep Maestro batches to **1-3 lesson targets** per request; validate between batches to catch drift early.
+- Stay in the **lesson authoring first / optional test authoring second** flow for normal next-lesson work on an unchanged spine.
+- Re-engage **planning** before lesson generation when chapter sequencing, lesson scope, or audience constraints need replanning.
+- Prefer **1 lesson target** by default; expand to **2-3 lesson targets** only when the chapter is already well scoped. Validate between batches to catch drift early.

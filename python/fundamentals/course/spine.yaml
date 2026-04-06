@@ -9,6 +9,8 @@ chapters:
         title: Run Your First Program
         concept: Program execution is a top-to-bottom sequence of statements.
         project_step: Show a welcome line for the Personal Tracker app.
+        assignment:
+          summary: Show a welcome line for the Personal Tracker app.
         test_glob: main_test.py
         lesson_selector: lesson_ch1_l1
         depends_on: []
@@ -17,6 +19,8 @@ chapters:
         title: Name Values with Variables
         concept: Variables bind names to values using assignment.
         project_step: Store app metadata in clearly named variables.
+        assignment:
+          summary: Store app metadata in clearly named variables.
         test_glob: main_test.py
         lesson_selector: lesson_ch1_l2
         depends_on:
@@ -26,6 +30,8 @@ chapters:
         title: Work with Basic Data Types
         concept: Strings, ints, floats, and booleans model different kinds of data.
         project_step: Build a starter profile dictionary from typed values.
+        assignment:
+          summary: Build a starter profile dictionary from typed values.
         test_glob: main_test.py
         lesson_selector: lesson_ch1_l3
         depends_on:
@@ -35,6 +41,8 @@ chapters:
         title: Evaluate Expressions with Operators
         concept: Operators combine values into new values and comparisons.
         project_step: Compute progress percentages and goal checks.
+        assignment:
+          summary: Compute progress percentages and goal checks.
         test_glob: main_test.py
         lesson_selector: lesson_ch1_l4
         depends_on:
@@ -47,6 +55,8 @@ chapters:
         title: Index and Slice Strings
         concept: String positions let you inspect or extract substrings.
         project_step: Parse compact tracker tags from user text.
+        assignment:
+          summary: Parse compact tracker tags from user text.
         test_glob: main_test.py
         lesson_selector: lesson_ch2_l1
         depends_on:
@@ -56,6 +66,8 @@ chapters:
         title: Iterate Through Strings
         concept: Strings are iterable objects that yield one character at a time.
         project_step: Count category prefixes by scanning characters.
+        assignment:
+          summary: Count category prefixes by scanning characters.
         test_glob: main_test.py
         lesson_selector: lesson_ch2_l2
         depends_on:
@@ -65,6 +77,8 @@ chapters:
         title: Normalize Input Text
         concept: String methods create predictable text formats for downstream logic.
         project_step: Clean incoming tracker item names.
+        assignment:
+          summary: Clean incoming tracker item names.
         test_glob: main_test.py
         lesson_selector: lesson_ch2_l3
         depends_on:
@@ -74,6 +88,8 @@ chapters:
         title: Use Conditionals for Decisions
         concept: if/elif/else branches select behavior from boolean conditions.
         project_step: Reject invalid tracker entries with clear decisions.
+        assignment:
+          summary: Reject invalid tracker entries with clear decisions.
         test_glob: main_test.py
         lesson_selector: lesson_ch2_l4
         depends_on:
@@ -86,6 +102,8 @@ chapters:
         title: Store Sequences in Lists
         concept: Lists are ordered mutable collections for growing state.
         project_step: Maintain a running list of tracker entries.
+        assignment:
+          summary: Maintain a running list of tracker entries.
         test_glob: main_test.py
         lesson_selector: lesson_ch3_l1
         depends_on:
@@ -95,6 +113,8 @@ chapters:
         title: Lock Records with Tuples
         concept: Tuples are ordered immutable collections for fixed records.
         project_step: Represent each entry as an immutable tuple.
+        assignment:
+          summary: Represent each entry as an immutable tuple.
         test_glob: main_test.py
         lesson_selector: lesson_ch3_l2
         depends_on:
@@ -104,6 +124,8 @@ chapters:
         title: Map Fields with Dictionaries
         concept: Dictionaries map keys to values for named access.
         project_step: Build a dictionary summary for one tracker entry.
+        assignment:
+          summary: Build a dictionary summary for one tracker entry.
         test_glob: main_test.py
         lesson_selector: lesson_ch3_l3
         depends_on:
@@ -113,6 +135,8 @@ chapters:
         title: Deduplicate Categories with Sets
         concept: Sets keep unique values and support membership checks.
         project_step: Generate the set of unique tracker categories.
+        assignment:
+          summary: Generate the set of unique tracker categories.
         test_glob: main_test.py
         lesson_selector: lesson_ch3_l4
         depends_on:
@@ -125,6 +149,8 @@ chapters:
         title: Define Functions with Parameters
         concept: Function signatures declare inputs and interface intent.
         project_step: Create functions for adding and formatting tracker data.
+        assignment:
+          summary: Create functions for adding and formatting tracker data.
         test_glob: main_test.py
         lesson_selector: lesson_ch4_l1
         depends_on:
@@ -134,6 +160,8 @@ chapters:
         title: Return Values from Functions
         concept: return sends results back to callers for composition.
         project_step: Return structured results instead of printing everywhere.
+        assignment:
+          summary: Return structured results instead of printing everywhere.
         test_glob: main_test.py
         lesson_selector: lesson_ch4_l2
         depends_on:
@@ -143,6 +171,8 @@ chapters:
         title: Understand Local Scope
         concept: Names exist in local scope unless intentionally shared.
         project_step: Avoid accidental state leaks between helper functions.
+        assignment:
+          summary: Avoid accidental state leaks between helper functions.
         test_glob: main_test.py
         lesson_selector: lesson_ch4_l3
         depends_on:
@@ -152,6 +182,8 @@ chapters:
         title: Compose Functions into Pipelines
         concept: Small functions combine into reliable end-to-end workflows.
         project_step: Build the add-entry pipeline from reusable helpers.
+        assignment:
+          summary: Build the add-entry pipeline from reusable helpers.
         test_glob: main_test.py
         lesson_selector: lesson_ch4_l4
         depends_on:
@@ -164,6 +196,8 @@ chapters:
         title: Organize Code with Modules and Imports
         concept: Modules split responsibilities and imports connect them.
         project_step: Separate tracker utilities into importable functions.
+        assignment:
+          summary: Separate tracker utilities into importable functions.
         test_glob: main_test.py
         lesson_selector: lesson_ch5_l1
         depends_on:
@@ -173,6 +207,8 @@ chapters:
         title: Use the Main Guard Correctly
         concept: __name__ checks separate import-time setup from script execution.
         project_step: Add a main guard that calls main only when run directly.
+        assignment:
+          summary: Add a main guard that calls main only when run directly.
         test_glob: main_test.py
         lesson_selector: lesson_ch5_l2
         depends_on:
@@ -182,6 +218,8 @@ chapters:
         title: Sequence Work in main
         concept: main coordinates function calls in explicit declaration order.
         project_step: Implement a predictable start-read-update-render sequence.
+        assignment:
+          summary: Implement a predictable start-read-update-render sequence.
         test_glob: main_test.py
         lesson_selector: lesson_ch5_l3
         depends_on:
@@ -191,6 +229,8 @@ chapters:
         title: Dispatch Basic Commands
         concept: Conditional command dispatch routes one input to one action.
         project_step: Support add, list, and summary commands in main flow.
+        assignment:
+          summary: Support add, list, and summary commands in main flow.
         test_glob: main_test.py
         lesson_selector: lesson_ch5_l4
         depends_on:
@@ -203,6 +243,8 @@ chapters:
         title: Read and Write Text Files
         concept: File I/O persists tracker state outside program memory.
         project_step: Save tracker entries to a text file and load them back.
+        assignment:
+          summary: Save tracker entries to a text file and load them back.
         test_glob: main_test.py
         lesson_selector: lesson_ch6_l1
         depends_on:
@@ -212,6 +254,8 @@ chapters:
         title: Append Records Safely
         concept: Append mode grows logs without overwriting history.
         project_step: Append one formatted tracker record per command.
+        assignment:
+          summary: Append one formatted tracker record per command.
         test_glob: main_test.py
         lesson_selector: lesson_ch6_l2
         depends_on:
@@ -221,6 +265,8 @@ chapters:
         title: Handle Exceptions Gracefully
         concept: try/except catches predictable failures and preserves control flow.
         project_step: Return clear messages when files or conversions fail.
+        assignment:
+          summary: Return clear messages when files or conversions fail.
         test_glob: main_test.py
         lesson_selector: lesson_ch6_l3
         depends_on:
@@ -230,6 +276,8 @@ chapters:
         title: Validate Loaded Records
         concept: Defensive checks enforce invariants for persisted data.
         project_step: Filter malformed lines before they enter tracker state.
+        assignment:
+          summary: Filter malformed lines before they enter tracker state.
         test_glob: main_test.py
         lesson_selector: lesson_ch6_l4
         depends_on:
@@ -242,6 +290,8 @@ chapters:
         title: Define a Basic Class
         concept: Classes bundle data and behavior into reusable object blueprints.
         project_step: Introduce a TrackerItem class for one entry.
+        assignment:
+          summary: Introduce a TrackerItem class for one entry.
         test_glob: main_test.py
         lesson_selector: lesson_ch7_l1
         depends_on:
@@ -251,6 +301,8 @@ chapters:
         title: Initialize Objects with __init__
         concept: __init__ constructs object state from input arguments.
         project_step: Require name, amount, and category at creation time.
+        assignment:
+          summary: Require name, amount, and category at creation time.
         test_glob: main_test.py
         lesson_selector: lesson_ch7_l2
         depends_on:
@@ -260,6 +312,8 @@ chapters:
         title: Compare __str__ and __repr__
         concept: __str__ is user-facing text while __repr__ is developer-facing representation.
         project_step: Provide readable display and debug output for items.
+        assignment:
+          summary: Provide readable display and debug output for items.
         test_glob: main_test.py
         lesson_selector: lesson_ch7_l3
         depends_on:
@@ -269,6 +323,8 @@ chapters:
         title: Add Behavior with Instance Methods
         concept: Instance methods operate on object state through self.
         project_step: Compute per-item status text from stored values.
+        assignment:
+          summary: Compute per-item status text from stored values.
         test_glob: main_test.py
         lesson_selector: lesson_ch7_l4
         depends_on:
@@ -281,6 +337,8 @@ chapters:
         title: Build a Base Class and Child Classes
         concept: Inheritance shares common behavior while subclasses specialize details.
         project_step: Create BaseTrackerItem and specialized item subclasses.
+        assignment:
+          summary: Create BaseTrackerItem and specialized item subclasses.
         test_glob: main_test.py
         lesson_selector: lesson_ch8_l1
         depends_on:
@@ -290,6 +348,8 @@ chapters:
         title: Use Polymorphism for Summaries
         concept: Polymorphism lets one interface call different subclass behavior.
         project_step: Render mixed item summaries through a shared method.
+        assignment:
+          summary: Render mixed item summaries through a shared method.
         test_glob: main_test.py
         lesson_selector: lesson_ch8_l2
         depends_on:
@@ -299,6 +359,8 @@ chapters:
         title: Integrate Functional and OOP Layers
         concept: Architectural boundaries keep functions and classes cooperating cleanly.
         project_step: Connect parsing functions to object creation and reporting.
+        assignment:
+          summary: Connect parsing functions to object creation and reporting.
         test_glob: main_test.py
         lesson_selector: lesson_ch8_l3
         depends_on:
@@ -308,6 +370,8 @@ chapters:
         title: Complete the Personal Tracker Capstone
         concept: End-to-end tests verify the full workflow as one coherent system.
         project_step: Deliver a working CLI tracker with add, list, and summary features.
+        assignment:
+          summary: Deliver a working CLI tracker with add, list, and summary features.
         test_glob: main_test.py
         lesson_selector: lesson_ch8_l4
         depends_on:

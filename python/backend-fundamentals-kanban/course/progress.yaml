@@ -3,10 +3,10 @@ next_target: Ch1/L1
 current_target:
   type: chapter
   ref: Ch1
-  notes: The pre-Ch1 readiness checkpoint is complete. Route to the live Chapter 1 batch under course/M1/Ch1/, and keep the chapter review-heavy on HTTP request-response semantics, JSON response contracts, nested resource ownership, status and error categories, and SQLite's role in persistence.
+  notes: The pre-Ch1 assessment is complete. Route to the live Chapter 1 batch under course/M1/Ch1/, and keep the chapter review-heavy on HTTP request-response semantics, JSON response contracts, nested resource ownership, status and error categories, and SQLite's role in persistence.
 generation_mode: chapter_batch
 recent_assessment:
-  kind: checkpoint
+  kind: prechapter
   summary: The learner is ready to begin the real Chapter 1 batch, but still needs explicit review on what requests and responses mean, why JSON is the API default, how nested routes express ownership, how common success and error statuses differ, and what SQLite is persisting for the project.
   review:
     - HTTP request and response semantics, especially what a health check is actually asking for
@@ -23,7 +23,7 @@ notes: |
   The refreshed intake confirms that Kanban Lite API is still the right capstone.
   The learner's Python base is strong enough that the course should not collapse into syntax-first review, but HTTP/API and data-modeling foundations still need explicit early depth.
   The three-module spine remains appropriate because foundations, application/data design, and runtime/operations are still meaningfully distinct phases.
-  The chapter-local readiness checkpoint at course/M1/Ch1/ASSESSMENT.md is now complete and should inform pacing rather than block routing.
+  The chapter-local prechapter assessment at course/M1/Ch1/ASSESSMENT.md is now complete and should inform pacing rather than block routing.
   Keep the logical Chapter 1 ids and selectors unchanged: Ch1/L1 through Ch1/L4 and lesson_ch1_l1 through lesson_ch1_l4.
   Content generation remains chapter-batched, starting with the live Chapter 1 batch and reassessing before Chapter 2.
   Chapter 1 should stay especially explicit about request meaning, JSON contracts, nested resource ownership, status-code categories, and SQLite's persistence role.

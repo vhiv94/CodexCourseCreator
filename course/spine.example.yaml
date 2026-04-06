@@ -6,9 +6,12 @@ title: Example Adaptive Backend Course
 audience_level: beginner to intermediate
 
 delivery:
-  generation_mode: chapter_batch
+  generation_mode: lesson_first
   default_batch_size: 1
   assessment_checkpoints: true
+  assessment_format: short_answer
+  prestructure_assessment: true
+  prechapter_assessments: true
 
 modules:
   - id: M1
@@ -23,11 +26,16 @@ modules:
             kind: lesson
             concept: One request creates one response contract.
             project_step: Sketch the first health endpoint and response shape.
+            assignment:
+              summary: Draft the learner-facing endpoint contract for a simple health check.
+              outcomes:
+                - Name the request and response pieces that matter for the health endpoint.
+                - Produce a small contract sketch the next lesson can build on.
+              evidence:
+                - A short endpoint contract note or artifact is enough before tests exist.
             reads: []
             tasks_summary:
               - Identify the minimum request and response details the learner must reason about.
-            test_glob: main_test.py
-            lesson_selector: lesson_ch1_l1
             depends_on: []
             hints: false
           - id: L2
@@ -35,6 +43,13 @@ modules:
             kind: quiz
             concept: Status families communicate broad outcome categories.
             project_step: Confirm the learner can classify common response outcomes before moving on.
+            assignment:
+              summary: Complete a short status-code family check before the chapter continues.
+              outcomes:
+                - Classify common HTTP outcomes into the right status-code family.
+                - Explain why a chosen family fits a small request scenario.
+              evidence:
+                - A short-answer response or quiz artifact should show the learner's reasoning.
             assessment_goal: Verify status-code family recall before chapter generation continues.
             reads: []
             tasks_summary:
@@ -57,11 +72,14 @@ modules:
             kind: lesson
             concept: Resources need stable identifiers and responsibilities.
             project_step: Define the first board resource contract.
+            assignment:
+              summary: Define the first board resource boundary for the project.
+              outcomes:
+                - Identify the board resource's core responsibility.
+                - Describe the minimum stable fields or behaviors the resource must expose.
             reads: []
             tasks_summary:
               - Keep the lesson focused on one resource boundary.
-            test_glob: main_test.py
-            lesson_selector: lesson_ch2_l1
             depends_on:
               - Ch1/L2
             hints: false
@@ -78,12 +96,17 @@ modules:
             kind: assessment
             concept: A checkpoint can change pacing without skipping the deployment unit.
             project_step: Decide whether the next batch should deepen infra basics or continue to deployment tasks.
+            assignment:
+              summary: Complete a deployment-readiness checkpoint before new deployment lessons are planned.
+              outcomes:
+                - Identify which deployment ideas feel solid versus shaky.
+                - Recommend whether the next increment should review or continue.
+              evidence:
+                - Capture a short checkpoint response that can drive routing.
             assessment_goal: Capture whether the learner needs more review before deployment work.
             reads: []
             tasks_summary:
               - Record review topics before the next chapter batch.
-            test_glob: main_test.py
-            lesson_selector: lesson_ch3_l1
             depends_on:
               - Ch2/L1
             hints: true

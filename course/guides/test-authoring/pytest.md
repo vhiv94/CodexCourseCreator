@@ -1,13 +1,13 @@
 # pytest — selector-scoped test appendix
 
-Use when the course repo runs **[pytest](https://docs.pytest.org/)** on Python. Goal: **one lesson → one selector in append-only `main_test.py` → one scoped invocation** (e.g. **`uv run pytest main_test.py -m lesson_ch2_l3`** when using [uv](https://github.com/astral-sh/uv)), aligned with spine `test_glob` + `lesson_selector`.
+Use when the course repo runs **[pytest](https://docs.pytest.org/)** on Python. Goal: **one lesson → optional selector in append-only `main_test.py` → one scoped invocation** (e.g. **`uv run pytest main_test.py -m lesson_ch2_l3`** when using [uv](https://github.com/astral-sh/uv)), aligned with spine `test_glob` + `lesson_selector` only for lessons that ship tests.
 
 In this monorepo, **Python** courses live under **`python/<course-slug>/`**; run **`uv sync`** / **`uv run pytest …`** from **that** directory (see **`python/README.md`** at repo root).
 
 ## File layout
 
 - **Lesson tests**: append tests into module-root `main_test.py` and mark each lesson block with its spine `lesson_selector` (for example `@pytest.mark.lesson_ch1_l1`).
-- **Spine contract**: set `test_glob: main_test.py` and one unique `lesson_selector` per lesson.
+- **Spine contract**: only tested lessons need `test_glob: main_test.py` and one unique `lesson_selector`.
 - **Lesson prose**: keep lesson markdown under `course/Ch#/L#.md` for chapter-only courses or `course/M#/Ch#/L#.md` for module-aware courses, with optional hints beside the lesson file.
 - **Learner implementation**: prefer packages under `src/` (import as `from mycourse import ...`) while keeping root `main.py` and `main_test.py` as the stable entrypoints when the course uses them; tests import from the **learner-facing** package layout only.
 
@@ -45,11 +45,11 @@ Use **`uv run pytest main_test.py -m <lesson_selector>`** in `overview.md`, ever
 ## Shared fixtures / helpers
 
 - Prefer **`tests/support/`** or **`Chk/_support/`** for reusable factories; import them from the lesson test module.
-- Spine **`test_glob`** should be `main_test.py`, while **`lesson_selector`** scopes to one lesson.
+- Spine **`test_glob`** should be `main_test.py` when tests exist, while **`lesson_selector`** scopes to one tested lesson.
 
 ## Spine and naming
 
-- **`test_glob`**: use `main_test.py`.
+- **`test_glob`**: use `main_test.py` when the lesson includes tests.
 - **`lesson_selector`**: use `lesson_ch<chapter>_l<lesson>` (for example `lesson_ch2_l3`) and apply it as a pytest marker on that lesson's tests.
 - **`depends_on`**: import learner APIs established in earlier lessons; avoid re-asserting every detail of prior lessons unless this lesson extends a contract.
 
@@ -59,9 +59,9 @@ Use **`uv run pytest main_test.py -m <lesson_selector>`** in `overview.md`, ever
 - **`__init__.py` in `Ch*`**: usually omit so `Ch1` is not accidentally treated as a regular package you import; if you add packages under `Chk`, document clearly.
 - **Parametrization explosion**: parametrized tests are fine when they clarify the concept; avoid combinatorial tables that obscure the lesson goal.
 
-## Riley checklist (pytest-specific)
+## Test authoring checklist (pytest-specific)
 
-Riley’s deliverable is append-only updates to **`main_test.py`**; running **`uv run pytest`** afterward is optional and usually done by Maestro, CI, or the learner—not a requirement for Riley to execute locally.
+The test authoring deliverable is append-only updates to **`main_test.py`** for tested lessons; running **`uv run pytest`** afterward is optional and usually done by next-step routing, CI, or the learner, not a local execution requirement for the authoring pass.
 
 - [ ] Spine row uses `test_glob: main_test.py` and a unique `lesson_selector`.
 - [ ] `main_test.py` has the lesson's pytest marker on all tests for that lesson.

@@ -2,7 +2,7 @@
 
 ### v1 — Prompt-Guided (Good Starting Point)
 
-- Use role rules (Maestro, Atlas, Riley, Marsh) for behavior and handoffs.
+- Use workflow rules for planning, routing, test authoring, and lesson authoring.
 - Keep templates for lesson shape (Concept, Tasks, Acceptance, etc.).
 - Manually review outputs.
 
@@ -16,7 +16,7 @@ Outcome: fast iteration, but quality varies by run/model/context.
 - Standardize selector-scoped tests (test_glob + lesson_selector).
 - Require append-only test growth patterns.
 - Add repo validator + CI checks.
-- Keep a worked reference module as “golden pattern.”
+- Keep `course/reference-module/` as the lesson-first worked reference module and golden pattern.
 
 Outcome: much less drift; errors become detectable instead of subjective.
 

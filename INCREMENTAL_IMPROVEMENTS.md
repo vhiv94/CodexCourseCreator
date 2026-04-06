@@ -1,0 +1,1 @@
+next: the planner goes a little too deep by giving lesson scope at the outset. limit the planner to module and chapter extraction and let the lesson author roam free

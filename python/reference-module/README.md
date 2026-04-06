@@ -1,11 +1,14 @@
-# Python reference module
+# Python reference module (legacy archive)
 
-Small worked example for the canonical contract:
+This folder is kept as an archive of the earlier Python-specific worked example.
+
+It is no longer the primary canonical reference. Use `course/reference-module/` for the current minimal lesson-first workflow.
+
+This legacy archive still demonstrates:
 
 - learner entrypoint in `main.py`
 - append-only test history in `main_test.py`
 - selector-scoped lesson runs via `lesson_selector`
-- legacy lesson prose in `Ch#/L#.md` for this example; new courses should prefer `course/Ch#/L#.md`
-- Maestro progress-driven routing for Riley and Marsh
+- the older `uv` + pytest oriented setup
 
-See `MAESTRO_RILEY_MARSH_FLOW.md` for an end-to-end handoff example.
+See `WORKFLOW_EXAMPLE.md` here only if you need the historical selector-scoped handoff example.
