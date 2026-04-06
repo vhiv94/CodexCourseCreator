@@ -1,0 +1,24 @@
+last_completed: null
+next_target: Ch1/L1
+current_target:
+  type: assessment
+  ref: prechapter:Ch1
+  notes: Run the Chapter 1 short-answer prechapter assessment before generating the first Rust lesson batch.
+generation_mode: lesson_first
+recent_assessment:
+  kind: prestructure
+  summary: Learner has some typed-language and low-level experience, but wants Rust taught gently from scratch with practical emphasis on ownership and borrowing.
+  review:
+    - cargo workflow and crate layout
+    - String versus &str
+    - standard library scope and common APIs
+    - compiler-guided debugging habits
+  deepen:
+    - backend-shaped domain modeling
+    - traits and generics in practical code
+    - file-backed CLI design
+  recommended_next_step: Run the Chapter 1 prechapter assessment, then generate Ch1/L1 as the first narrow lesson for the Request Journal CLI.
+notes: |
+  Keep pacing gentle and concrete.
+  Treat the Request Journal CLI as the course-long project arc.
+  Delay the dedicated ownership and borrowing module until after the learner has working fluency with syntax, text, collections, modeling, and crate organization.

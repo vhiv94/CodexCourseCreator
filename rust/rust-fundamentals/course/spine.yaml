@@ -1,0 +1,681 @@
+course_id: rust-fundamentals
+title: Rust Fundamentals - Build a Request Journal CLI
+audience_level: beginner to early intermediate (new to Rust)
+
+delivery:
+  generation_mode: lesson_first
+  default_batch_size: 1
+  assessment_checkpoints: true
+  assessment_format: short_answer
+  prestructure_assessment: true
+  prechapter_assessments: true
+
+modules:
+  - id: M1
+    title: Foundations and Tooling
+    summary: Learn the Rust toolchain, crate layout, and first executable building blocks before deeper language-specific rules.
+    chapters:
+      - dir: Ch1
+        title: First Contact with Cargo
+        summary: Build the first runnable CLI shell and get comfortable with Rust's default project structure.
+        lessons:
+          - id: L1
+            title: "Create and run the Request Journal crate"
+            concept: Cargo is the normal entry point for creating, building, and running Rust programs.
+            project_step: Initialize the Request Journal CLI and confirm it runs from the terminal.
+            assignment:
+              summary: Create the course project with Cargo and run the starter binary successfully.
+              outcomes:
+                - Recognize the files Cargo creates for a standard binary crate.
+                - Run the project with the normal Cargo workflow instead of ad hoc commands.
+            depends_on: []
+            hints: false
+          - id: L2
+            title: "Read the crate layout and `main`"
+            concept: A Rust binary crate starts with a small predictable file layout and a clear entry point.
+            project_step: Identify where the Request Journal CLI begins execution and where future code should live.
+            assignment:
+              summary: Inspect the generated crate layout and explain the role of `Cargo.toml` and `src/main.rs`.
+              outcomes:
+                - Describe where package metadata lives.
+                - Explain why `fn main()` is the first code path to understand.
+            depends_on:
+              - Ch1/L1
+            hints: false
+          - id: L3
+            title: "Print structured output with `println!`"
+            concept: Rust uses macros like `println!` for formatted console output.
+            project_step: Print a clear welcome screen for the Request Journal CLI.
+            assignment:
+              summary: Replace the default output with a small formatted welcome message for the project.
+              outcomes:
+                - Use `println!` with interpolated values.
+                - Produce output that names the tool and its purpose.
+            depends_on:
+              - Ch1/L2
+            hints: false
+          - id: L4
+            title: "Capture one line of user input"
+            concept: "`std::io` plus `String` is the normal first path for terminal input in Rust."
+            project_step: Ask for one request note from the user and echo it back.
+            assignment:
+              summary: Read one line from standard input and confirm the program can reuse that text.
+              outcomes:
+                - "Bring `std::io` into scope and use it intentionally."
+                - "Store interactive input in a mutable `String`."
+            depends_on:
+              - Ch1/L3
+            hints: false
+
+      - dir: Ch2
+        title: Variables, Functions, and Control Flow
+        summary: Build the everyday syntax needed to keep the CLI moving without overloading the learner early.
+        lessons:
+          - id: L1
+            title: "Bind values with `let` and `mut`"
+            concept: Rust variables are immutable by default, so mutability is an explicit design choice.
+            project_step: Store app state and starter labels in well-named bindings.
+            assignment:
+              summary: Refactor the first CLI code so fixed values and changeable values are named clearly.
+              outcomes:
+                - Distinguish immutable bindings from mutable ones.
+                - Explain why Rust asks for explicit mutability.
+            depends_on:
+              - Ch1/L4
+            hints: false
+          - id: L2
+            title: "Write helper functions that return values"
+            concept: Small functions keep logic reusable and make the main flow easier to read.
+            project_step: "Move one formatting task out of `main` and return a reusable string value."
+            assignment:
+              summary: "Extract one small helper function from `main` and use its return value in output."
+              outcomes:
+                - Read a simple function signature with parameters and a return type.
+                - Use returned data instead of printing from every location.
+            depends_on:
+              - Ch2/L1
+            hints: false
+          - id: L3
+            title: "Choose behavior with `if` and `match`"
+            concept: Rust offers expression-based branching with both conditionals and pattern matching.
+            project_step: Decide how to respond to a small set of request-note states.
+            assignment:
+              summary: Add simple branching that prints different output for at least two input cases.
+              outcomes:
+                - "Use `if` for boolean checks."
+                - "Use `match` for small discrete cases."
+            depends_on:
+              - Ch2/L2
+            hints: false
+          - id: L4
+            title: "Repeat work with loops"
+            concept: Looping constructs let a CLI keep accepting and processing actions over time.
+            project_step: Let the Request Journal prompt for more than one action before exiting.
+            assignment:
+              summary: Wrap the CLI in a simple loop so it can process repeated input.
+              outcomes:
+                - Use a loop construct intentionally rather than duplicating code.
+                - Keep the control flow readable while the program repeats work.
+            depends_on:
+              - Ch2/L3
+            hints: false
+
+  - id: M2
+    title: Text and Collections
+    summary: Learn the string and collection types that make small Rust command-line tools useful.
+    chapters:
+      - dir: Ch3
+        title: Strings and Text Boundaries
+        summary: Work with owned and borrowed text while keeping the early parser concrete.
+        lessons:
+          - id: L1
+            title: "Compare `String` and `&str`"
+            concept: Rust separates owned growable text from borrowed string slices for good reason.
+            project_step: Identify which project values should be owned text and which can stay borrowed.
+            assignment:
+              summary: "Rewrite a small part of the CLI to use both `String` and `&str` in sensible roles."
+              outcomes:
+                - Describe the difference between owned and borrowed text at a practical level.
+                - "Recognize where string literals already behave like `&str`."
+            depends_on:
+              - Ch2/L4
+            hints: false
+          - id: L2
+            title: "Build and update request text"
+            concept: Rust provides clear APIs for growing and formatting owned strings.
+            project_step: Assemble a request-note line from smaller text parts.
+            assignment:
+              summary: "Create and update a `String` that combines user input with project metadata."
+              outcomes:
+                - Use standard string-building methods intentionally.
+                - Keep text assembly readable instead of deeply nested.
+            depends_on:
+              - Ch3/L1
+            hints: false
+          - id: L3
+            title: "Split one input line into fields"
+            concept: Basic string methods and iterators are enough to build a first parser.
+            project_step: Parse a route, method, and note from one line of CLI input.
+            assignment:
+              summary: Turn one line of raw input into a few structured text fields.
+              outcomes:
+                - Use string-splitting methods to isolate meaningful parts.
+                - Keep the first parser small and intentionally incomplete.
+            depends_on:
+              - Ch3/L2
+            hints: false
+          - id: L4
+            title: "Review chars, bytes, and UTF-8 boundaries"
+            concept: Rust strings are UTF-8 text, so indexing intuition from other languages needs adjustment.
+            project_step: Tighten the parser expectations so text handling stays correct and predictable.
+            assignment:
+              summary: Explain why direct string indexing is not Rust's default and apply one safer text-handling choice.
+              outcomes:
+                - Recognize the difference between bytes and characters in Rust strings.
+                - Avoid a brittle text-access pattern in the project parser.
+            depends_on:
+              - Ch3/L3
+            hints: false
+
+      - dir: Ch4
+        title: Collections for In-Memory State
+        summary: Use standard collections to hold and summarize request-journal data before modeling it more formally.
+        lessons:
+          - id: L1
+            title: "Store request notes in a `Vec`"
+            concept: "`Vec<T>` is Rust's default growable ordered collection."
+            project_step: Keep a running in-memory list of request-note entries.
+            assignment:
+              summary: Store repeated request-note values in a vector and confirm new entries append correctly.
+              outcomes:
+                - Use a vector for ordered growing data.
+                - Iterate over stored entries to print a simple list.
+            depends_on:
+              - Ch3/L4
+            hints: false
+          - id: L2
+            title: "Use tuples and arrays for small fixed shapes"
+            concept: Rust distinguishes growable collections from fixed-size records and sequences.
+            project_step: Represent one temporary parsed record with a small fixed shape before full structs arrive.
+            assignment:
+              summary: Introduce one tuple or array where the project only needs a tiny fixed grouping.
+              outcomes:
+                - Explain when a tuple is enough and when a vector is better.
+                - Keep temporary parser data lightweight.
+            depends_on:
+              - Ch4/L1
+            hints: false
+          - id: L3
+            title: "Summarize methods with a `HashMap`"
+            concept: Maps support grouped counting and lookup without manual parallel data structures.
+            project_step: Count how many request notes use each HTTP method.
+            assignment:
+              summary: "Build a simple method-frequency summary with `HashMap`."
+              outcomes:
+                - Use key-value storage for grouped statistics.
+                - Print a small summary rather than only raw entries.
+            depends_on:
+              - Ch4/L2
+            hints: false
+          - id: L4
+            title: "Checkpoint on text and collection choices"
+            kind: quiz
+            concept: Collection and string choices should feel deliberate before the course moves into stronger data modeling.
+            project_step: Confirm the learner can justify the current text and collection choices in the Request Journal.
+            assignment:
+              summary: "Complete a short reasoning check about why the project uses `String`, `&str`, `Vec`, and `HashMap` where it does."
+              outcomes:
+                - Match a problem shape to the most sensible standard collection.
+                - Explain one place where borrowed text is enough and one place where owned text is better.
+              evidence:
+                - A short written explanation or quiz artifact is enough.
+            assessment_goal: Verify that the learner can explain core text and collection choices before the project gains richer domain types.
+            depends_on:
+              - Ch4/L3
+            hints: false
+
+  - id: M3
+    title: Modeling Request Data
+    summary: Turn loose text and collections into clearer domain models that feel closer to backend work.
+    chapters:
+      - dir: Ch5
+        title: Structs for Request Records
+        summary: Replace temporary shapes with named fields and clearer domain intent.
+        lessons:
+          - id: L1
+            title: "Replace a tuple with `struct RouteEntry`"
+            concept: Structs give related fields names and make the program easier to reason about.
+            project_step: Introduce a named record type for one stored request entry.
+            assignment:
+              summary: "Refactor one tuple-based record into a `struct` with explicit field names."
+              outcomes:
+                - Explain why named fields are clearer than position-based tuple access.
+                - Update the CLI to construct the new struct successfully.
+            depends_on:
+              - Ch4/L4
+            hints: false
+          - id: L2
+            title: "Add associated constructors for common inputs"
+            concept: "Associated functions help keep object creation consistent without overloading `main`."
+            project_step: Centralize one common way to create a request record from parsed text.
+            assignment:
+              summary: "Add one associated function that builds a `RouteEntry` from already parsed values."
+              outcomes:
+                - Distinguish an associated function from an instance method.
+                - Remove a little construction noise from the call site.
+            depends_on:
+              - Ch5/L1
+            hints: false
+          - id: L3
+            title: "Derive debug output for domain structs"
+            concept: Derived traits can make new types easier to inspect while the design is still evolving.
+            project_step: Print stored request entries in a developer-friendly format during iteration.
+            assignment:
+              summary: Add a derive-based debug representation to the main project type and use it during inspection.
+              outcomes:
+                - Recognize why debug-friendly output helps while modeling data.
+                - Compare temporary developer output to user-facing output.
+            depends_on:
+              - Ch5/L2
+            hints: false
+          - id: L4
+            title: "Separate parsing from stored data"
+            concept: Parsing concerns and domain concerns should not stay tangled forever.
+            project_step: Move one parsing step to a dedicated helper that returns structured data.
+            assignment:
+              summary: Refactor one parser step so the project builds structured values before storage.
+              outcomes:
+                - "Keep `main` focused on flow rather than detailed parsing."
+                - Make one domain boundary in the code easier to explain.
+            depends_on:
+              - Ch5/L3
+            hints: false
+
+      - dir: Ch6
+        title: Enums and Pattern Matching
+        summary: Model a small request domain with explicit variants instead of loose strings everywhere.
+        lessons:
+          - id: L1
+            title: "Model HTTP methods with an enum"
+            concept: Enums let the program represent a closed set of meaningful variants.
+            project_step: Replace free-form method strings with a typed method enum.
+            assignment:
+              summary: Create an enum for the HTTP methods the CLI currently recognizes.
+              outcomes:
+                - Explain why an enum is safer than unconstrained strings for known variants.
+                - Update the project so at least one path uses the enum directly.
+            depends_on:
+              - Ch5/L4
+            hints: false
+          - id: L2
+            title: "Encode response classes with another enum"
+            concept: Rust enums are useful for many domain categories, not just one-off branching tricks.
+            project_step: Add a second enum for broad response categories or status families.
+            assignment:
+              summary: Introduce a second enum that captures one service-shaped category in the Request Journal.
+              outcomes:
+                - See how multiple small enums can clarify a domain model.
+                - Keep variant names readable and purposeful.
+            depends_on:
+              - Ch6/L1
+            hints: false
+          - id: L3
+            title: "Use `Option` and `Result` for parser decisions"
+            concept: Rust's standard enums express absence and recoverable failure without hidden conventions.
+            project_step: Return clearer parser outcomes when input is incomplete or invalid.
+            assignment:
+              summary: "Refactor one parsing helper so it uses `Option` or `Result` instead of ambiguous fallback behavior."
+              outcomes:
+                - Distinguish missing data from invalid data in a small API.
+                - Read a function signature that signals possible failure clearly.
+            depends_on:
+              - Ch6/L2
+            hints: false
+          - id: L4
+            title: "Render summaries with `match`"
+            concept: Pattern matching becomes more valuable as the program uses richer enums.
+            project_step: Print different summaries for different request or response variants.
+            assignment:
+              summary: "Use `match` to produce user-facing summaries from the project's enums."
+              outcomes:
+                - "Read and write a multi-branch `match` expression confidently."
+                - Connect domain variants to clear user output.
+            depends_on:
+              - Ch6/L3
+            hints: false
+
+  - id: M4
+    title: Organizing Real Programs
+    summary: Organize the crate, persist data, and adopt the basic tooling habits that make Rust projects feel real.
+    chapters:
+      - dir: Ch7
+        title: Modules, Crates, and Project Layout
+        summary: Move beyond a single file and give the project a maintainable structure.
+        lessons:
+          - id: L1
+            title: "Split parser and model code into modules"
+            concept: Modules separate responsibilities and make bigger Rust programs easier to navigate.
+            project_step: Break the Request Journal into at least two focused modules.
+            assignment:
+              summary: Move one project concern into its own module and keep the crate compiling cleanly.
+              outcomes:
+                - Create a module with a clear responsibility.
+                - Navigate compiler errors caused by moved items or missing imports.
+            depends_on:
+              - Ch6/L4
+            hints: false
+          - id: L2
+            title: "Expose a small crate-level API"
+            concept: Crates benefit from intentional public surfaces instead of accidental reach-through everywhere.
+            project_step: Make the main flow depend on a small set of clear helper functions or types.
+            assignment:
+              summary: Decide which items should be visible across modules and expose only that small surface.
+              outcomes:
+                - Use visibility intentionally rather than making everything public.
+                - Describe one boundary inside the crate.
+            depends_on:
+              - Ch7/L1
+            hints: false
+          - id: L3
+            title: "Use `use` imports to keep code readable"
+            concept: Bringing items into scope cleanly improves readability without changing behavior.
+            project_step: Simplify module call sites so the project code reads more like domain logic.
+            assignment:
+              summary: Refactor one area of the crate to use cleaner imports and less path noise.
+              outcomes:
+                - Read module paths more comfortably.
+                - Choose imports that clarify rather than obscure intent.
+            depends_on:
+              - Ch7/L2
+            hints: false
+          - id: L4
+            title: "Keep `main` thin and explicit"
+            concept: "`main` should coordinate work rather than contain every detail."
+            project_step: Reshape the CLI entry point into a readable flow across helpers and modules.
+            assignment:
+              summary: "Refactor `main` so it mostly sequences existing helpers and domain operations."
+              outcomes:
+                - Explain the top-level flow of the application without reading every helper body.
+                - See the benefit of separating orchestration from implementation details.
+            depends_on:
+              - Ch7/L3
+            hints: false
+
+      - dir: Ch8
+        title: File Persistence and Basic Tooling
+        summary: Persist request-journal data and learn the baseline maintenance tools used in everyday Rust work.
+        lessons:
+          - id: L1
+            title: "Read request notes from a text file"
+            concept: Standard-library file APIs let small tools persist or reload work without extra frameworks.
+            project_step: Load saved request notes from disk when the CLI starts.
+            assignment:
+              summary: Add one file-reading path that turns saved text into usable project input.
+              outcomes:
+                - Use a standard-library file read in a narrow, concrete way.
+                - Keep the parser connected to real persisted text.
+            depends_on:
+              - Ch7/L4
+            hints: false
+          - id: L2
+            title: "Write a snapshot back to disk"
+            concept: Persistence becomes more useful when the program can save changes as well as load them.
+            project_step: Save the current request-journal state to a file after updates.
+            assignment:
+              summary: Add one write path that saves the project's current state in a predictable text format.
+              outcomes:
+                - Choose a simple saved representation the learner can inspect manually.
+                - Confirm the project can round-trip one realistic entry through disk.
+            depends_on:
+              - Ch8/L1
+            hints: false
+          - id: L3
+            title: "Add a first `cargo test` smoke check"
+            concept: Rust's built-in test workflow supports small confidence checks without extra ceremony.
+            project_step: Protect one parser or formatter behavior with an automated test.
+            assignment:
+              summary: Write one focused test that protects an important project behavior and run it with Cargo.
+              outcomes:
+                - See where tests live in a small Rust crate.
+                - "Run `cargo test` as part of normal iteration."
+            depends_on:
+              - Ch8/L2
+            hints: false
+          - id: L4
+            title: "Use `cargo fmt` and `cargo clippy`"
+            concept: Formatting and linting are part of the normal Rust feedback loop.
+            project_step: Clean up the crate with standard Rust maintenance tools.
+            assignment:
+              summary: Run formatting and linting tools and interpret at least one helpful piece of feedback.
+              outcomes:
+                - Treat formatting and linting as routine tooling rather than optional polish.
+                - Notice how the toolchain supports code quality early.
+            depends_on:
+              - Ch8/L3
+            hints: false
+
+  - id: M5
+    title: Ownership and Borrowing
+    summary: Tackle Rust's signature constraint system after the learner already has a working project and enough syntax fluency to reason about it.
+    chapters:
+      - dir: Ch9
+        title: Ownership and Moves
+        summary: Learn how values move through scope and function calls without jumping into advanced lifetime-heavy material.
+        lessons:
+          - id: L1
+            title: "Trace ownership through scope boundaries"
+            concept: Rust ties cleanup to ownership, so scope is a runtime behavior tool as well as a syntax detail.
+            project_step: Identify where owned request-journal values are created and dropped.
+            assignment:
+              summary: Walk through a small project example and mark where owned values begin and end their life.
+              outcomes:
+                - Explain why scope matters for cleanup in Rust.
+                - Recognize that not every value survives the whole program.
+            depends_on:
+              - Ch8/L4
+            hints: false
+          - id: L2
+            title: "Watch moves happen across function calls"
+            concept: Passing ownership is normal in Rust and often changes which variables remain usable.
+            project_step: Trigger and explain one move in the Request Journal code.
+            assignment:
+              summary: Refactor one helper call so the learner can see when an owned value moves and why.
+              outcomes:
+                - Predict when a moved value can no longer be used.
+                - Read a compiler error about moved ownership as design feedback.
+            depends_on:
+              - Ch9/L1
+            hints: false
+          - id: L3
+            title: "Return ownership or clone on purpose"
+            concept: Rust asks the programmer to choose whether values move back, clone, or stay borrowed.
+            project_step: Repair one moved-value problem using an intentional ownership strategy.
+            assignment:
+              summary: Compare two ways to fix a moved-value problem and choose the more sensible one for the project.
+              outcomes:
+                - Distinguish between returning ownership and cloning data.
+                - Avoid treating cloning as the only rescue tool.
+            depends_on:
+              - Ch9/L2
+            hints: false
+          - id: L4
+            title: "Reduce unnecessary clones in helpers"
+            concept: Ownership-aware design can improve both clarity and efficiency.
+            project_step: Simplify a helper API so it stops cloning more data than it needs.
+            assignment:
+              summary: Refactor one helper to remove an unnecessary clone without making the code harder to read.
+              outcomes:
+                - Notice a small API design improvement driven by ownership.
+                - Keep the fix practical rather than hyper-optimized.
+            depends_on:
+              - Ch9/L3
+            hints: false
+
+      - dir: Ch10
+        title: References, Borrowing, and Slices
+        summary: Use borrowing and slices in the kinds of APIs this project naturally needs.
+        lessons:
+          - id: L1
+            title: "Borrow shared data with `&`"
+            concept: Shared references let code inspect data without taking ownership of it.
+            project_step: Pass stored request data into a read-only helper without moving it.
+            assignment:
+              summary: Change one helper so it borrows shared data instead of taking ownership.
+              outcomes:
+                - Read a function signature that uses borrowed input.
+                - Explain why the caller still keeps the original value afterward.
+            depends_on:
+              - Ch9/L4
+            hints: false
+          - id: L2
+            title: "Mutate safely with `&mut`"
+            concept: Mutable borrowing enables updates, but only under controlled access rules.
+            project_step: Update stored request data through a mutable reference.
+            assignment:
+              summary: Refactor one update path so it uses a mutable reference instead of moving or rebuilding the whole value.
+              outcomes:
+                - Distinguish immutable and mutable borrowing in a real helper.
+                - Interpret the rule against overlapping mutable and immutable borrows.
+            depends_on:
+              - Ch10/L1
+            hints: false
+          - id: L3
+            title: "Accept `&str` and slices in parser APIs"
+            concept: Slice-based APIs are often more flexible and more borrow-checker-friendly than owned-only APIs.
+            project_step: Make the project parser accept borrowed text instead of requiring owned strings everywhere.
+            assignment:
+              summary: "Update one parser or formatter API so it takes `&str` or another slice type where ownership is unnecessary."
+              outcomes:
+                - See why borrowed slice parameters generalize better than owned ones.
+                - Connect slices to a concrete project ergonomics win.
+            depends_on:
+              - Ch10/L2
+            hints: false
+          - id: L4
+            title: "Practical ownership checkpoint"
+            kind: assessment
+            concept: Ownership and borrowing should feel usable in common cases before the course moves into abstraction and polish.
+            project_step: Confirm the learner can diagnose and repair common move and borrow problems in the Request Journal.
+            assignment:
+              summary: Complete a short practical checkpoint on moves, borrowing, mutable references, and slice-friendly APIs.
+              outcomes:
+                - Explain how to choose among move, borrow, and clone in a common code path.
+                - Identify one API change that makes borrow-checker friction smaller.
+              evidence:
+                - A short-answer explanation plus one small code sketch is enough.
+            assessment_goal: Verify that ownership and borrowing are usable in practical project code before the final abstraction module.
+            depends_on:
+              - Ch10/L3
+            hints: false
+
+  - id: M6
+    title: Reuse and Extension
+    summary: Finish the first course by using Rust's abstraction tools carefully and preparing the project for a later backend-focused follow-up.
+    chapters:
+      - dir: Ch11
+        title: Traits and Generics in Small Doses
+        summary: Learn just enough abstraction to reduce duplication without turning the course into a theory exercise.
+        lessons:
+          - id: L1
+            title: "Define a trait for project summaries"
+            concept: Traits describe shared behavior across types without relying on inheritance-style class hierarchies.
+            project_step: Give at least one project type a shared summary behavior.
+            assignment:
+              summary: Define a small trait and implement it for one project type that needs summary-style output.
+              outcomes:
+                - Explain a trait as a behavior contract.
+                - See how trait methods can simplify output logic.
+            depends_on:
+              - Ch10/L4
+            hints: false
+          - id: L2
+            title: "Use one generic helper over borrowed input"
+            concept: Generics let one function work across multiple types when the behavior contract is clear.
+            project_step: Remove one small duplication point with a focused generic helper.
+            assignment:
+              summary: Write one generic helper with a simple trait bound and apply it to the project.
+              outcomes:
+                - Read a lightweight generic signature without getting lost in syntax.
+                - See generics as a practical reuse tool instead of a separate topic from real code.
+            depends_on:
+              - Ch11/L1
+            hints: false
+          - id: L3
+            title: "Choose trait bounds over copy-pasted code"
+            concept: Abstraction should solve a real repetition problem rather than appearing just because the language supports it.
+            project_step: Replace one duplicated formatting or validation path with a bounded helper.
+            assignment:
+              summary: Refactor one repeated pattern so a trait-bound helper removes duplication cleanly.
+              outcomes:
+                - Justify when a generic abstraction is worth adding.
+                - Keep the refactor smaller than the concept it teaches.
+            depends_on:
+              - Ch11/L2
+            hints: false
+          - id: L4
+            title: "Review abstraction choices"
+            kind: review
+            concept: The learner should leave the course knowing when not to abstract as much as when to abstract.
+            project_step: Revisit the Request Journal structure and decide which abstractions earned their place.
+            assignment:
+              summary: Review the project and explain which abstractions made the code clearer versus which would have been premature.
+              outcomes:
+                - Name one trait or generic abstraction that improved the code.
+                - Identify one place where simpler code should stay simple.
+            depends_on:
+              - Ch11/L3
+            hints: false
+
+      - dir: Ch12
+        title: Project Integration and Backend Handoff
+        summary: Finish the first-course project as a polished CLI that is ready to inspire a future Rust backend course.
+        lessons:
+          - id: L1
+            title: "Refactor around stable domain modules"
+            concept: A project becomes easier to extend when data, parsing, storage, and output boundaries stay clear.
+            project_step: Tighten the final module boundaries of the Request Journal CLI.
+            assignment:
+              summary: Revisit the crate structure and make one final organizational refactor that improves clarity.
+              outcomes:
+                - Explain the main domain boundaries in the project.
+                - Keep the final structure coherent for future growth.
+            depends_on:
+              - Ch11/L4
+            hints: false
+          - id: L2
+            title: "Add subcommands for route and request workflows"
+            concept: A CLI can still model application workflows clearly without becoming a full server.
+            project_step: Support a small set of explicit commands for recording and reviewing service ideas.
+            assignment:
+              summary: Add a few clear command paths that separate recording work from summary work.
+              outcomes:
+                - Make the CLI feel more like a real application.
+                - Preserve readable control flow even as features expand.
+            depends_on:
+              - Ch12/L1
+            hints: false
+          - id: L3
+            title: "Export data in a service-friendly shape"
+            concept: Good course-one outputs can prepare a future service without implementing networking immediately.
+            project_step: Produce a saved representation that a later backend course could consume.
+            assignment:
+              summary: Add or refine one exported data shape that would make a later service implementation easier.
+              outcomes:
+                - Connect this CLI project to a believable future backend project.
+                - See the value of stable data contracts before networking exists.
+            depends_on:
+              - Ch12/L2
+            hints: false
+          - id: L4
+            title: "Capstone review and next-course handoff"
+            kind: review
+            concept: A strong fundamentals course should end with clear fluency gains and a visible next step.
+            project_step: Review the finished Request Journal CLI and identify the cleanest path into a later Rust services course.
+            assignment:
+              summary: Reflect on the final project, the major Rust ideas it taught, and the best backend-oriented continuation point.
+              outcomes:
+                - Summarize the Rust fundamentals now covered by the project.
+                - Identify which backend concepts should be deferred to a follow-up course.
+            depends_on:
+              - Ch12/L3
+            hints: false
