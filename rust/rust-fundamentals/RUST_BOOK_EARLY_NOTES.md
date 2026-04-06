@@ -47,7 +47,7 @@ These notes condense the opening arc of the official Rust book and translate it 
 
 - Use `modules -> chapters -> lessons`.
 - Keep pacing gentle and lesson steps narrow.
-- Start with a CLI-first project that grows toward service-style thinking later.
+- Start with a CLI-first project that makes text and file processing central.
 - Delay the dedicated ownership and borrowing module until after data modeling and program organization.
 - Include explicit review/checkpoint moments before the ownership module.
 
@@ -55,21 +55,21 @@ These notes condense the opening arc of the official Rust book and translate it 
 
 Recommended primary project:
 
-- **Request Journal CLI**
-- A small command-line tool that records route ideas, sample requests, and response notes for a future tiny service.
-- Starts with prints, input, and text parsing.
-- Grows into structs, enums, file persistence, modules, and later borrow-checker-friendly helper APIs.
+- **Log Summary CLI**
+- A small command-line tool that reads log files or pasted log lines, parses them, and prints grouped summaries.
+- Starts with prints, input, string handling, and line parsing.
+- Grows into structs, enums, collections, file I/O, modules, and later borrow-checker-friendly helper APIs.
 
 Why it fits:
 
-- It is concrete without requiring real networking too early.
+- It matches the Rust book's strong early CLI and text-processing emphasis.
 - It naturally uses `String`, `&str`, collections, pattern matching, and file I/O.
-- It leaves a clean path into a future Rust backend or web-services course.
+- It leaves a clean path into a future Rust tooling, data-processing, or backend course.
 
 ## Other Good Intro Project Options
 
-- **Log Summary CLI**: read a text file, parse lines, and print grouped summaries.
 - **File-Backed Task Tracker**: build a simple CRUD-style terminal app around tasks or notes.
+- **Request Journal CLI**: record route ideas, sample requests, and response notes for a future service.
 - **Route Sketcher**: design endpoints, methods, and status responses without implementing a server yet.
 
 ## What To Avoid In Course One

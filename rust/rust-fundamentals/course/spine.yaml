@@ -1,5 +1,5 @@
 course_id: rust-fundamentals
-title: Rust Fundamentals - Build a Request Journal CLI
+title: Rust Fundamentals - Build a Log Summary CLI
 audience_level: beginner to early intermediate (new to Rust)
 
 delivery:
@@ -20,9 +20,9 @@ modules:
         summary: Build the first runnable CLI shell and get comfortable with Rust's default project structure.
         lessons:
           - id: L1
-            title: "Create and run the Request Journal crate"
+            title: "Create and run the Log Summary crate"
             concept: Cargo is the normal entry point for creating, building, and running Rust programs.
-            project_step: Initialize the Request Journal CLI and confirm it runs from the terminal.
+            project_step: Initialize the Log Summary CLI and confirm it runs from the terminal.
             assignment:
               summary: Create the course project with Cargo and run the starter binary successfully.
               outcomes:
@@ -33,7 +33,7 @@ modules:
           - id: L2
             title: "Read the crate layout and `main`"
             concept: A Rust binary crate starts with a small predictable file layout and a clear entry point.
-            project_step: Identify where the Request Journal CLI begins execution and where future code should live.
+            project_step: Identify where the Log Summary CLI begins execution and where future code should live.
             assignment:
               summary: Inspect the generated crate layout and explain the role of `Cargo.toml` and `src/main.rs`.
               outcomes:
@@ -45,7 +45,7 @@ modules:
           - id: L3
             title: "Print structured output with `println!`"
             concept: Rust uses macros like `println!` for formatted console output.
-            project_step: Print a clear welcome screen for the Request Journal CLI.
+            project_step: Print a clear welcome screen for the Log Summary CLI.
             assignment:
               summary: Replace the default output with a small formatted welcome message for the project.
               outcomes:
@@ -57,7 +57,7 @@ modules:
           - id: L4
             title: "Capture one line of user input"
             concept: "`std::io` plus `String` is the normal first path for terminal input in Rust."
-            project_step: Ask for one request note from the user and echo it back.
+            project_step: Ask for one sample log line from the user and echo it back.
             assignment:
               summary: Read one line from standard input and confirm the program can reuse that text.
               outcomes:
@@ -98,7 +98,7 @@ modules:
           - id: L3
             title: "Choose behavior with `if` and `match`"
             concept: Rust offers expression-based branching with both conditionals and pattern matching.
-            project_step: Decide how to respond to a small set of request-note states.
+            project_step: Decide how to respond to a small set of log-analysis states.
             assignment:
               summary: Add simple branching that prints different output for at least two input cases.
               outcomes:
@@ -110,7 +110,7 @@ modules:
           - id: L4
             title: "Repeat work with loops"
             concept: Looping constructs let a CLI keep accepting and processing actions over time.
-            project_step: Let the Request Journal prompt for more than one action before exiting.
+            project_step: Let the Log Summary CLI prompt for more than one action before exiting.
             assignment:
               summary: Wrap the CLI in a simple loop so it can process repeated input.
               outcomes:
@@ -141,9 +141,9 @@ modules:
               - Ch2/L4
             hints: false
           - id: L2
-            title: "Build and update request text"
+            title: "Build and update log text"
             concept: Rust provides clear APIs for growing and formatting owned strings.
-            project_step: Assemble a request-note line from smaller text parts.
+            project_step: Assemble a sample log line from smaller text parts.
             assignment:
               summary: "Create and update a `String` that combines user input with project metadata."
               outcomes:
@@ -155,7 +155,7 @@ modules:
           - id: L3
             title: "Split one input line into fields"
             concept: Basic string methods and iterators are enough to build a first parser.
-            project_step: Parse a route, method, and note from one line of CLI input.
+            project_step: Parse a level, source, and message from one line of CLI input.
             assignment:
               summary: Turn one line of raw input into a few structured text fields.
               outcomes:
@@ -179,14 +179,14 @@ modules:
 
       - dir: Ch4
         title: Collections for In-Memory State
-        summary: Use standard collections to hold and summarize request-journal data before modeling it more formally.
+        summary: Use standard collections to hold and summarize log data before modeling it more formally.
         lessons:
           - id: L1
-            title: "Store request notes in a `Vec`"
+            title: "Store log records in a `Vec`"
             concept: "`Vec<T>` is Rust's default growable ordered collection."
-            project_step: Keep a running in-memory list of request-note entries.
+            project_step: Keep a running in-memory list of parsed log entries.
             assignment:
-              summary: Store repeated request-note values in a vector and confirm new entries append correctly.
+              summary: Store repeated log-entry values in a vector and confirm new entries append correctly.
               outcomes:
                 - Use a vector for ordered growing data.
                 - Iterate over stored entries to print a simple list.
@@ -206,11 +206,11 @@ modules:
               - Ch4/L1
             hints: false
           - id: L3
-            title: "Summarize methods with a `HashMap`"
+            title: "Summarize levels with a `HashMap`"
             concept: Maps support grouped counting and lookup without manual parallel data structures.
-            project_step: Count how many request notes use each HTTP method.
+            project_step: Count how many parsed log entries appear at each log level.
             assignment:
-              summary: "Build a simple method-frequency summary with `HashMap`."
+              summary: "Build a simple level-frequency summary with `HashMap`."
               outcomes:
                 - Use key-value storage for grouped statistics.
                 - Print a small summary rather than only raw entries.
@@ -221,7 +221,7 @@ modules:
             title: "Checkpoint on text and collection choices"
             kind: quiz
             concept: Collection and string choices should feel deliberate before the course moves into stronger data modeling.
-            project_step: Confirm the learner can justify the current text and collection choices in the Request Journal.
+            project_step: Confirm the learner can justify the current text and collection choices in the Log Summary CLI.
             assignment:
               summary: "Complete a short reasoning check about why the project uses `String`, `&str`, `Vec`, and `HashMap` where it does."
               outcomes:
@@ -235,17 +235,17 @@ modules:
             hints: false
 
   - id: M3
-    title: Modeling Request Data
-    summary: Turn loose text and collections into clearer domain models that feel closer to backend work.
+    title: Modeling Log Data
+    summary: Turn loose text and collections into clearer domain models for a real text-processing CLI.
     chapters:
       - dir: Ch5
-        title: Structs for Request Records
+        title: Structs for Log Records
         summary: Replace temporary shapes with named fields and clearer domain intent.
         lessons:
           - id: L1
-            title: "Replace a tuple with `struct RouteEntry`"
+            title: "Replace a tuple with `struct LogEntry`"
             concept: Structs give related fields names and make the program easier to reason about.
-            project_step: Introduce a named record type for one stored request entry.
+            project_step: Introduce a named record type for one stored log entry.
             assignment:
               summary: "Refactor one tuple-based record into a `struct` with explicit field names."
               outcomes:
@@ -257,9 +257,9 @@ modules:
           - id: L2
             title: "Add associated constructors for common inputs"
             concept: "Associated functions help keep object creation consistent without overloading `main`."
-            project_step: Centralize one common way to create a request record from parsed text.
+            project_step: Centralize one common way to create a log record from parsed text.
             assignment:
-              summary: "Add one associated function that builds a `RouteEntry` from already parsed values."
+              summary: "Add one associated function that builds a `LogEntry` from already parsed values."
               outcomes:
                 - Distinguish an associated function from an instance method.
                 - Remove a little construction noise from the call site.
@@ -269,7 +269,7 @@ modules:
           - id: L3
             title: "Derive debug output for domain structs"
             concept: Derived traits can make new types easier to inspect while the design is still evolving.
-            project_step: Print stored request entries in a developer-friendly format during iteration.
+            project_step: Print stored log entries in a developer-friendly format during iteration.
             assignment:
               summary: Add a derive-based debug representation to the main project type and use it during inspection.
               outcomes:
@@ -293,14 +293,14 @@ modules:
 
       - dir: Ch6
         title: Enums and Pattern Matching
-        summary: Model a small request domain with explicit variants instead of loose strings everywhere.
+        summary: Model a small log domain with explicit variants instead of loose strings everywhere.
         lessons:
           - id: L1
-            title: "Model HTTP methods with an enum"
+            title: "Model log levels with an enum"
             concept: Enums let the program represent a closed set of meaningful variants.
-            project_step: Replace free-form method strings with a typed method enum.
+            project_step: Replace free-form level strings with a typed log-level enum.
             assignment:
-              summary: Create an enum for the HTTP methods the CLI currently recognizes.
+              summary: Create an enum for the log levels the CLI currently recognizes.
               outcomes:
                 - Explain why an enum is safer than unconstrained strings for known variants.
                 - Update the project so at least one path uses the enum directly.
@@ -308,11 +308,11 @@ modules:
               - Ch5/L4
             hints: false
           - id: L2
-            title: "Encode response classes with another enum"
+            title: "Encode parse outcomes with another enum"
             concept: Rust enums are useful for many domain categories, not just one-off branching tricks.
-            project_step: Add a second enum for broad response categories or status families.
+            project_step: Add a second enum for broad parse outcomes or summary modes.
             assignment:
-              summary: Introduce a second enum that captures one service-shaped category in the Request Journal.
+              summary: Introduce a second enum that captures one recurring category in the Log Summary CLI.
               outcomes:
                 - See how multiple small enums can clarify a domain model.
                 - Keep variant names readable and purposeful.
@@ -334,7 +334,7 @@ modules:
           - id: L4
             title: "Render summaries with `match`"
             concept: Pattern matching becomes more valuable as the program uses richer enums.
-            project_step: Print different summaries for different request or response variants.
+            project_step: Print different summaries for different log or parse variants.
             assignment:
               summary: "Use `match` to produce user-facing summaries from the project's enums."
               outcomes:
@@ -355,7 +355,7 @@ modules:
           - id: L1
             title: "Split parser and model code into modules"
             concept: Modules separate responsibilities and make bigger Rust programs easier to navigate.
-            project_step: Break the Request Journal into at least two focused modules.
+            project_step: Break the Log Summary CLI into at least two focused modules.
             assignment:
               summary: Move one project concern into its own module and keep the crate compiling cleanly.
               outcomes:
@@ -403,12 +403,12 @@ modules:
 
       - dir: Ch8
         title: File Persistence and Basic Tooling
-        summary: Persist request-journal data and learn the baseline maintenance tools used in everyday Rust work.
+        summary: Read log files, write summary output, and learn the baseline maintenance tools used in everyday Rust work.
         lessons:
           - id: L1
-            title: "Read request notes from a text file"
+            title: "Read log lines from a text file"
             concept: Standard-library file APIs let small tools persist or reload work without extra frameworks.
-            project_step: Load saved request notes from disk when the CLI starts.
+            project_step: Load log lines from disk when the CLI starts.
             assignment:
               summary: Add one file-reading path that turns saved text into usable project input.
               outcomes:
@@ -418,14 +418,14 @@ modules:
               - Ch7/L4
             hints: false
           - id: L2
-            title: "Write a snapshot back to disk"
+            title: "Write a summary report back to disk"
             concept: Persistence becomes more useful when the program can save changes as well as load them.
-            project_step: Save the current request-journal state to a file after updates.
+            project_step: Save the current summary output to a file after analysis.
             assignment:
               summary: Add one write path that saves the project's current state in a predictable text format.
               outcomes:
                 - Choose a simple saved representation the learner can inspect manually.
-                - Confirm the project can round-trip one realistic entry through disk.
+                - Confirm the project can read input from disk and write a useful summary artifact back.
             depends_on:
               - Ch8/L1
             hints: false
@@ -465,7 +465,7 @@ modules:
           - id: L1
             title: "Trace ownership through scope boundaries"
             concept: Rust ties cleanup to ownership, so scope is a runtime behavior tool as well as a syntax detail.
-            project_step: Identify where owned request-journal values are created and dropped.
+            project_step: Identify where owned log-analysis values are created and dropped.
             assignment:
               summary: Walk through a small project example and mark where owned values begin and end their life.
               outcomes:
@@ -477,7 +477,7 @@ modules:
           - id: L2
             title: "Watch moves happen across function calls"
             concept: Passing ownership is normal in Rust and often changes which variables remain usable.
-            project_step: Trigger and explain one move in the Request Journal code.
+            project_step: Trigger and explain one move in the Log Summary CLI code.
             assignment:
               summary: Refactor one helper call so the learner can see when an owned value moves and why.
               outcomes:
@@ -518,7 +518,7 @@ modules:
           - id: L1
             title: "Borrow shared data with `&`"
             concept: Shared references let code inspect data without taking ownership of it.
-            project_step: Pass stored request data into a read-only helper without moving it.
+            project_step: Pass stored log data into a read-only helper without moving it.
             assignment:
               summary: Change one helper so it borrows shared data instead of taking ownership.
               outcomes:
@@ -530,7 +530,7 @@ modules:
           - id: L2
             title: "Mutate safely with `&mut`"
             concept: Mutable borrowing enables updates, but only under controlled access rules.
-            project_step: Update stored request data through a mutable reference.
+            project_step: Update stored summary state through a mutable reference.
             assignment:
               summary: Refactor one update path so it uses a mutable reference instead of moving or rebuilding the whole value.
               outcomes:
@@ -555,7 +555,7 @@ modules:
             title: "Practical ownership checkpoint"
             kind: assessment
             concept: Ownership and borrowing should feel usable in common cases before the course moves into abstraction and polish.
-            project_step: Confirm the learner can diagnose and repair common move and borrow problems in the Request Journal.
+            project_step: Confirm the learner can diagnose and repair common move and borrow problems in the Log Summary CLI.
             assignment:
               summary: Complete a short practical checkpoint on moves, borrowing, mutable references, and slice-friendly APIs.
               outcomes:
@@ -570,7 +570,7 @@ modules:
 
   - id: M6
     title: Reuse and Extension
-    summary: Finish the first course by using Rust's abstraction tools carefully and preparing the project for a later backend-focused follow-up.
+    summary: Finish the first course by using Rust's abstraction tools carefully and preparing the project for a later tooling, data, or backend follow-up.
     chapters:
       - dir: Ch11
         title: Traits and Generics in Small Doses
@@ -616,7 +616,7 @@ modules:
             title: "Review abstraction choices"
             kind: review
             concept: The learner should leave the course knowing when not to abstract as much as when to abstract.
-            project_step: Revisit the Request Journal structure and decide which abstractions earned their place.
+            project_step: Revisit the Log Summary CLI structure and decide which abstractions earned their place.
             assignment:
               summary: Review the project and explain which abstractions made the code clearer versus which would have been premature.
               outcomes:
@@ -627,13 +627,13 @@ modules:
             hints: false
 
       - dir: Ch12
-        title: Project Integration and Backend Handoff
-        summary: Finish the first-course project as a polished CLI that is ready to inspire a future Rust backend course.
+        title: Project Integration and Tooling Handoff
+        summary: Finish the first-course project as a polished CLI that is ready to inspire a future Rust tooling, data, or backend course.
         lessons:
           - id: L1
             title: "Refactor around stable domain modules"
             concept: A project becomes easier to extend when data, parsing, storage, and output boundaries stay clear.
-            project_step: Tighten the final module boundaries of the Request Journal CLI.
+            project_step: Tighten the final module boundaries of the Log Summary CLI.
             assignment:
               summary: Revisit the crate structure and make one final organizational refactor that improves clarity.
               outcomes:
@@ -643,11 +643,11 @@ modules:
               - Ch11/L4
             hints: false
           - id: L2
-            title: "Add subcommands for route and request workflows"
-            concept: A CLI can still model application workflows clearly without becoming a full server.
-            project_step: Support a small set of explicit commands for recording and reviewing service ideas.
+            title: "Add subcommands for summary and filter workflows"
+            concept: A CLI can still model realistic workflows clearly without needing a GUI or network service.
+            project_step: Support a small set of explicit commands for analyzing logs, filtering results, and printing summaries.
             assignment:
-              summary: Add a few clear command paths that separate recording work from summary work.
+              summary: Add a few clear command paths that separate analysis work from summary and filtering work.
               outcomes:
                 - Make the CLI feel more like a real application.
                 - Preserve readable control flow even as features expand.
@@ -655,14 +655,14 @@ modules:
               - Ch12/L1
             hints: false
           - id: L3
-            title: "Export data in a service-friendly shape"
-            concept: Good course-one outputs can prepare a future service without implementing networking immediately.
-            project_step: Produce a saved representation that a later backend course could consume.
+            title: "Export data in a report-friendly shape"
+            concept: Good course-one outputs can produce useful artifacts without requiring a larger application stack.
+            project_step: Produce a saved representation that another tool or later Rust project could consume.
             assignment:
-              summary: Add or refine one exported data shape that would make a later service implementation easier.
+              summary: Add or refine one exported data shape that makes the summary output reusable outside the CLI.
               outcomes:
-                - Connect this CLI project to a believable future backend project.
-                - See the value of stable data contracts before networking exists.
+                - Connect this CLI project to a believable future Rust tooling or data-processing project.
+                - See the value of stable data contracts before a larger application exists.
             depends_on:
               - Ch12/L2
             hints: false
@@ -670,12 +670,12 @@ modules:
             title: "Capstone review and next-course handoff"
             kind: review
             concept: A strong fundamentals course should end with clear fluency gains and a visible next step.
-            project_step: Review the finished Request Journal CLI and identify the cleanest path into a later Rust services course.
+            project_step: Review the finished Log Summary CLI and identify the cleanest path into a later Rust tooling or backend course.
             assignment:
-              summary: Reflect on the final project, the major Rust ideas it taught, and the best backend-oriented continuation point.
+              summary: Reflect on the final project, the major Rust ideas it taught, and the best continuation point for deeper Rust study.
               outcomes:
                 - Summarize the Rust fundamentals now covered by the project.
-                - Identify which backend concepts should be deferred to a follow-up course.
+                - Identify which larger ecosystem topics should be deferred to a follow-up course.
             depends_on:
               - Ch12/L3
             hints: false

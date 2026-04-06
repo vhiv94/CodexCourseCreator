@@ -1098,6 +1098,31 @@
 
 ---
 
+## 2026-04-05 — Rust course project reframed to log summary CLI
+
+**User request:** Change the starter project for [`rust/rust-fundamentals/`](rust/rust-fundamentals/) from the Request Journal CLI to a **Log Summary CLI** because that fit the Rust documentation suggestions better.
+
+**Assistant actions:**
+
+- Reframed the Rust course project across the planning files from a request-journal/service-shape tool to a log-parsing and summary CLI.
+- Updated project-facing docs:
+  - [`rust/rust-fundamentals/README.md`](rust/rust-fundamentals/README.md)
+  - [`rust/rust-fundamentals/course/overview.md`](rust/rust-fundamentals/course/overview.md)
+  - [`rust/rust-fundamentals/course/progress.yaml`](rust/rust-fundamentals/course/progress.yaml)
+  - [`rust/rust-fundamentals/RUST_BOOK_EARLY_NOTES.md`](rust/rust-fundamentals/RUST_BOOK_EARLY_NOTES.md)
+- Reworked the Rust spine and matching contents to fit log-processing concepts:
+  - course title now points at **Build a Log Summary CLI**
+  - early chapters now refer to sample log lines and log text instead of request notes
+  - collection/modeling chapters now use log records, log levels, parse outcomes, and grouped summaries
+  - final integration chapter now frames the handoff as tooling-oriented rather than service-oriented
+  - updated [`rust/rust-fundamentals/course/spine.yaml`](rust/rust-fundamentals/course/spine.yaml) and [`rust/rust-fundamentals/CONTENTS.md`](rust/rust-fundamentals/CONTENTS.md) together so they stayed aligned
+- Ran `python3 scripts/validate_repo.py`:
+  - result: `OK: validated 7 course root(s).`
+  - unchanged warning remained for the repository root missing a top-level `CONTENTS.md`
+- Ran `ReadLints` on the edited Rust course files; no diagnostics were reported.
+
+---
+
 ## 2026-04-05 — Rust fundamentals course planning root
 
 **User request:** Create a new Rust course in [`rust/rust-fundamentals/`](rust/rust-fundamentals/) and implement the approved planning artifacts without editing the attached plan file.
@@ -1558,3 +1583,87 @@
 - Ran `ReadLints` on the edited backend course files; no diagnostics reported.
 
 **Note:** The attached plan file was not modified.
+
+---
+
+## 2026-04-05 — Rust fundamentals: Chapter 1 prechapter assessment
+
+**User request:** Move on to the assessment after reading the new Rust course docs.
+
+**Assistant actions:**
+
+- Read [`rust/rust-fundamentals/course/progress.yaml`](rust/rust-fundamentals/course/progress.yaml) and [`rust/rust-fundamentals/course/overview.md`](rust/rust-fundamentals/course/overview.md): pre-structure assessment already recorded; `current_target` is `prechapter:Ch1` before first lesson batch.
+- Read Chapter 1 scope from [`rust/rust-fundamentals/course/spine.yaml`](rust/rust-fundamentals/course/spine.yaml) (L1–L4: Cargo project, crate layout/`main`, `println!`, stdin line with `std::io` / `String`).
+- Delivered short-answer **Chapter 1 prechapter assessment** questions (terminal/Cargo, prior build tools, entry point layout, printing, stdin experience, desired pace, constraints).
+
+---
+
+## 2026-04-05 — Rust fundamentals: Chapter 1 prechapter answers recorded
+
+**User request:** Submit Chapter 1 prechapter assessment answers (terminal/Cargo, build tools, entry layout, printing/stdin, pace, piping, debugger).
+
+**Assessment answers captured:**
+
+- Terminal: comfortable; `rustup`/`rustc`/`cargo` installed (for Jujutsu); wants fresh-repo practice before Git→jj migration.
+- Build tools: shallow use of npm, pip, make, CMake, Go modules; `uv` noted for venv+packages; user compares Cargo to uv and likes Cargo driving compile/build.
+- IDE habits: relies on IDE build and debuggers (VS Code family) over print debugging.
+- Entry layout: `main` plus a separate “main loop” file for app flow.
+- Printing/stdin: formatted strings yes; question about `println!` and stdout locking vs overwriting lines; stdin in Python, C, bash.
+- Pace: brisk for Chapter 1; wants Linux piping refresher.
+- Debugger: wants Rust analogue to `pdb` early or VS Code extension.
+
+**Assistant actions:**
+
+- Updated [`rust/rust-fundamentals/course/progress.yaml`](rust/rust-fundamentals/course/progress.yaml): `recent_assessment.kind: prechapter`, Ch1 summary, `review`/`deepen` tuned for piping, editor debugging, and `println!`/stdout semantics; `current_target` → lesson `Ch1/L1`; notes mention brisk Ch1 and jj side context.
+- Ran `python3 scripts/validate_repo.py`: `OK: validated 7 course root(s).`
+
+---
+
+## 2026-04-05 — Rust fundamentals: Ch1/L1 lesson authored
+
+**User request:** Author lesson 1 (Ch1/L1).
+
+**Assistant actions:**
+
+- Added [`rust/rust-fundamentals/course/M1/Ch1/L1.md`](rust/rust-fundamentals/course/M1/Ch1/L1.md): title matches spine/CONTENTS; concept-first narrative (Cargo workflow, binary crate, `cargo run` / `cargo build`, no hand-compiler recipe); assigned task aligns with spine outcomes (create crate, run default binary, recognize manifest + main source path); optional CodeLLDB / rust-analyzer note; further reading links to Rust Book and Cargo Book.
+- Updated [`rust/rust-fundamentals/README.md`](rust/rust-fundamentals/README.md) current-status blurb to reflect lesson prose under `course/M1/Ch1/`.
+
+---
+
+## 2026-04-05 — Rust Cargo `target/` layout and dev vs release
+
+**User question:** After `cargo run` for `log-summary-cli`, clarify whether `target/debug/deps/` holds the final binary vs `target/debug/log-summary-cli`; meaning of `dev` profile, unoptimized, debuginfo; relation to optimizer and object files.
+
+**Assistant response (summary):** Final runnable binary is `target/debug/<package-name>`; `deps/` holds intermediates and dependency artifacts. `dev` = debug profile (fast compile, little optimization, debuginfo for source-level debugging). Debuginfo is not “the object files”; object files are link inputs. Release builds use `cargo build --release` and `target/release/`.
+
+---
+
+## 2026-04-05 — Rust fundamentals: Ch1/L2 lesson + progress after L1
+
+**User request:** Continue to lesson 2; will explore release build separately.
+
+**Assistant actions:**
+
+- Added [`rust/rust-fundamentals/course/M1/Ch1/L2.md`](rust/rust-fundamentals/course/M1/Ch1/L2.md): manifest vs `src/`, `fn main()` as entry, `target/` as output; brisk tie-in to thin-`main` / app-module pattern later; optional `cargo build --release` exploration note; links to Rust Book and Cargo manifest reference.
+- Updated [`rust/rust-fundamentals/course/progress.yaml`](rust/rust-fundamentals/course/progress.yaml): `last_completed: Ch1/L1`, `current_target` / `next_target` → `Ch1/L2`, `recommended_next_step` toward L3 after L2.
+- Ran `python3 scripts/validate_repo.py`: OK.
+
+---
+
+## 2026-04-05 — Rust L2 learner recap (Cargo.toml, lockfile, main, target/, debug vs release size)
+
+**User message:** Confirmed understanding: `Cargo.toml` for deps; `Cargo.lock` auto-generated for resolved versions; `fn main()` as OS/runtime entry convention; source in `src/`, compiler output in `target/` (rebuildable); observed ~3.8 MB debug vs ~426 KB release binary.
+
+**Assistant response:** Affirmed; noted `Cargo.toml` also holds non-dep manifest fields; `Cargo.lock` usually committed for binaries; clarified `target/` as rebuildable output/cache; explained why debug binaries are much larger than release.
+
+---
+
+## 2026-04-05 — Rust fundamentals: Ch1/L3 lesson + progress after L2
+
+**User request:** Continue to lesson 3; positive feedback on flow.
+
+**Assistant actions:**
+
+- Added [`rust/rust-fundamentals/course/M1/Ch1/L3.md`](rust/rust-fundamentals/course/M1/Ch1/L3.md): `println!`, format strings, macro `!` at high level; assignment replaces default output with welcome naming tool + purpose; requires at least one interpolated value; links to Rust Book ch01-02, Rust by Example print, `std::fmt`.
+- Updated [`rust/rust-fundamentals/course/progress.yaml`](rust/rust-fundamentals/course/progress.yaml): `last_completed: Ch1/L2`, `current_target` / `next_target` → `Ch1/L3`, `recommended_next_step` toward L4.
+- Ran `python3 scripts/validate_repo.py`: OK.

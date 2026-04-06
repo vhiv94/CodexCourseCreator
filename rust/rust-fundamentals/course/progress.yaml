@@ -1,24 +1,31 @@
-last_completed: null
-next_target: Ch1/L1
+last_completed: Ch1/L2
+next_target: Ch1/L3
 current_target:
-  type: assessment
-  ref: prechapter:Ch1
-  notes: Run the Chapter 1 short-answer prechapter assessment before generating the first Rust lesson batch.
+  type: lesson
+  ref: Ch1/L3
+  notes: >-
+    L2 complete (layout, main, lockfile/debug vs release observations). Ch1/L3: println! welcome screen.
 generation_mode: lesson_first
 recent_assessment:
-  kind: prestructure
-  summary: Learner has some typed-language and low-level experience, but wants Rust taught gently from scratch with practical emphasis on ownership and borrowing.
+  kind: prechapter
+  summary: >-
+    Ch1 prechapter: Comfortable with terminal; rustup/rustc/cargo already installed (originally for
+    Jujutsu). Used npm, pip, make, CMake, Go modules, and uv at a shallow level—draws a useful analogy
+    between Cargo and uv as more than bare package installers, including build/compilation. Entry-point
+    habit is a small main plus a separate “main loop” module for app flow. Familiar with formatted
+    console output and stdin in Python, C, and bash. Wants a brisk first chapter with a light piping
+    refresher on Linux. Strong preference for IDE builds and stepping debuggers (pdb-style) over
+    print debugging; interested in Rust debugging early or via a VS Code extension.
   review:
-    - cargo workflow and crate layout
-    - String versus &str
-    - standard library scope and common APIs
-    - compiler-guided debugging habits
+    - Linux piping for driving and testing CLIs (stdin/stdout chains)
+    - Rust debugging in the editor (e.g. CodeLLDB with rust-analyzer) alongside compiler errors
+    - Relationship of println! to stdout (newline vs locking; not “overwrite the same line”)
   deepen:
-    - backend-shaped domain modeling
-    - traits and generics in practical code
-    - file-backed CLI design
-  recommended_next_step: Run the Chapter 1 prechapter assessment, then generate Ch1/L1 as the first narrow lesson for the Request Journal CLI.
+    - Cargo’s role beyond dependency fetch (build graph, targets) when the brisk Ch1 pass needs depth
+    - Mapping the learner’s main vs “loop file” split onto Rust module layout in later chapters
+  recommended_next_step: Complete Ch1/L3 (println! welcome), then Ch1/L4 (one line from stdin).
 notes: |
-  Keep pacing gentle and concrete.
-  Treat the Request Journal CLI as the course-long project arc.
+  Keep pacing gentle and concrete overall; Ch1 may move faster than later chapters.
+  Treat the Log Summary CLI as the course-long project arc.
   Delay the dedicated ownership and borrowing module until after the learner has working fluency with syntax, text, collections, modeling, and crate organization.
+  Side context: learner wants a fresh repo workflow before migrating a Git repo to Jujutsu again—no change to Rust lesson order.

@@ -1,4 +1,4 @@
-# Rust Fundamentals - Build a Request Journal CLI
+# Rust Fundamentals - Build a Log Summary CLI
 
 This course root plans a gentle first Rust course for a learner who is comfortable with typed languages and some low-level ideas, but has not yet explored Rust itself in this project.
 
@@ -11,11 +11,11 @@ This course root plans a gentle first Rust course for a learner who is comfortab
 
 ## Project
 
-The course project is a **Request Journal CLI**:
+The course project is a **Log Summary CLI**:
 
-- starts as a small terminal tool for recording route ideas, request notes, and response summaries
+- starts as a small terminal tool for reading log lines, parsing them, and printing grouped summaries
 - teaches Rust fundamentals through `cargo`, terminal I/O, strings, collections, structs, enums, modules, and file persistence
-- prepares a clean handoff into a later Rust backend or services course without forcing networking too early
+- prepares a clean handoff into a later Rust tooling, data-processing, or backend course without forcing networking too early
 
 ## Files in this course root
 
@@ -27,7 +27,7 @@ The course project is a **Request Journal CLI**:
 
 ## Current status
 
-This root currently contains planning artifacts only. Lessons, assessments, learner implementation files, and tests have not been generated yet.
+Planning artifacts, `course/progress.yaml`, and lesson prose live under `course/` (for example `course/M1/Ch1/L1.md`). Learner-owned crate sources and per-lesson tests are still created by you alongside those lessons.
 
 ## Validation
 

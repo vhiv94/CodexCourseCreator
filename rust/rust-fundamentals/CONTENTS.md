@@ -4,7 +4,7 @@
 
 ### Ch1: First Contact with Cargo
 
-1. Create and run the Request Journal crate
+1. Create and run the Log Summary crate
 2. Read the crate layout and `main`
 3. Print structured output with `println!`
 4. Capture one line of user input
@@ -21,30 +21,30 @@
 ### Ch3: Strings and Text Boundaries
 
 1. Compare `String` and `&str`
-2. Build and update request text
+2. Build and update log text
 3. Split one input line into fields
 4. Review chars, bytes, and UTF-8 boundaries
 
 ### Ch4: Collections for In-Memory State
 
-1. Store request notes in a `Vec`
+1. Store log records in a `Vec`
 2. Use tuples and arrays for small fixed shapes
-3. Summarize methods with a `HashMap`
+3. Summarize levels with a `HashMap`
 4. Checkpoint on text and collection choices
 
-## M3: Modeling Request Data
+## M3: Modeling Log Data
 
-### Ch5: Structs for Request Records
+### Ch5: Structs for Log Records
 
-1. Replace a tuple with `struct RouteEntry`
+1. Replace a tuple with `struct LogEntry`
 2. Add associated constructors for common inputs
 3. Derive debug output for domain structs
 4. Separate parsing from stored data
 
 ### Ch6: Enums and Pattern Matching
 
-1. Model HTTP methods with an enum
-2. Encode response classes with another enum
+1. Model log levels with an enum
+2. Encode parse outcomes with another enum
 3. Use `Option` and `Result` for parser decisions
 4. Render summaries with `match`
 
@@ -59,8 +59,8 @@
 
 ### Ch8: File Persistence and Basic Tooling
 
-1. Read request notes from a text file
-2. Write a snapshot back to disk
+1. Read log lines from a text file
+2. Write a summary report back to disk
 3. Add a first `cargo test` smoke check
 4. Use `cargo fmt` and `cargo clippy`
 
@@ -89,9 +89,9 @@
 3. Choose trait bounds over copy-pasted code
 4. Review abstraction choices
 
-### Ch12: Project Integration and Backend Handoff
+### Ch12: Project Integration and Tooling Handoff
 
 1. Refactor around stable domain modules
-2. Add subcommands for route and request workflows
-3. Export data in a service-friendly shape
+2. Add subcommands for summary and filter workflows
+3. Export data in a report-friendly shape
 4. Capstone review and next-course handoff
