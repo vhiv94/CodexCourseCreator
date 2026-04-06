@@ -1667,3 +1667,11 @@
 - Added [`rust/rust-fundamentals/course/M1/Ch1/L3.md`](rust/rust-fundamentals/course/M1/Ch1/L3.md): `println!`, format strings, macro `!` at high level; assignment replaces default output with welcome naming tool + purpose; requires at least one interpolated value; links to Rust Book ch01-02, Rust by Example print, `std::fmt`.
 - Updated [`rust/rust-fundamentals/course/progress.yaml`](rust/rust-fundamentals/course/progress.yaml): `last_completed: Ch1/L2`, `current_target` / `next_target` → `Ch1/L3`, `recommended_next_step` toward L4.
 - Ran `python3 scripts/validate_repo.py`: OK.
+
+---
+
+## 2026-04-05 — Rust Ch1/L3 implementation note (screen clear / carriage control)
+
+**User message:** While implementing Ch1/L3, learner added terminal UX polish: a simple way to clear the screen and move the carriage.
+
+**Assistant guidance:** Confirmed it’s a fun, relevant CLI exploration, but recommended keeping Ch1/L3 aligned to the lesson contract (tool name + purpose + at least one interpolated `println!`) and being cautious with terminal-control sequences because they vary across terminals and can reduce output readability; suggested deferring “pretty mode” toggles to later lessons.
