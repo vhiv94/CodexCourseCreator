@@ -1,1 +1,0 @@
-/home/honey/workspace/courses/coursecreator/rust/rust-fundamentals/log-summary-cli/target/release/log-summary-cli: /home/honey/workspace/courses/coursecreator/rust/rust-fundamentals/log-summary-cli/src/main.rs

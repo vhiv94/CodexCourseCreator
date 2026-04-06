@@ -4,6 +4,16 @@
 **/.pytest_cache/
 **/*.pyc
 
+# Rust caches and virtual environments (all modules)
+**/.cargo/
+**/.rustup/
+**/.venv/
+**/.pytest_cache/
+**/*.pyc
+
+# ide stuff
+**/.vscode/
+
 # OS/editor noise
 .DS_Store
 Thumbs.db
