@@ -66,3 +66,89 @@
         ├──  log-summary-cli   # executible
         └──  log-summary-cli.d
 ```
+
+### `println!()`
+
+- a macro, that gets expanded into multiple function calls
+
+```rust
+let variable = "gets printed to the console";
+println!("sometext {}", variable);
+// $ sometext gets printed to the console
+ ```
+
+- the first subfunction is another macro `format!()`
+    - this takes a string literal and optional args
+    - within the string literal use `{}` to insert the positional args
+        - this converts everything to a string, so you can pass numbers
+        - if the `{}` is empty it simply inserts args in order `format!("{} plus {} is {}", 5, 3, 5+3)` evaluates to `"5 plus 3 is 8"`
+        - you can insert a specific positional arg by using its position `format!("{1}! and {0}, yeh!", "jiggle with it", "Stop")` evaluates to `"Stop! and jiggle with it, yeh!"`
+        - you can format the input as well:
+        
+```rust
+println!("Base 10:               {}",   69420); // 69420
+println!("Base 2 (binary):       {:b}", 69420); // 10000111100101100
+println!("Base 8 (octal):        {:o}", 69420); // 207454
+println!("Base 16 (hexadecimal): {:x}", 69420); // 10f2c
+```
+
+        - you can use named args and surrounding variables by name
+
+```rust
+let width: usize = 5;
+println!("{number:>width}") // :{def}{direction}{width} specifies the width of the resulting string, the fill value and where to pad it 
+```
+
+> SIDE NOTE
+> raw strings `r"\never escape charac\ter\s"` and will be stored as is without escape characters such as `new line`
+> - to get double quotes into the string use hashes `r#""""#` results in `""` stored in the string
+> - to get hashes as well use double hashes `r##"#"##` results in `#` stored in the string
+
+> SIDE NOTE 
+> to clear the terminal's screen and scroll buffer and reset the cursor's position
+> use control sequences. `print!("{ESC}[2J{ESC}[3J{ESC}[H", ESC=27 as char)
+>
+> escape character (ESC): 0x1b (27 in decimal) (literally a special char called escape, not to be confused with the escape key)
+> typically this is simple `"\e"`, but in rust you must use the hex code `27 as char` which evaluates to `"\u{001B}"`
+>
+> control sequence introducer (CSI): "[" to tell the terminal this is a control sequence
+> 
+> control sequence: used to update the terminal window in some way
+> `<n>J` clears the screen: 0 clears to the end, 1 to the beginning, 2 the entire screen (only what's displayed), 3 just clears the scroll buffer (only what's NOT displayed)
+> `<row>;<col>H` moves the cursor to the given row/column pair, 1;1 by default 
+
+ ### user input
+
+```rust
+fn get_name() -> std::io::Result<String> {
+    let mut name = String::new();
+    std::io::stdin()
+    .read_line(&mut name)?;
+    Ok(name)
+}
+```
+
+```rust
+fn get_input_from_stdin(limit: u64) -> std::io::Result<String> {
+    let mut buffer: String = String::new();
+    let n = std::io::stdin()
+    .lock()
+    .take(limit)
+    .read_to_string(&mut buffer)?;
+    if n == 0 {
+        buffer.push_str("nothing was entered");
+    }
+    Ok(buffer)
+}
+```
+
+- `String::new()` Creates a new empty String. Given that the String is empty, this will not allocate any initial buffer.
+- `std::io::stdin()` Constructs a new handle to the standard input of the current process. (can be assigned to a variable)
+- `Stdin.read_line(&mut name)` Locks this handle and reads a line of input, appending it to the specified buffer.
+- but that can be unsafe in some cases, so for a more tightened down
+- `.take(limit: u64)` Creates an adapter which will read at most limit bytes from it.
+- `.read_to_string(&mut name)` Reads all bytes until EOF in this source, appending them to buf. returns the number of bytes appended to buf.
+- if we didn't append anything to the name buffer, then we will instead...
+- `name.push_str(&str)` Appends a given string slice onto the end of this String.
+- it keeps the end line character so then call `name.trim()` to remove it
+- `println!("Hello, {}", name.trim())`

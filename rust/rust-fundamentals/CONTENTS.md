@@ -8,13 +8,16 @@
 2. Read the crate layout and `main`
 3. Print structured output with `println!`
 4. Capture one line of user input
+5. Checkpoint on first Cargo and CLI input steps
 
 ### Ch2: Variables, Functions, and Control Flow
 
-1. Bind values with `let` and `mut`
-2. Write helper functions that return values
-3. Choose behavior with `if` and `match`
-4. Repeat work with loops
+1. Prechapter check on variables, functions, and control flow
+2. Bind values with `let` and `mut`
+3. Write helper functions that return values
+4. Choose behavior with `if` and `match`
+5. Repeat work with loops
+6. Checkpoint on variables, helpers, and control flow
 
 ## M2: Text and Collections
 
@@ -40,6 +43,7 @@
 2. Add associated constructors for common inputs
 3. Derive debug output for domain structs
 4. Separate parsing from stored data
+5. Checkpoint on struct-based log modeling
 
 ### Ch6: Enums and Pattern Matching
 
@@ -47,6 +51,7 @@
 2. Encode parse outcomes with another enum
 3. Use `Option` and `Result` for parser decisions
 4. Render summaries with `match`
+5. Checkpoint on enum-driven parser decisions
 
 ## M4: Organizing Real Programs
 
@@ -56,6 +61,7 @@
 2. Expose a small crate-level API
 3. Use `use` imports to keep code readable
 4. Keep `main` thin and explicit
+5. Checkpoint on crate organization and `main` flow
 
 ### Ch8: File Persistence and Basic Tooling
 
@@ -63,6 +69,7 @@
 2. Write a summary report back to disk
 3. Add a first `cargo test` smoke check
 4. Use `cargo fmt` and `cargo clippy`
+5. Checkpoint on persistence and Rust tooling habits
 
 ## M5: Ownership and Borrowing
 
@@ -72,6 +79,7 @@
 2. Watch moves happen across function calls
 3. Return ownership or clone on purpose
 4. Reduce unnecessary clones in helpers
+5. Checkpoint on ownership and move choices
 
 ### Ch10: References, Borrowing, and Slices
 

@@ -53,6 +53,7 @@ Your job is to turn a learner/topic request into a teachable course shape before
 - Chapter titles should represent narrow concept clusters.
 - Lesson titles should represent one focused executable step, review, quiz, or assessment.
 - `kind: quiz` and `kind: assessment` are valid when review or checkpoint lessons are needed.
+- `L0` is a valid lesson id for a chapter-entry prechapter assessment row.
 - Prefer many small lessons over fewer overloaded lessons.
 
 ## Output files
@@ -74,6 +75,8 @@ For Python courses under `python/<slug>/`, keep all course files inside that cou
   - `assessment_format: short_answer`
   - `prestructure_assessment: true`
   - `prechapter_assessments: true`
+- When `delivery.prechapter_assessments: true`, prefer making the chapter-entry assessment the chapter's `L0` row with a normal lesson markdown file.
+- When the course should end each chapter with a learner check, set `delivery.chapter_end_quizzes: true` and make that check the final lesson row for the chapter.
 - Keep chapter `dir` values as `Ch#`.
 - When using modules, keep module ids as `M#`.
 - Preserve globally unique chapter ids and lesson ids within each chapter.
@@ -89,6 +92,7 @@ For Python courses under `python/<slug>/`, keep all course files inside that cou
 - For chapter-only courses, use `### Ch#: Title`.
 - For module-aware courses, use `## M#: Title` followed by `### Ch#: Title`.
 - Under each chapter heading, list numbered lesson titles in exact spine order.
+- If a chapter uses `L0`, list it first in `CONTENTS.md` before `L1`.
 - `CONTENTS.md` and the spine must match verbatim for ordering and spelling.
 
 ## Forbidden outputs
@@ -102,6 +106,7 @@ For Python courses under `python/<slug>/`, keep all course files inside that cou
 ## Handoff contract
 
 - Lesson authoring receives stable titles, concept intent, project-step intent, `assignment`, and `hints`.
+- Lesson authoring should receive `L0` prechapter rows the same way it receives other lesson rows when the spine models them explicitly.
 - Test authoring receives stable lesson rows, the lesson assignment contract, and any present `test_glob`, `lesson_selector`, `kind`, and `depends_on` fields.
 - Next-step routing receives enough `delivery` and structural metadata to choose between replanning, assessment, one-lesson continuation, and bounded chapter batching.
 

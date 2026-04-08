@@ -40,6 +40,8 @@ Chapters should represent a narrow concept cluster.
 
 - A chapter should feel like one leaf concept area, not a vague bucket.
 - Chapters can be short or long, but they should stay conceptually coherent.
+- Each chapter may begin with a prechapter learner check as `L0` when the course uses in-spine prechapter assessments.
+- Each chapter should end with a learner check as its final lesson row; an existing final `review`, `quiz`, or `assessment` already counts.
 - A long module may contain 10 or more chapters, with roughly 6 as a healthy average.
 - A long course can have many chapters even when modules are omitted.
 
@@ -55,7 +57,10 @@ Lessons should be as narrow as possible while still advancing the project.
 
 - Each lesson should teach one concrete step of execution, reasoning, or review.
 - Lessons build on one another rather than trying to dump an entire concept at once.
-- Quiz or review lessons are allowed, but should be used intentionally.
+- A chapter-entry prechapter assessment may use `L0` as the first lesson row when the course wants that check in the normal lesson sequence.
+- Each chapter's final lesson should be a learner check, usually modeled as `review`, `quiz`, or `assessment`.
+- Every lesson row, including `review`, `quiz`, and `assessment`, should still get a normal lesson markdown file at the standard lesson path.
+- Long chapters may also include additional review or quiz moments before the final lesson when that improves pacing.
 - A long chapter may contain 15 or more lessons, with roughly 8 as a healthy average.
 
 Examples:
@@ -71,9 +76,13 @@ Assessment is part of the system, not an afterthought.
 - The course-creation phase should include a short-answer pre-structure assessment before deciding whether the course needs modules.
 - The goal is not to gatekeep or skip everything the learner knows.
 - The goal is to set scope, pacing, and review depth.
-- Additional quizzes may appear inside lessons, at chapter endings, or before generating the next batch.
-- Before writing any chapter's lesson batch, run a short-answer prechapter assessment for that chapter.
-- For adaptive flows, the default pattern is two assessments before the first lesson of a chapter exists:
+- A prechapter assessment may live as the chapter's `L0` lesson row so it can route and be documented like other lessons.
+- Each chapter should end with a learner check, represented in the spine as the final lesson row.
+- That learner-check row should be documented in a normal lesson markdown file, not left implicit in progress or chat only.
+- Additional quizzes may appear inside long chapters or before generating the next batch when the learner would benefit from an earlier checkpoint.
+- Before writing any chapter's lesson batch, run a short-answer prechapter assessment for that chapter. When modeled in the spine, this is usually `Ch#/L0`.
+- Routine chapter-ending learner checks should still route like normal lessons, so `next_target` may point at them with a standard `Ch#/L#` ref.
+- For adaptive flows, the default pattern is two assessments before the main build lessons of a chapter begin:
   - one pre-structure assessment before choosing the course or module shape
   - one prechapter assessment before generating that chapter's lessons
 

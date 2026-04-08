@@ -5,6 +5,8 @@ Use this template for:
 - a pre-structure assessment before deciding whether the course should use `chapters` or `modules`
 - a prechapter assessment before writing any lessons for a chapter
 
+When the spine models a prechapter assessment explicitly, prefer making it the chapter's `L0` lesson row with a normal `L0.md` lesson file. Use this template for the content inside that file.
+
 Keep the format short-answer and learner-friendly. Short bullet answers are fine.
 
 ## How to answer
@@ -26,4 +28,5 @@ Keep the format short-answer and learner-friendly. Short bullet answers are fine
 
 - Use the answers to tune scope, pacing, and review depth.
 - Do not use the assessment to skip whole foundations automatically.
-- For prechapter assessments, keep logical lesson ids unchanged and use the assessment only to personalize the upcoming batch.
+- For prechapter assessments modeled in the spine, prefer `Ch#/L0` as the logical lesson id and use the assessment to personalize the upcoming batch.
+- Legacy routing may still refer to `prechapter:Ch#`, but the normal prose artifact should be the chapter's `L0.md` file when that convention is enabled.

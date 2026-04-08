@@ -51,7 +51,11 @@
         },
         "prechapter_assessments": {
           "type": "boolean",
-          "description": "Whether each chapter should begin with a short-answer assessment before lesson generation."
+          "description": "Whether each chapter should begin with a short-answer assessment before lesson generation, usually modeled as an L0 lesson row."
+        },
+        "chapter_end_quizzes": {
+          "type": "boolean",
+          "description": "Whether each chapter should end with a learner-check lesson row. These chapter-ending checks still live in the normal lesson order and are typically marked as review, quiz, or assessment."
         }
       }
     },
@@ -92,7 +96,7 @@
     "lessonRef": {
       "type": "string",
       "description": "Cross-chapter dependency: chapter dir + '/' + lesson id.",
-      "pattern": "^Ch[1-9][0-9]*/L[1-9][0-9]*$"
+      "pattern": "^Ch[1-9][0-9]*/L(?:0|[1-9][0-9]*)$"
     },
     "assignment": {
       "type": "object",
@@ -161,7 +165,7 @@
         "lessons": {
           "type": "array",
           "minItems": 1,
-          "description": "Lessons in this chapter; ids are stems for lesson files under course/Ch#/L# for chapter-only courses or course/M#/Ch#/L# for module-aware courses.",
+          "description": "Lessons in this chapter; ids are stems for lesson files under course/Ch#/L# for chapter-only courses or course/M#/Ch#/L# for module-aware courses. L0 is reserved for a chapter-entry prechapter assessment when used. When delivery.chapter_end_quizzes is true, the final lesson row should be the chapter-ending learner check.",
           "items": { "$ref": "#/$defs/lesson" }
         }
       }
@@ -180,8 +184,8 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "Lesson file stem inside the chapter dir under course/: L1, L2, ... Chapter-only courses place it under course/Ch#/, while module-aware courses place it under course/M#/Ch#/.",
-          "pattern": "^L[1-9][0-9]*$"
+          "description": "Lesson file stem inside the chapter dir under course/: L0, L1, L2, ... Chapter-only courses place it under course/Ch#/, while module-aware courses place it under course/M#/Ch#/.",
+          "pattern": "^L(?:0|[1-9][0-9]*)$"
         },
         "title": {
           "type": "string",
@@ -190,7 +194,7 @@
         },
         "kind": {
           "type": "string",
-          "description": "Optional lesson mode for adaptive flows and review checkpoints.",
+          "description": "Optional lesson mode for adaptive flows and review checkpoints. Chapter-ending learner checks are usually marked as review, quiz, or assessment.",
           "enum": ["lesson", "review", "quiz", "assessment"]
         },
         "concept": {
@@ -228,7 +232,7 @@
         "lesson_selector": {
           "type": "string",
           "description": "Optional pytest marker selector for this lesson when test_glob points at main_test.py or a split main_test_ch*.py file.",
-          "pattern": "^lesson_ch[1-9][0-9]*_l[1-9][0-9]*$"
+          "pattern": "^lesson_ch[1-9][0-9]*_l(?:0|[1-9][0-9]*)$"
         },
         "depends_on": {
           "type": "array",

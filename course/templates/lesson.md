@@ -2,6 +2,8 @@
 
 Use the exact lesson title from `CONTENTS.md` / `course/spine.*`. Do not include `Ch#/L#` in the heading.
 
+This template applies to every lesson row, including `L0` prechapter checks and rows with `kind: lesson`, `review`, `quiz`, and `assessment`.
+
 Write one concept-first narrative block (no `## Concept` subheader). This block should integrate:
 
 - definition and mechanics of the lesson concept
@@ -18,13 +20,16 @@ Describe what to build, change, explain, or review in learner-owned work, with o
 
 Suggested shape:
 
-- **Build/Change:** *(what learner implements)*
+- **Build/Change:** *(what learner implements for a normal build lesson)*
+- **Explain/Review:** *(what learner explains, reviews, or demonstrates for a review / quiz / assessment row)*
 - **Expected outcomes / acceptance criteria:**
   - [ ] *(learner-visible outcome from `assignment.outcomes` or the lesson contract)*
   - [ ] *(another concrete acceptance point)*
   - [ ] *(add rows until the checklist covers the lesson scope)*
 - **Evidence:** describe the artifact, explanation, demo, or review the learner should produce.
 - **Optional test evidence:** include `test_glob` + `lesson_selector` only when the spine supplies them (for example `main_test.py` + `lesson_ch1_l1`)
+
+Use the label that matches the lesson kind. Quiz and assessment files should still be normal lesson markdown files; they just ask for explanation, comparison, or a small demo instead of a new implementation step. A chapter's `L0` row should usually use the same shape with `Explain/Review` as the main action.
 
 ## Further reading (optional)
 

@@ -25,9 +25,9 @@ except ImportError as exc:  # pragma: no cover - environment/setup error
     ) from exc
 
 
-LEGACY_TEST_FILE_RE = re.compile(r"(^|.*/)Ch[1-9][0-9]*/L[1-9][0-9]*\.py$")
+LEGACY_TEST_FILE_RE = re.compile(r"(^|.*/)Ch[1-9][0-9]*/L(?:0|[1-9][0-9]*)\.py$")
 MAIN_TEST_FILE_RE = re.compile(r"(^|.*/)main_test(?:_[a-z0-9_]+)?\.py$")
-SELECTOR_RE = re.compile(r"\blesson_ch[1-9][0-9]*_l[1-9][0-9]*\b")
+SELECTOR_RE = re.compile(r"\blesson_ch[1-9][0-9]*_l(?:0|[1-9][0-9]*)\b")
 SPINE_FILE_RE = re.compile(r"(^|.*/)course/spine\.(?:yaml|yml|json)$")
 
 

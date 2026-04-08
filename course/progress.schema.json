@@ -15,14 +15,14 @@
       ]
     },
     "next_target": {
-      "description": "Legacy-compatible explicit next lesson. Prefer current_target for adaptive flows, but keep this for existing linear courses.",
+      "description": "Legacy-compatible explicit next lesson. Prefer current_target for adaptive flows, but keep this for existing linear courses, including chapter-entry L0 assessments and chapter-ending learner checks that still live at normal Ch#/L# lesson refs.",
       "oneOf": [
         { "type": "null" },
         { "$ref": "#/$defs/lessonRef" }
       ]
     },
     "current_target": {
-      "description": "Current adaptive target for the next step of work.",
+      "description": "Current adaptive target for the next step of work. Routine chapter-entry L0 assessments and chapter-ending learner checks should remain normal lesson targets rather than special assessment refs.",
       "oneOf": [
         { "type": "null" },
         { "$ref": "#/$defs/currentTarget" }
@@ -39,6 +39,7 @@
       "properties": {
         "kind": {
           "type": "string",
+          "description": "Assessment context label. chapter_end records the result of a chapter-ending learner check after it is completed; it does not replace the lesson row used for routing.",
           "enum": ["entry", "prestructure", "prechapter", "checkpoint", "chapter_end", "module_end", "manual"]
         },
         "summary": {
@@ -79,7 +80,7 @@
     },
     "lessonRef": {
       "type": "string",
-      "pattern": "^Ch[1-9][0-9]*/L[1-9][0-9]*$"
+      "pattern": "^Ch[1-9][0-9]*/L(?:0|[1-9][0-9]*)$"
     },
     "currentTarget": {
       "type": "object",
@@ -135,7 +136,7 @@
             "properties": {
               "ref": {
                 "type": "string",
-                "pattern": "^(entry|prestructure|prechapter:Ch[1-9][0-9]*|module:M[1-9][0-9]*|chapter:Ch[1-9][0-9]*|lesson:Ch[1-9][0-9]*/L[1-9][0-9]*)$"
+                "pattern": "^(entry|prestructure|prechapter:Ch[1-9][0-9]*|module:M[1-9][0-9]*|chapter:Ch[1-9][0-9]*|lesson:Ch[1-9][0-9]*/L(?:0|[1-9][0-9]*))$"
               }
             }
           }

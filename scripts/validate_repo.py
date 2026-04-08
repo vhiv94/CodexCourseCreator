@@ -34,8 +34,8 @@ except ImportError as exc:  # pragma: no cover - environment/setup error
 MODULE_HEADING_RE = re.compile(r"^##\s+(M[1-9][0-9]*):\s+(.+?)\s*$")
 CHAPTER_HEADING_RE = re.compile(r"^###\s+(Ch[1-9][0-9]*):\s+(.+?)\s*$")
 LESSON_LINE_RE = re.compile(r"^[0-9]+\.\s+(.+?)\s*$")
-LESSON_ID_RE = re.compile(r"^(L[1-9][0-9]*)(?:[._-]|$)")
-LESSON_SELECTOR_RE = re.compile(r"^lesson_ch([1-9][0-9]*)_l([1-9][0-9]*)$")
+LESSON_ID_RE = re.compile(r"^(L(?:0|[1-9][0-9]*))(?:[._-]|$)")
+LESSON_SELECTOR_RE = re.compile(r"^lesson_ch([1-9][0-9]*)_l(0|[1-9][0-9]*)$")
 MAIN_TEST_GLOB_RE = re.compile(r"^main_test(?:_[a-z0-9_]+)?\.py$")
 
 
@@ -415,6 +415,36 @@ def validate_dependencies(
                 )
 
 
+def validate_chapter_end_quizzes(
+    spine_data: dict[str, Any], course_root: Path, results: ValidationResults
+) -> None:
+    delivery = spine_data.get("delivery")
+    if not isinstance(delivery, dict) or not delivery.get("chapter_end_quizzes"):
+        return
+
+    valid_kinds = {"review", "quiz", "assessment"}
+    for _, chapter in iter_spine_chapters(spine_data):
+        chapter_dir = chapter.get("dir")
+        lessons = chapter.get("lessons", [])
+        if not isinstance(chapter_dir, str) or not isinstance(lessons, list) or not lessons:
+            continue
+
+        last_lesson = lessons[-1]
+        if not isinstance(last_lesson, dict):
+            continue
+
+        lesson_id = last_lesson.get("id")
+        lesson_kind = last_lesson.get("kind")
+        if not isinstance(lesson_id, str):
+            continue
+
+        if lesson_kind not in valid_kinds:
+            results.add_error(
+                f"{course_root}: {chapter_dir}/{lesson_id} is the final lesson but is not marked "
+                "as review, quiz, or assessment while delivery.chapter_end_quizzes is true"
+            )
+
+
 def validate_progress_targets(
     progress_data: dict[str, Any], spine_data: dict[str, Any], course_root: Path, results: ValidationResults
 ) -> None:
@@ -638,6 +668,7 @@ def validate_course_root(
 
     validate_structure_metadata(spine_data, course_root, results)
     validate_dependencies(spine_data, course_root, results)
+    validate_chapter_end_quizzes(spine_data, course_root, results)
     if progress_data is not None:
         validate_progress_targets(progress_data, spine_data, course_root, results)
 

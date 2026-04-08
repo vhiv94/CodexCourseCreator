@@ -9,6 +9,7 @@ delivery:
   assessment_format: short_answer
   prestructure_assessment: true
   prechapter_assessments: true
+  chapter_end_quizzes: true
 
 modules:
   - id: M1
@@ -66,11 +67,43 @@ modules:
             depends_on:
               - Ch1/L3
             hints: false
+          - id: L5
+            title: "Checkpoint on first Cargo and CLI input steps"
+            kind: quiz
+            concept: The learner should be able to explain the first Rust CLI workflow before moving into broader syntax and flow control.
+            project_step: Confirm the Log Summary CLI can be created, run, printed to, and fed a single line of input.
+            assignment:
+              summary: Complete a short checkpoint on Cargo workflow, crate layout, `println!` output, and one-line stdin handling.
+              outcomes:
+                - Explain where Cargo metadata and entry-point code live.
+                - Describe how the current CLI prints output and captures one line of input.
+              evidence:
+                - A short-answer explanation or tiny demo transcript is enough.
+            assessment_goal: Verify that the learner can explain the first end-to-end Rust CLI loop before Chapter 2 starts.
+            depends_on:
+              - Ch1/L4
+            hints: false
 
       - dir: Ch2
         title: Variables, Functions, and Control Flow
         summary: Build the everyday syntax needed to keep the CLI moving without overloading the learner early.
         lessons:
+          - id: L0
+            title: "Prechapter check on variables, functions, and control flow"
+            kind: assessment
+            concept: Before Chapter 2 starts, the learner should surface what already feels familiar versus uncertain about bindings, helper functions, branching, and loops.
+            project_step: Calibrate the pace for the next batch so the Log Summary CLI can introduce state and control flow at the right depth.
+            assignment:
+              summary: Complete a short prechapter assessment on bindings, mutability, helper functions, branching, and loops before starting the chapter's implementation lessons.
+              outcomes:
+                - Explain what feels most familiar versus least familiar in the upcoming chapter.
+                - Identify where extra examples, slower pacing, or comparison to prior languages would help.
+              evidence:
+                - A short-answer response is enough.
+            assessment_goal: Personalize Chapter 2 pacing and examples before the CLI starts adding named state and more explicit control flow.
+            depends_on:
+              - Ch1/L5
+            hints: false
           - id: L1
             title: "Bind values with `let` and `mut`"
             concept: Rust variables are immutable by default, so mutability is an explicit design choice.
@@ -81,7 +114,7 @@ modules:
                 - Distinguish immutable bindings from mutable ones.
                 - Explain why Rust asks for explicit mutability.
             depends_on:
-              - Ch1/L4
+              - Ch2/L0
             hints: false
           - id: L2
             title: "Write helper functions that return values"
@@ -119,6 +152,22 @@ modules:
             depends_on:
               - Ch2/L3
             hints: false
+          - id: L5
+            title: "Checkpoint on variables, helpers, and control flow"
+            kind: quiz
+            concept: The learner should be able to justify the first round of state, helper, branching, and loop choices before moving deeper into text handling.
+            project_step: Confirm the Log Summary CLI has a readable first control-flow shape and intentionally named state.
+            assignment:
+              summary: Complete a short checkpoint on `let` vs `let mut`, helper extraction, conditional logic, and the first loop in the project.
+              outcomes:
+                - Explain why one value in the current CLI should stay mutable while another should not.
+                - Describe how a helper, branch, or loop improved the top-level program flow.
+              evidence:
+                - A short written explanation or walkthrough is enough.
+            assessment_goal: Verify that the learner can explain the Chapter 2 syntax and control-flow decisions before the project moves into text-heavy parsing.
+            depends_on:
+              - Ch2/L4
+            hints: false
 
   - id: M2
     title: Text and Collections
@@ -138,7 +187,7 @@ modules:
                 - Describe the difference between owned and borrowed text at a practical level.
                 - "Recognize where string literals already behave like `&str`."
             depends_on:
-              - Ch2/L4
+              - Ch2/L5
             hints: false
           - id: L2
             title: "Build and update log text"
@@ -166,6 +215,7 @@ modules:
             hints: false
           - id: L4
             title: "Review chars, bytes, and UTF-8 boundaries"
+            kind: review
             concept: Rust strings are UTF-8 text, so indexing intuition from other languages needs adjustment.
             project_step: Tighten the parser expectations so text handling stays correct and predictable.
             assignment:
@@ -290,6 +340,22 @@ modules:
             depends_on:
               - Ch5/L3
             hints: false
+          - id: L5
+            title: "Checkpoint on struct-based log modeling"
+            kind: quiz
+            concept: The learner should be able to explain why named data modeling and parser boundaries improve the project before enums arrive.
+            project_step: Confirm the Log Summary CLI now stores clearer structured records and separates at least one parsing concern.
+            assignment:
+              summary: Complete a short checkpoint on why `struct LogEntry`, associated constructors, debug output, and parser separation improved the current design.
+              outcomes:
+                - Explain one benefit of replacing position-based data with a named struct.
+                - Identify one boundary between parsing work and stored domain data.
+              evidence:
+                - A short-answer explanation or comparison note is enough.
+            assessment_goal: Verify that the learner can justify the first domain-modeling decisions before Chapter 6 adds richer variants and parser outcomes.
+            depends_on:
+              - Ch5/L4
+            hints: false
 
       - dir: Ch6
         title: Enums and Pattern Matching
@@ -305,7 +371,7 @@ modules:
                 - Explain why an enum is safer than unconstrained strings for known variants.
                 - Update the project so at least one path uses the enum directly.
             depends_on:
-              - Ch5/L4
+              - Ch5/L5
             hints: false
           - id: L2
             title: "Encode parse outcomes with another enum"
@@ -343,6 +409,22 @@ modules:
             depends_on:
               - Ch6/L3
             hints: false
+          - id: L5
+            title: "Checkpoint on enum-driven parser decisions"
+            kind: quiz
+            concept: The learner should be able to explain why enums, `Option` or `Result`, and `match` made the parser and summaries clearer.
+            project_step: Confirm the Log Summary CLI now uses explicit variants and clearer outcome handling instead of loose fallback conventions.
+            assignment:
+              summary: Complete a short checkpoint on enum modeling, parser outcomes, and `match`-driven summary output.
+              outcomes:
+                - Explain why one domain choice belongs in an enum instead of a free-form string.
+                - Distinguish a missing or invalid parse case using the project's current APIs.
+              evidence:
+                - A short written explanation or code-reading note is enough.
+            assessment_goal: Verify that enum-based domain modeling and parser decisions are clear before the course shifts into crate organization.
+            depends_on:
+              - Ch6/L4
+            hints: false
 
   - id: M4
     title: Organizing Real Programs
@@ -362,7 +444,7 @@ modules:
                 - Create a module with a clear responsibility.
                 - Navigate compiler errors caused by moved items or missing imports.
             depends_on:
-              - Ch6/L4
+              - Ch6/L5
             hints: false
           - id: L2
             title: "Expose a small crate-level API"
@@ -400,6 +482,22 @@ modules:
             depends_on:
               - Ch7/L3
             hints: false
+          - id: L5
+            title: "Checkpoint on crate organization and `main` flow"
+            kind: quiz
+            concept: The learner should be able to explain how modules, visibility, imports, and a thinner `main` improved maintainability.
+            project_step: Confirm the Log Summary CLI has a clearer project layout and a more readable entry-point flow.
+            assignment:
+              summary: Complete a short checkpoint on module boundaries, `use` imports, visibility, and the top-level flow through `main`.
+              outcomes:
+                - Describe one project concern that now belongs outside `main`.
+                - Explain one module or visibility choice that made the crate easier to navigate.
+              evidence:
+                - A short explanation or annotated walkthrough is enough.
+            assessment_goal: Verify that the learner can explain the crate organization choices before Chapter 8 adds persistence and tooling tasks.
+            depends_on:
+              - Ch7/L4
+            hints: false
 
       - dir: Ch8
         title: File Persistence and Basic Tooling
@@ -415,7 +513,7 @@ modules:
                 - Use a standard-library file read in a narrow, concrete way.
                 - Keep the parser connected to real persisted text.
             depends_on:
-              - Ch7/L4
+              - Ch7/L5
             hints: false
           - id: L2
             title: "Write a summary report back to disk"
@@ -453,6 +551,22 @@ modules:
             depends_on:
               - Ch8/L3
             hints: false
+          - id: L5
+            title: "Checkpoint on persistence and Rust tooling habits"
+            kind: quiz
+            concept: The learner should be able to explain the first real persistence path and the normal Rust quality loop before ownership becomes the main topic.
+            project_step: Confirm the Log Summary CLI can read and write useful text artifacts and that the learner can use Cargo's basic maintenance commands.
+            assignment:
+              summary: Complete a short checkpoint on file I/O, smoke tests, formatting, and linting in the current crate.
+              outcomes:
+                - Explain one way the project now interacts with disk beyond terminal-only input.
+                - Describe how `cargo test`, `cargo fmt`, or `cargo clippy` fits into normal iteration.
+              evidence:
+                - A short written explanation or brief command transcript is enough.
+            assessment_goal: Verify that persistence and basic Rust tooling habits are in place before the course turns to ownership and borrowing.
+            depends_on:
+              - Ch8/L4
+            hints: false
 
   - id: M5
     title: Ownership and Borrowing
@@ -472,7 +586,7 @@ modules:
                 - Explain why scope matters for cleanup in Rust.
                 - Recognize that not every value survives the whole program.
             depends_on:
-              - Ch8/L4
+              - Ch8/L5
             hints: false
           - id: L2
             title: "Watch moves happen across function calls"
@@ -510,6 +624,22 @@ modules:
             depends_on:
               - Ch9/L3
             hints: false
+          - id: L5
+            title: "Checkpoint on ownership and move choices"
+            kind: quiz
+            concept: The learner should be able to explain where values move, when clones are justified, and how helper design affects ownership friction.
+            project_step: Confirm the Log Summary CLI can survive common ownership questions without treating cloning as the default answer.
+            assignment:
+              summary: Complete a short checkpoint on scope, moves, returning ownership, and avoiding unnecessary clones in helper APIs.
+              outcomes:
+                - Explain one code path where ownership moves on purpose.
+                - Identify one place where borrowing or returning a value is better than cloning it blindly.
+              evidence:
+                - A short-answer explanation or small code sketch is enough.
+            assessment_goal: Verify that ownership basics are usable before Chapter 10 adds explicit borrowing and slices.
+            depends_on:
+              - Ch9/L4
+            hints: false
 
       - dir: Ch10
         title: References, Borrowing, and Slices
@@ -525,7 +655,7 @@ modules:
                 - Read a function signature that uses borrowed input.
                 - Explain why the caller still keeps the original value afterward.
             depends_on:
-              - Ch9/L4
+              - Ch9/L5
             hints: false
           - id: L2
             title: "Mutate safely with `&mut`"

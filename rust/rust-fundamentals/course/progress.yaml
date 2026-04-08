@@ -1,10 +1,14 @@
-last_completed: Ch1/L2
-next_target: Ch1/L3
+last_completed: Ch1/L5
+next_target: Ch2/L0
 current_target:
   type: lesson
-  ref: Ch1/L3
+  ref: Ch2/L0
   notes: >-
-    L2 complete (layout, main, lockfile/debug vs release observations). Ch1/L3: println! welcome screen.
+    Ch1/L5 checkpoint complete. Learner can explain the crate layout, the role of `fn main()`,
+    formatted output with `println!`, and the normal first stdin path using `String` plus
+    `read_line()`. Carry a small correction forward: `read_exact()` fills a fixed-size byte buffer;
+    it is not the line-input API and does not mean "read until EOF". Next route through Ch2/L0 so
+    Chapter 2 pacing can adapt before `let`, `mut`, helpers, branching, and loops.
 generation_mode: lesson_first
 recent_assessment:
   kind: prechapter
@@ -23,7 +27,7 @@ recent_assessment:
   deepen:
     - Cargo’s role beyond dependency fetch (build graph, targets) when the brisk Ch1 pass needs depth
     - Mapping the learner’s main vs “loop file” split onto Rust module layout in later chapters
-  recommended_next_step: Complete Ch1/L3 (println! welcome), then Ch1/L4 (one line from stdin).
+  recommended_next_step: Complete Ch2/L0 (prechapter assessment on variables, functions, and control flow), then continue to Ch2/L1 on `let` and `mut`.
 notes: |
   Keep pacing gentle and concrete overall; Ch1 may move faster than later chapters.
   Treat the Log Summary CLI as the course-long project arc.

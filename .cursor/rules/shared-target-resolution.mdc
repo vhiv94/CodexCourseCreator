@@ -8,7 +8,7 @@ alwaysApply: false
 
 Use this contract whenever work must resolve one or more lesson targets from progress plus spine.
 
-Default stance: resolve one next lesson unless the request or `current_target` explicitly opts into a bounded batch.
+Default stance: resolve one next lesson unless the request or `current_target` explicitly opts into a bounded batch. Chapter-entry `L0` prechapter checks and chapter-ending learner checks both count as ordinary lessons in that order.
 
 ## Inputs
 
@@ -20,7 +20,7 @@ Default stance: resolve one next lesson unless the request or `current_target` e
 
 1. Explicit lesson list in the request wins.
 2. `current_target` wins when it points to a lesson, chapter, or module.
-3. `next_target` is the legacy fallback for one next lesson.
+3. `next_target` is the legacy fallback for one next lesson, including a chapter-entry `L0` row and a chapter-ending `review`, `quiz`, or `assessment` row.
 4. Otherwise use the lesson after `last_completed`.
 5. If `last_completed` is `null`, use the first lesson in global order.
 
@@ -38,6 +38,7 @@ Default stance: resolve one next lesson unless the request or `current_target` e
 ### `current_target.type: chapter`
 
 - Resolve the incomplete lessons in that chapter in spine order.
+- Include the chapter's final learner-check row before advancing out of the chapter.
 - Use chapter batches only when the chapter is already well scoped for a bounded increment.
 
 ### `current_target.type: module`
@@ -48,9 +49,10 @@ Default stance: resolve one next lesson unless the request or `current_target` e
 ### `current_target.type: assessment` or `replan`
 
 - Do not resolve lesson targets.
-- Common assessment refs include `prestructure` before shape decisions and `prechapter:Ch#` before a chapter batch starts.
+- Common assessment refs include `prestructure` before shape decisions and legacy `prechapter:Ch#` before a chapter batch starts.
+- When a chapter's prechapter check is modeled explicitly in the spine, prefer resolving it as the chapter's `L0` lesson row instead of a separate assessment target.
 - Route back to next-step routing or planning for the next scoping or planning step.
 
 ## Completion case
 
-If there is no remaining lesson after resolution and no explicit override, treat the course as complete until a replan changes the spine.
+If there is no remaining lesson after resolution, including any chapter-entry `L0` rows and chapter-ending learner-check rows, and there is no explicit override, treat the course as complete until a replan changes the spine.

@@ -27,7 +27,8 @@ Supported fields:
 - `assessment_checkpoints`: whether reassessment is expected beyond intake
 - `assessment_format`: default assessment style such as `short_answer`
 - `prestructure_assessment`: whether planning starts with a short-answer assessment before deciding chapters vs modules
-- `prechapter_assessments`: whether each chapter should begin with a short-answer assessment before lesson generation
+- `prechapter_assessments`: whether each chapter should begin with a short-answer assessment before lesson generation, usually modeled as `L0`
+- `chapter_end_quizzes`: whether each chapter should end with a learner-check lesson row inside the normal lesson order
 
 ## Course shape
 
@@ -46,7 +47,7 @@ Use `modules:` only when the course has **three or more** meaningful module grou
 
 ## On-disk lesson layout
 
-Logical lesson refs still use chapter + lesson ids such as `Ch1/L3`, but the prose path depends on the course shape.
+Logical lesson refs still use chapter + lesson ids such as `Ch1/L0` or `Ch1/L3`, but the prose path depends on the course shape.
 
 ### Chapter-only courses
 
@@ -54,7 +55,7 @@ For each chapter `dir` and lesson `id`:
 
 | Role | Path pattern |
 |------|--------------|
-| Lesson prose | `course/{dir}/{id}.md` |
+| Lesson prose | `course/{dir}/{id}.md` for every lesson row, including `review`, `quiz`, and `assessment` |
 | Hint prose | `course/{dir}/{id}-hint.md` when `hints: true` |
 | Tests | optional, resolved by `test_glob` when present |
 
@@ -64,7 +65,7 @@ For each module `id`, chapter `dir`, and lesson `id`:
 
 | Role | Path pattern |
 |------|--------------|
-| Lesson prose | `course/{module-id}/{dir}/{id}.md` |
+| Lesson prose | `course/{module-id}/{dir}/{id}.md` for every lesson row, including `review`, `quiz`, and `assessment` |
 | Hint prose | `course/{module-id}/{dir}/{id}-hint.md` when `hints: true` |
 | Tests | optional, resolved by `test_glob` when present |
 
@@ -80,7 +81,9 @@ Each lesson keeps the existing core fields and may now include:
 - `assignment.evidence`: optional notes about what counts as proof of completion
 - `assessment_goal`: required when `kind` is `quiz` or `assessment`
 
-This lets the spine represent lightweight reviews, checkpoints, and explicit assignment contracts without pretending every row is a normal build step.
+This lets the spine represent lightweight reviews, checkpoints, and explicit assignment contracts without pretending every row is a normal build step. Those rows still map to ordinary lesson markdown files at the same prose paths as other lessons, including chapter-entry `L0` assessments.
+
+When `delivery.prechapter_assessments` is `true`, the chapter may begin with an `L0` lesson row for that prechapter check. When `delivery.chapter_end_quizzes` is `true`, the final lesson row in each chapter should be that chapter's learner check. Existing final `review`, `quiz`, or `assessment` rows already satisfy the contract.
 
 ## Optional test contract
 
@@ -126,13 +129,14 @@ Rules:
 
 1. Module headings, when present, must be exactly `## {id}: {title}`.
 2. Chapter headings must be exactly `### {dir}: {title}`.
-3. Numbered lesson lines must match lesson titles in order within that chapter.
+3. Numbered lesson lines must match lesson titles in order within that chapter, including any leading `L0` prechapter assessment row.
 4. Numbering resets at each chapter.
 5. Do not list filenames in `CONTENTS.md`.
 
 ## Validation
 
 - Update `course/spine.*` and `CONTENTS.md` together.
+- If `delivery.chapter_end_quizzes` is `true`, make sure each chapter's final lesson row is marked as `review`, `quiz`, or `assessment`.
 - Run `python3 scripts/validate_repo.py` from the repository root after edits.
 - Expect current validators to support both legacy chapter-only and module-aware course shapes during the migration period.
 

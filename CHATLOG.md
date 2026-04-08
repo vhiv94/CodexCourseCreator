@@ -1675,3 +1675,104 @@
 **User message:** While implementing Ch1/L3, learner added terminal UX polish: a simple way to clear the screen and move the carriage.
 
 **Assistant guidance:** Confirmed it’s a fun, relevant CLI exploration, but recommended keeping Ch1/L3 aligned to the lesson contract (tool name + purpose + at least one interpolated `println!`) and being cautious with terminal-control sequences because they vary across terminals and can reduce output readability; suggested deferring “pretty mode” toggles to later lessons.
+
+---
+
+## 2026-04-06 — Rust fundamentals: Ch1/L4 lesson authored (stdin one-liner)
+
+**User request:** Write lesson 4 again (Ch1/L4).
+
+**Assistant actions:**
+
+- Added [`rust/rust-fundamentals/course/M1/Ch1/L4.md`](rust/rust-fundamentals/course/M1/Ch1/L4.md): stdin intro via `std::io`, read one line into a mutable `String`, echo it back; includes a light note about the trailing newline and an optional piping refresher.
+- Updated [`rust/rust-fundamentals/course/progress.yaml`](rust/rust-fundamentals/course/progress.yaml): advanced `current_target` / `next_target` to `Ch1/L4`.
+
+---
+
+## 2026-04-06 — Chapter-end quiz routing convention implemented
+
+**User request:** Update project documentation and routing so each chapter ends with a learner check, represented as the final lesson row, and keep `next_target` pointing at normal lesson refs.
+
+**Assistant actions:**
+
+- Updated workflow and design docs:
+  - [`AGENTS.md`](AGENTS.md): chapter-ending learner checks are now part of the documented core flow, planning duties, and routing rules.
+  - [`SCOPE.md`](SCOPE.md): each chapter now ends with a final learner check; long chapters may still include extra internal checkpoints.
+  - [`course/spine-and-contents.md`](course/spine-and-contents.md) and [`.cursor/rules/planning.mdc`](.cursor/rules/planning.mdc): documented `delivery.chapter_end_quizzes` and the final-lesson-row convention.
+- Clarified machine contracts:
+  - [`course/spine.schema.json`](course/spine.schema.json): added `delivery.chapter_end_quizzes` and clarified that chapter-end checks stay inside normal lesson order as `review`, `quiz`, or `assessment`.
+  - [`course/progress.schema.json`](course/progress.schema.json): clarified that `next_target` still points at normal lesson refs, including chapter-end checks.
+  - [`scripts/validate_repo.py`](scripts/validate_repo.py): now enforces that when `delivery.chapter_end_quizzes: true`, each chapter's final lesson row is marked as `review`, `quiz`, or `assessment`.
+- Normalized the Rust course data:
+  - [`rust/rust-fundamentals/course/spine.yaml`](rust/rust-fundamentals/course/spine.yaml): enabled `delivery.chapter_end_quizzes: true`; added new chapter-end checkpoint lessons for Ch1, Ch2, Ch5, Ch6, Ch7, Ch8, and Ch9; marked Ch3/L4 as `kind: review`; updated downstream `depends_on` refs accordingly.
+  - [`rust/rust-fundamentals/CONTENTS.md`](rust/rust-fundamentals/CONTENTS.md): added the new checkpoint titles so the TOC matches the spine.
+  - [`rust/rust-fundamentals/course/progress.yaml`](rust/rust-fundamentals/course/progress.yaml): advanced learner progress to `last_completed: Ch1/L4` and routed the next step to the new chapter-end checkpoint at `Ch1/L5`.
+- Verification:
+  - Ran `python3 scripts/validate_repo.py` from the repo root: `OK: validated 7 course root(s).`
+
+---
+
+## 2026-04-07 — Rust stdin: `read_line()` vs explicit line-reading APIs
+
+**User question:** After finishing lesson 4, ask whether Rust has a more explicit stdin function like C `fgets()`; noted a commented-out stdin experiment in `rust/rust-fundamentals/log-summary-cli/src/main.rs` and found `read_exact()`, but that expects a `u8` buffer.
+
+**Assistant response (summary):** The closest text equivalent to `fgets()` is `BufRead::read_line(&mut String)`, which is what `stdin().read_line(&mut name)` uses. `read_exact()` is for a fixed number of bytes, more like “fill this buffer completely,” not line input. If byte-oriented delimiter control is wanted, `BufRead::read_until(b'\n', &mut Vec<u8>)` is the more explicit low-level option. The commented helper using `.take(limit).read_to_string(...)` reads until EOF or the byte limit, not just one line. For “press ENTER to close,” `read_line()` into a throwaway `String` is usually the idiomatic choice on a normal terminal.
+
+---
+
+## 2026-04-07 — Rust routing after Ch1/L4
+
+**User question:** Noted that `end_program()` was changed, left the commented stdin experiment in place for now, and asked what comes next.
+
+**Assistant response (summary):** Confirmed the Rust course progress is already updated to `last_completed: Ch1/L4` with `current_target` / `next_target` set to `Ch1/L5`. The next step is the Chapter 1 checkpoint lesson: a short-answer quiz on Cargo workflow, crate layout, `println!`, and one-line stdin handling. After that, the course moves to `Ch2/L1` on `let` and `mut`.
+
+---
+
+## 2026-04-07 — Start Rust Ch1/L5 checkpoint
+
+**User request:** Begin the Chapter 1 checkpoint prompts.
+
+**Assistant actions:** Started a short-answer checkpoint covering Cargo workflow, crate layout, `println!`, and one-line stdin handling.
+
+---
+
+## 2026-04-07 — Rust Ch1/L5 checkpoint completed
+
+**User response:** Answered the Chapter 1 checkpoint questions on `Cargo.toml` vs `src/main.rs`, `fn main()`, `println!`, stdin handling with `String` plus `read_line()`, trailing newline behavior, and pausing for Enter.
+
+**Assistant assessment:** Marked the checkpoint complete and advanced progress to `Ch2/L1`. Answers were solid overall. Two small corrections were noted: `read_exact()` reads a fixed number of bytes into a buffer rather than “until EOF,” and `.trim()` returns a trimmed view (`&str`) rather than modifying the `String` in place.
+
+---
+
+## 2026-04-07 — Standardize prose files for checkpoint lessons
+
+**User request:** Document the completed Chapter 1 checkpoint in a new lesson file for `Ch1/L5` and make that the standard convention going forward.
+
+**Assistant actions:**
+
+- Added [`rust/rust-fundamentals/course/M1/Ch1/L5.md`](rust/rust-fundamentals/course/M1/Ch1/L5.md): quiz/checkpoint lesson prose with context, acceptance criteria, evidence, and the short-answer prompt set used for the Chapter 1 checkpoint.
+- Updated [`AGENTS.md`](AGENTS.md), [`SCOPE.md`](SCOPE.md), [`course/spine-and-contents.md`](course/spine-and-contents.md), [`course/templates/lesson.md`](course/templates/lesson.md), and [`.cursor/rules/lesson-authoring.mdc`](.cursor/rules/lesson-authoring.mdc) so every lesson row, including `review`, `quiz`, and `assessment`, is expected to have a normal lesson markdown file at the standard lesson path.
+- Ran `python3 scripts/validate_repo.py`: `OK: validated 7 course root(s).`
+
+---
+
+## 2026-04-07 — Add prechapter `L0` convention
+
+**User request:** Introduce `L0` as the canonical prechapter assessment lesson row, give those assessments normal lesson markdown files like quizzes, and route the Rust course to `Ch2/L0` next.
+
+**Assistant actions:**
+
+- Updated repo-level workflow and authoring docs:
+  - [`AGENTS.md`](AGENTS.md), [`SCOPE.md`](SCOPE.md), [`course/spine-and-contents.md`](course/spine-and-contents.md), [`.cursor/rules/planning.mdc`](.cursor/rules/planning.mdc), [`.cursor/rules/shared-target-resolution.mdc`](.cursor/rules/shared-target-resolution.mdc), [`.cursor/rules/lesson-authoring.mdc`](.cursor/rules/lesson-authoring.mdc), [`course/templates/lesson.md`](course/templates/lesson.md), and [`course/templates/assessment.md`](course/templates/assessment.md)
+  - documented `L0` as the chapter-entry prechapter assessment row, clarified that it gets a normal lesson markdown file, and kept legacy `prechapter:Ch#` wording only as a compatibility note.
+- Updated machine contracts to allow `L0`:
+  - [`course/spine.schema.json`](course/spine.schema.json) and [`course/progress.schema.json`](course/progress.schema.json) now accept `L0` lesson ids and refs.
+  - [`scripts/validate_repo.py`](scripts/validate_repo.py) and [`scripts/check_test_regression.py`](scripts/check_test_regression.py) now accept `L0` lesson ids, legacy per-lesson test filenames, and `lesson_ch*_l0` selectors.
+- Migrated the next Rust chapter entry to the new convention:
+  - Updated [`rust/rust-fundamentals/course/spine.yaml`](rust/rust-fundamentals/course/spine.yaml) to insert `Ch2/L0` as a `kind: assessment` row and made `Ch2/L1` depend on it.
+  - Updated [`rust/rust-fundamentals/CONTENTS.md`](rust/rust-fundamentals/CONTENTS.md) so Chapter 2 lists the new prechapter row first.
+  - Added [`rust/rust-fundamentals/course/M1/Ch2/L0.md`](rust/rust-fundamentals/course/M1/Ch2/L0.md) with the Chapter 2 prechapter assessment prompts.
+  - Updated [`rust/rust-fundamentals/course/progress.yaml`](rust/rust-fundamentals/course/progress.yaml) so `current_target` / `next_target` now point to `Ch2/L0`.
+- Verification:
+  - Ran `python3 scripts/validate_repo.py`: `OK: validated 7 course root(s).`
+  - Ran `python3 scripts/check_test_regression.py`: `OK: no prior-lesson test regressions detected.`

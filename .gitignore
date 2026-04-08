@@ -20,7 +20,3 @@ Thumbs.db
 
 # Local migration safety artifacts
 .migration-backups/
-
-# project folders
-# they should have their own repository
-./rust/rust-fundamentals/course/logsummary-cli/

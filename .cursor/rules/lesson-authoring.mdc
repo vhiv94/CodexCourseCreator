@@ -31,9 +31,11 @@ Lesson authoring writes lesson prose from the spine's lesson and assignment cont
 - `course/Ch#/L#.md` for chapter-only courses
 - `course/M#/Ch#/L#.md` for module-aware courses
 - optional sibling `-hint.md` file only when `hints: true`
+- These prose paths apply to every lesson row, including `L0` prechapter assessments and rows with `kind: review`, `kind: quiz`, or `kind: assessment`.
 
 ## Main requirements
 
+- Create a lesson markdown file for every targeted lesson row instead of leaving `L0` checks, reviews, or checkpoints implicit.
 - Keep each lesson tightly scoped to one concrete step, review, or assessment goal.
 - Match the lesson title to the spine and `CONTENTS.md` exactly.
 - Make the assignment section the primary learner contract for the lesson.
@@ -45,6 +47,7 @@ Lesson authoring writes lesson prose from the spine's lesson and assignment cont
 - `kind: lesson`: teach one concrete build step.
 - `kind: review`: consolidate recent concepts without pretending the learner is starting fresh.
 - `kind: quiz` or `kind: assessment`: focus on what is being checked, why it matters, and what evidence the learner should produce.
+- `id: L0`: usually a chapter-entry prechapter assessment that should still read like a normal lesson file, just with explanation and evidence instead of a build-heavy task.
 
 ## Pedagogy constraints
 

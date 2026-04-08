@@ -19,9 +19,12 @@ The source-of-truth documents are:
    longer courses may use `modules -> chapters -> lessons`.
 5. Produce or update a spine that reflects the chosen scope.
 6. Run a short-answer prechapter assessment before writing a chapter's lesson batch.
-7. Generate lesson and assignment content in narrow increments, usually one lesson at a time unless a chapter is already well scoped.
-8. Add tests after the lesson when they materially help the contract, feedback loop, or stack expectations.
-9. Reassess progress before choosing the next increment or batch.
+7. When `delivery.prechapter_assessments` is enabled, model that chapter-entry assessment as `Ch#/L0` in the normal lesson order.
+8. Generate lesson and assignment content in narrow increments, usually one lesson at a time unless a chapter is already well scoped.
+9. Make sure each chapter ends with a learner check as the final lesson row, usually a `review`, `quiz`, or `assessment`.
+10. Author a normal lesson markdown file for every lesson row that gets generated, including `L0` prechapter checks and chapter-ending learner checks.
+11. Add tests after the lesson when they materially help the contract, feedback loop, or stack expectations.
+12. Reassess progress before choosing the next increment or batch.
 
 ## Responsibility boundaries
 
@@ -33,6 +36,8 @@ Planning turns a learner/topic request into a teachable course shape before less
 - Decides whether modules are needed.
 - Produces or revises `course/spine.*`, `CONTENTS.md`, and `course/overview.md`.
 - Keeps lesson scope narrow: one concrete step per lesson.
+- Makes the chapter-entry prechapter assessment explicit as `L0` when that delivery mode is enabled.
+- Makes the chapter-ending learner check explicit as the final lesson row, unless an existing final `review`, `quiz`, or `assessment` already serves that role.
 - Does not write full lesson bodies, full tests, or learner implementation code.
 
 ### Next-step routing
@@ -43,6 +48,7 @@ Next-step routing decides what should happen now based on course state.
 - Treats `course/progress.*` as routing state rather than assuming a fixed linear sequence.
 - Decides whether the next action is scope clarification, pre-structure assessment, spine planning or replanning, prechapter assessment, lesson or chapter batch generation, or reassessment/completion.
 - Updates adaptive progress metadata rather than assuming every course is a simple linear march through a fixed plan.
+- Treats routine `L0` prechapter assessments and chapter-ending learner checks as normal lesson rows, so `next_target` may point at them with ordinary `Ch#/L#` refs.
 - Routes work to planning, lesson authoring, or test authoring rather than silently substituting for those specialist outputs unless explicitly asked.
 
 ### Test authoring
@@ -61,7 +67,8 @@ Lesson authoring writes lesson markdown and optional hint files for the current 
 
 - Treats the lesson assignment as the primary contract for learner work and current scope.
 - Explains one focused step at a time.
-- Supports review and quiz moments where the spine calls for them.
+- Supports review and quiz moments where the spine calls for them, including `L0` prechapter assessments and the chapter-ending learner check.
+- Writes a standard lesson markdown file for `lesson`, `review`, `quiz`, and `assessment` rows at the normal `Ch#/L#` prose path.
 - Defines learner-facing outcomes and evidence before any optional tests are added.
 - Keeps lessons narrow and avoids solution leakage.
 - Does not rewrite tests or redesign the course architecture.
@@ -101,15 +108,16 @@ Important fields:
 - `recent_assessment`
 - `notes`
 
-Use `current_target` for adaptive routing. Keep `next_target` for simple lesson-to-lesson compatibility.
+Use `current_target` for adaptive routing. Keep `next_target` for simple lesson-to-lesson compatibility, including `L0` prechapter assessment lessons and chapter-ending `review`, `quiz`, or `assessment` lessons that still live at normal `Ch#/L#` refs.
 
 ### Routing rules
 
 - If scope is unclear, ask scoping questions or route to planning.
 - If learner level is unclear, ask a short-answer pre-structure assessment before deeper planning.
-- Before generating a chapter's lessons for the first time, route through a short-answer prechapter assessment for that chapter.
-- If `current_target.type` is `assessment` or `replan`, do not route to test authoring or lesson authoring yet.
+- Before generating a chapter's lessons for the first time, route through a short-answer prechapter assessment for that chapter. When the spine models it explicitly, this is normally the chapter's `L0` lesson row.
+- If `current_target.type` is `assessment` or `replan`, do not route to test authoring or lesson authoring yet. A chapter's `L0` row is different: it is a normal lesson target, usually with `kind: assessment`.
 - If `current_target.type` is `chapter` or `module`, emit a bounded batch for the incomplete lessons in that target.
+- Before advancing from one chapter to the next, complete the chapter's final learner-check lesson if it is still incomplete.
 - If no adaptive target is set, resolve lessons through `.cursor/rules/shared-target-resolution.mdc`.
 - Prefer a single next lesson by default and use chapter-local batches only when the chapter is already well scoped.
 
